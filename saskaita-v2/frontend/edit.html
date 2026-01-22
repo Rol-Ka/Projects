@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="lt">
+
+<head>
+    <meta charset="utf-8">
+    <title>PVM Sąskaita – redagavimas</title>
+
+    <script src="invoiceRender.js" defer></script>
+    <script src="validation.js" defer></script>
+    <script src="edit.js" defer></script>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<div id="toast-container"></div>
+
+<body class="page-edit">
+
+    <div class="invoice-wrap">
+        <header>
+            <div class="brand">
+                <div class="company">
+                    <div class="name">PVM Sąskaita faktūra (redagavimas)</div>
+
+                    <div class="saskaitos-data"><b>Sąskaita Nr:</b>
+                        <p id="saskaitos-numeris"></p>
+                    </div>
+                    <div class="saskaitos-data"><b>Išrašymo data:</b>
+                        <p id="israsymo-data"></p>
+                    </div>
+                    <div class="saskaitos-data"><b>Mokėti iki:</b>
+                        <p id="apmoketi-iki"></p>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <section class="rekvizitai">
+            <div>
+                <h4>Pirkėjas</h4>
+                <p id="pirkejo-adresas"></p>
+                <p id="pirkejo-kodas"></p>
+                <p id="pirkejo-pastas"></p>
+                <p id="pirkejo-pavadinimas"></p>
+                <p id="pirkejo-telefonas"></p>
+                <p id="pirkejo-pvm"></p>
+            </div>
+
+            <div>
+                <h4>Pardavėjas</h4>
+                <p id="pardavejo-adresas"></p>
+                <p id="pardavejo-kodas"></p>
+                <p id="pardavejo-pastas"></p>
+                <p id="pardavejo-pavadinimas"></p>
+                <p id="pardavejo-telefonas"></p>
+                <p id="pardavejo-pvm"></p>
+            </div>
+        </section>
+
+        <div id="krepselis"></div>
+
+        <div class="actions">
+            <button id="save">Išsaugoti pakeitimus</button>
+            <button id="back">Atgal į sąrašą</button>
+        </div>
+
+    </div>
+
+</body>
+
+</html>
