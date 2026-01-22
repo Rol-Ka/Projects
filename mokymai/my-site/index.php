@@ -41,32 +41,6 @@ include __DIR__ . '/parts/top.php';
                 <span class="post-meta">Posted on March 10, 2024</span>
             </div>
         </article>
-        <article class="post-card">
-            <img src="https://images.unsplash.com/photo-1514995669114-7b2f0a0b8a6f?w=400" alt="Street Style">
-            <div class="post-content">
-                <h3>Street Style Essentials</h3>
-                <p>Build a cool, comfortable wardrobe with key streetwear pieces and outfit formulas.</p>
-                <span class="post-meta">Posted on March 9, 2024</span>
-            </div>
-        </article>
-
-        <article class="post-card">
-            <img src="https://images.unsplash.com/photo-1520975919561-4f8a3e1d9b6f?w=400" alt="Sustainable Fabrics">
-            <div class="post-content">
-                <h3>Sustainable Fabrics 101</h3>
-                <p>Understand eco-friendly materials and how to choose durable, sustainable garments.</p>
-                <span class="post-meta">Posted on March 8, 2024</span>
-            </div>
-        </article>
-
-        <article class="post-card">
-            <img src="https://images.unsplash.com/photo-1503342452485-86f7f9f9c0b1?w=400" alt="Workwear to Weekend">
-            <div class="post-content">
-                <h3>Workwear to Weekend</h3>
-                <p>Transition seamlessly from office looks to casual weekend outfits with simple swaps.</p>
-                <span class="post-meta">Posted on March 7, 2024</span>
-            </div>
-        </article>
 
         <article class="post-card">
             <img src="https://images.unsplash.com/photo-1519744792095-2f2205e87b6f?w=400" alt="Shoes That Make the Outfit">
@@ -74,15 +48,6 @@ include __DIR__ . '/parts/top.php';
                 <h3>Shoes That Make the Outfit</h3>
                 <p>Choose the right footwear to elevate any outfit, from sneakers to statement heels.</p>
                 <span class="post-meta">Posted on March 6, 2024</span>
-            </div>
-        </article>
-
-        <article class="post-card">
-            <img src="https://images.unsplash.com/photo-1495121605193-b116b5b09a83?w=400" alt="Color Pairing">
-            <div class="post-content">
-                <h3>Color Pairing Tips</h3>
-                <p>Learn practical rules for mixing colors and creating balanced, eye-catching looks.</p>
-                <span class="post-meta">Posted on March 5, 2024</span>
             </div>
         </article>
 
@@ -105,29 +70,43 @@ include __DIR__ . '/parts/top.php';
         </article>
 
         <article class="post-card">
-            <img src="https://images.unsplash.com/photo-1520975919561-1a6d0e7e3c3b?w=400" alt="Monochrome Outfit">
-            <div class="post-content">
-                <h3>Monochrome Outfit Ideas</h3>
-                <p>Create sleek, cohesive looks using a single color palette with varied tones.</p>
-                <span class="post-meta">Posted on March 2, 2024</span>
-            </div>
-        </article>
-
-        <article class="post-card">
-            <img src="https://images.unsplash.com/photo-1520975919561-9f1b6b2f8c8d?w=400" alt="DIY Fashion">
-            <div class="post-content">
-                <h3>DIY Fashion Hacks</h3>
-                <p>Easy customizations and repairs to refresh old clothes and personalize your style.</p>
-                <span class="post-meta">Posted on March 1, 2024</span>
-            </div>
-        </article>
-
-        <article class="post-card">
             <img src="https://images.unsplash.com/photo-1503341455253-b2e723bb3dbb?w=400" alt="Evening Lookbook">
             <div class="post-content">
                 <h3>Evening Lookbook 2024</h3>
                 <p>Curated evening outfits for every occasion, from cocktail to black-tie events.</p>
                 <span class="post-meta">Posted on February 28, 2024</span>
+            </div>
+        </article>
+        <article class="post-card">
+            <img src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?w=400" alt="Sustainable Fabrics">
+            <div class="post-content">
+                <h3>Sustainable Fabrics 101</h3>
+                <p>An introduction to eco-friendly fabrics and how to incorporate them into your wardrobe.</p>
+                <span class="post-meta">Posted on February 25, 2024</span>
+            </div>
+        </article>
+        <article class="post-card">
+            <img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=400" alt="Mixing Patterns">
+            <div class="post-content">
+                <h3>Mixing Patterns Like a Pro</h3>
+                <p>Tips and tricks for combining patterns to create bold, fashionable looks.</p>
+                <span class="post-meta">Posted on February 20, 2024</span>
+            </div>
+        </article>
+        <article class="post-card">
+            <img src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?w=400" alt="Bold Colors">
+            <div class="post-content">
+                <h3>Incorporating Bold Colors</h3>
+                <p>Learn how to wear and combine bold colors to make a fashion statement.</p>
+                <span class="post-meta">Posted on February 15, 2024</span>
+            </div>
+        </article>
+        <article class="post-card">
+            <img src="https://images.unsplash.com/photo-1521334884684-d80222895322?w=400" alt="Sustainable Fashion">
+            <div class="post-content">
+                <h3>Sustainable Fashion Choices</h3>
+                <p>Explore ways to make your wardrobe more sustainable without sacrificing style.</p>
+                <span class="post-meta">Posted on February 10, 2024</span>
             </div>
         </article>
     </div>
