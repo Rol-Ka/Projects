@@ -29,9 +29,7 @@ foreach ($required as $field) {
     }
 }
 
-/**
- * 🔧 NORMALIZUOJAM company
- */
+
 $company = $data['company'] ?? [];
 
 $company = [
@@ -53,9 +51,7 @@ $company = [
     ]
 ];
 
-/**
- * 🔧 NORMALIZUOJAM items
- */
+
 $items = array_map(function ($item) {
     return [
         'description' => $item['description'] ?? '',

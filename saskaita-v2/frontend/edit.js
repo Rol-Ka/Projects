@@ -1,46 +1,4 @@
-// window.IS_EDIT = true;
 
-// document.addEventListener('DOMContentLoaded', () => {
-
-//   function getInvoices() {
-//     return JSON.parse(localStorage.getItem('invoices')) || [];
-//   }
-
-//   function saveInvoices(invoices) {
-//     localStorage.setItem('invoices', JSON.stringify(invoices));
-//   }
-
-//   const params = new URLSearchParams(window.location.search);
-//   const id = params.get('id');
-
-//   const invoices = getInvoices();
-//   const invoice = invoices.find(inv => inv.id === id);
-
-//   if (!invoice) {
-//     alert('Sąskaita nerasta');
-//     window.location.href = 'list.html';
-//     return;
-//   }
-
-//   saskaita(invoice);
-
-//   const saveBtn = document.querySelector('#save');
-//   saveBtn.addEventListener('click', (e) => {
-//     e.preventDefault();
-
-//     if (!validateInvoice(invoice)) return;
-
-//     saveInvoices(invoices);
-//     alert('Sąskaita atnaujinta');
-
-//     window.location.href = `edit.html?id=${id}`;
-//   });
-
-//   document.querySelector('#back').addEventListener('click', () => {
-//     window.location.href = 'list.html';
-//   });
-
-// });
 
 const params = new URLSearchParams(window.location.search);
 const id = params.get('id');
@@ -62,8 +20,8 @@ fetch(`/projects/saskaita-v2/backend/invoice_get.php?id=${id}`)
     }
 
     currentInvoice = inv;
-    window.IS_EDIT = true; // 👈 LABAI SVARBU
-    saskaita(inv);        // 👈 renderinam su inputais
+    window.IS_EDIT = true;
+    saskaita(inv);
   })
   .catch(err => {
     console.error(err);
@@ -89,7 +47,7 @@ document.querySelector('#save').addEventListener('click', () => {
       }
 
       showToast('Sąskaita atnaujinta', 'success');
-      // window.location.href = 'list.html';
+
     })
     .catch(err => {
       console.error(err);

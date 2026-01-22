@@ -1,10 +1,10 @@
 <?php
-// backend/db.php
+
 
 $host = 'localhost';
-$db   = 'invoice_app';        // 👈 tavo DB pavadinimas phpMyAdmin
-$user = 'root';             // XAMPP default
-$pass = '';                 // XAMPP default (Windows)
+$db   = 'invoice_app';
+$user = 'root';
+$pass = '';
 $charset = 'utf8mb4';
 
 $dsn = "mysql:host=$host;dbname=$db;charset=$charset";

@@ -17,11 +17,11 @@ fetch(`/projects/saskaita-v2/backend/invoice_get.php?id=${id}`)
 
     saskaita(inv);
   })
-// .catch(err => {
-//   console.error(err);
-//   alert('Klaida kraunant sąskaitą');
-//   window.location.href = 'list.html';
-// });
+  .catch(err => {
+    console.error(err);
+    alert('Klaida kraunant sąskaitą');
+    window.location.href = 'list.html';
+  });
 
 
 const backBtn = document.querySelector('#back');

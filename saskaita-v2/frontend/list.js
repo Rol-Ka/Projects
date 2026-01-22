@@ -1,10 +1,3 @@
-// function getInvoices() {
-//   return JSON.parse(localStorage.getItem('invoices')) || [];
-// }
-
-// function saveInvoices(invoices) {
-//   localStorage.setItem('invoices', JSON.stringify(invoices));
-// }
 
 function calculateTotalWithVat(inv) {
   let total = 0;
@@ -99,19 +92,3 @@ tbody.addEventListener('click', e => {
       alert('Klaida trinant sąskaitą');
     });
 });
-
-
-// console.log(inv.shipping_price, typeof inv.shipping_price);
-// tbody.addEventListener('click', e => {
-//   if (e.target.tagName !== 'BUTTON') return;
-
-//   const id = e.target.dataset.id;
-
-//   if (!confirm('Ar tikrai norite ištrinti sąskaitą?')) return;
-
-//   const filtered = getInvoices().filter(inv => inv.id !== id);
-//   saveInvoices(filtered);
-
-//   alert('Sąskaita ištrinta');
-//   location.reload();
-// });

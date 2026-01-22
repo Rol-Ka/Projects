@@ -336,48 +336,6 @@ function saskaita(inv) {
     container.appendChild(table);
 }
 
-
-// function updateTotals(inv) {
-//     let prekiuViso = 0;
-
-//     inv.items.forEach((item, index) => {
-//         const qty = Number(item.quantity) || 0;
-//         const price = Number(item.price) || 0;
-//         let discount = 0;
-
-//         if (item.discount) {
-//             if (item.discount.type === 'percentage') {
-//                 discount = price * qty * (item.discount.value / 100);
-//             } else if (item.discount.type === 'fixed') {
-//                 discount = Number(item.discount.value) || 0;
-//             }
-//         }
-
-//         const itemSum = (price * qty) - discount;
-//         prekiuViso += itemSum;
-
-//         const sumCell = document.querySelector(
-//             `.item-sum[data-index="${index}"]`
-//         );
-//         if (sumCell) {
-//             sumCell.innerText = itemSum.toFixed(2) + ' €';
-//         }
-//     });
-
-//     const sumaBePvm = prekiuViso + Number(inv.shipping_price || 0);
-//     const pvm = sumaBePvm * 0.21;
-//     const sumaSuPvm = sumaBePvm + pvm;
-
-//     const bePvmEl = document.querySelector('#suma-be-pvm');
-//     if (bePvmEl) bePvmEl.innerText = sumaBePvm.toFixed(2) + ' €';
-
-//     const pvmEl = document.querySelector('#pvm-suma');
-//     if (pvmEl) pvmEl.innerText = pvm.toFixed(2) + ' €';
-
-//     const suPvmEl = document.querySelector('#suma-su-pvm');
-//     if (suPvmEl) suPvmEl.innerText = sumaSuPvm.toFixed(2) + ' €';
-// }
-
 function updateTotals(inv) {
     let prekiuViso = 0;
 

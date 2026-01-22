@@ -204,9 +204,6 @@ tbody td {
 
 
 
-
-
-
 .krepselio-lentele {
   table-layout: fixed;
   width: 100%;
@@ -297,13 +294,12 @@ button:hover {
 }
 
 
-/* Kiekis */
 .krepselio-lentele th:nth-child(2),
 .krepselio-lentele td:nth-child(2) {
   width: 12%;
 }
 
-/* Kaina */
+
 .krepselio-lentele th:nth-child(3),
 .krepselio-lentele td:nth-child(3) {
   width: 18%;
