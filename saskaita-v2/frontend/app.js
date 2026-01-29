@@ -88,7 +88,7 @@ function refreshInvoice() {
             showToast('Sąskaita atnaujinta', 'info');
         })
         .catch(err => {
-            console.error(err);
+
             showToast('Klaida atnaujinant', 'error');
         });
 }
@@ -111,7 +111,7 @@ function saveInvoice() {
             showToast('Sąskaita išsaugota', 'success');
         })
         .catch(err => {
-            console.error(err);
-            showToast('Klaida saugant', 'error');
+
+            showToast('Klaida saugant, tokia sąskaita jau egzistuoja', 'error');
         });
 }

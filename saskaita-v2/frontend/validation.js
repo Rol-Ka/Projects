@@ -1,3 +1,74 @@
+
+
+function showToast(message, type = 'info') {
+
+    let container = document.querySelector('#toast-container');
+
+    if (!container) {
+        container = document.createElement('div');
+        container.id = 'toast-container';
+        document.body.appendChild(container);
+    }
+
+    const toast = document.createElement('div');
+    toast.classList.add('toast', type);
+    toast.innerText = message;
+
+    container.appendChild(toast);
+    requestAnimationFrame(() => {
+        toast.classList.add('show');
+    });
+
+    setTimeout(() => {
+        toast.classList.add('hide');
+    }, 2500);
+
+    setTimeout(() => {
+        toast.remove();
+    }, 3000);
+}
+function showConfirm(
+    message,
+    onConfirm,
+    options = {}
+) {
+    const {
+        confirmText = 'Patvirtinti',
+        cancelText = 'Atšaukti',
+        confirmClass = 'btn-confirm'
+    } = options;
+
+    let overlay = document.querySelector('#confirm-overlay');
+
+    if (!overlay) {
+        overlay = document.createElement('div');
+        overlay.id = 'confirm-overlay';
+        document.body.appendChild(overlay);
+    }
+
+    overlay.innerHTML = `
+        <div class="confirm-modal">
+            <p>${message}</p>
+            <div class="confirm-actions">
+                <button class="btn-cancel">${cancelText}</button>
+                <button class="${confirmClass}">${confirmText}</button>
+            </div>
+        </div>
+    `;
+
+    overlay.classList.add('show');
+
+    overlay.querySelector('.btn-cancel').onclick = () => {
+        overlay.classList.remove('show');
+    };
+
+    overlay.querySelector(`.${confirmClass}`).onclick = () => {
+        overlay.classList.remove('show');
+        onConfirm();
+    };
+}
+
+
 function validateInvoice(inv) {
     let firstErrorInput = null;
 
@@ -6,7 +77,7 @@ function validateInvoice(inv) {
     });
 
     if (!inv.items || inv.items.length === 0) {
-        alert('Sąskaita turi turėti bent vieną prekę.');
+        showToast('Sąskaita turi turėti bent vieną prekę', 'error');
         return false;
     }
 
@@ -20,10 +91,10 @@ function validateInvoice(inv) {
 
             if (input) {
                 input.classList.add('input-error');
-                if (!firstErrorInput) firstErrorInput = input;
+                firstErrorInput ??= input;
             }
 
-            alert(`Prekės pavadinimas ${i + 1}-oje eilutėje yra tuščias.`);
+            showToast(`Prekės pavadinimas ${i + 1}-oje eilutėje yra tuščias`, 'error');
             break;
         }
 
@@ -34,10 +105,10 @@ function validateInvoice(inv) {
 
             if (input) {
                 input.classList.add('input-error');
-                if (!firstErrorInput) firstErrorInput = input;
+                firstErrorInput ??= input;
             }
 
-            alert(`Prekės kiekis ${i + 1}-oje eilutėje turi būti ≥ 1.`);
+            showToast(`Prekės kiekis ${i + 1}-oje eilutėje turi būti ≥ 1`, 'error');
             break;
         }
 
@@ -48,15 +119,18 @@ function validateInvoice(inv) {
 
             if (input) {
                 input.classList.add('input-error');
-                if (!firstErrorInput) firstErrorInput = input;
+                firstErrorInput ??= input;
             }
 
-            alert(`Prekės kaina ${i + 1}-oje eilutėje turi būti įvesta.`);
+            showToast(`Prekės kaina ${i + 1}-oje eilutėje turi būti įvesta`, 'error');
             break;
         }
 
         if (item.discount?.type === 'percentage' && item.discount.value > 100) {
-            alert(`Procentinė nuolaida ${i + 1}-oje eilutėje negali viršyti 100%.`);
+            showToast(
+                `Procentinė nuolaida ${i + 1}-oje eilutėje negali viršyti 100%`,
+                'error'
+            );
             return false;
         }
     }
@@ -68,3 +142,4 @@ function validateInvoice(inv) {
 
     return true;
 }
+

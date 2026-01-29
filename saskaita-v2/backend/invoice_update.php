@@ -3,7 +3,7 @@ require 'db.php';
 
 header('Content-Type: application/json');
 
-if ($_SERVER['REQUEST_METHOD'] !== 'PUT') {
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     http_response_code(405);
     echo json_encode(['error' => 'Method not allowed']);
     exit;
@@ -11,9 +11,8 @@ if ($_SERVER['REQUEST_METHOD'] !== 'PUT') {
 
 $data = json_decode(file_get_contents('php://input'), true);
 
-if (!$data || !isset($data['id'])) {
-    http_response_code(400);
-    echo json_encode(['error' => 'Invalid data']);
+if (!$data) {
+    echo json_encode(['error' => 'No data received']);
     exit;
 }
 
@@ -38,4 +37,7 @@ $stmt->execute([
     $data['id']
 ]);
 
-echo json_encode(['status' => 'ok']);
+echo json_encode([
+    'success' => true
+]);
+exit;

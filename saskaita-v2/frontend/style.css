@@ -427,3 +427,211 @@ input[type="number"] {
 .toast.info {
   background: #1565c0;
 }
+
+
+
+.toast.hide {
+  opacity: 0;
+  transform: translateX(20px);
+  transition: all 0.3s ease;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+
+#confirm-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.45);
+  /* šaltesnis, modernesnis */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+
+#confirm-overlay.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.confirm-modal {
+  background: #ffffff;
+  padding: 28px 32px;
+  border-radius: 12px;
+  min-width: 320px;
+  max-width: 420px;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.25);
+  animation: scaleIn 0.2s ease;
+}
+
+.confirm-modal p {
+  margin: 0 0 20px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #1f2937;
+  /* tamsiai pilka, ne juoda */
+  line-height: 1.4;
+}
+
+.confirm-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+.confirm-actions button {
+  padding: 8px 16px;
+  border-radius: 6px;
+  border: none;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+#confirm-overlay .btn-confirm {
+  background: #2563eb;
+  color: #ffffff;
+}
+
+#confirm-overlay .btn-confirm:hover {
+  background: #1d4ed8;
+}
+
+#confirm-overlay .btn-cancel {
+  background: #e5e7eb;
+  color: #374151;
+}
+
+#confirm-overlay .btn-cancel:hover {
+  background: #d1d5db;
+}
+
+@keyframes scaleIn {
+  from {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.btn-save {
+  background: #2ecc71;
+  color: #fff;
+}
+
+button.saved {
+  background: #2ecc71;
+  cursor: default;
+  opacity: 0.8;
+}
+
+.confirm-actions button:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
+}
+
+
+
+
+
+
+/* ===== GLOBAL CONFIRM MODAL (LIST + EDIT) ===== */
+
+#confirm-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.45);
+  backdrop-filter: blur(3px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+
+#confirm-overlay.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.confirm-modal {
+  background: #ffffff;
+  padding: 28px 32px;
+  border-radius: 14px;
+  min-width: 320px;
+  max-width: 420px;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.25);
+  animation: confirmScaleIn 0.2s ease;
+}
+
+.confirm-modal p {
+  margin: 0 0 22px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #1f2937;
+  text-align: center;
+}
+
+.confirm-actions {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+}
+
+/* Cancel */
+.btn-cancel {
+  background: #e5e7eb;
+  color: #374151;
+  padding: 8px 18px;
+  border-radius: 8px;
+  font-weight: 500;
+}
+
+.btn-cancel:hover {
+  background: #d1d5db;
+}
+
+/* Confirm (danger / primary) */
+.btn-confirm {
+  background: #2563eb;
+  color: #ffffff;
+  padding: 8px 18px;
+  border-radius: 8px;
+  font-weight: 600;
+}
+
+.btn-confirm:hover {
+  background: crimson;
+}
+
+@keyframes confirmScaleIn {
+  from {
+    transform: scale(0.92);
+    opacity: 0;
+  }
+
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}

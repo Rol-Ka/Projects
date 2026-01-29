@@ -98,6 +98,9 @@ function saskaita(inv) {
             input.addEventListener('input', () => {
                 input.classList.remove('input-error');
                 item.description = input.value;
+                if (!isInitializing) {
+                    isDirty = true;
+                }
             });
 
             tdTitle.appendChild(input);
@@ -123,6 +126,9 @@ function saskaita(inv) {
                 input.classList.remove('input-error');
                 item.quantity = input.value === '' ? null : Number(input.value);
                 updateTotals(inv);
+                if (!isInitializing) {
+                    isDirty = true;
+                }
             });
 
             tdQty.appendChild(input);
@@ -148,6 +154,9 @@ function saskaita(inv) {
                 input.classList.remove('input-error');
                 item.price = input.value === '' ? null : Number(input.value);
                 updateTotals(inv);
+                if (!isInitializing) {
+                    isDirty = true;
+                }
             });
 
             tdPrice.appendChild(input);
@@ -204,13 +213,18 @@ function saskaita(inv) {
                     type: select.value,
                     value: value
                 };
-
+                if (!isInitializing) {
+                    isDirty = true;
+                }
                 updateTotals(inv);
             };
 
             input.addEventListener('input', applyDiscount);
             select.addEventListener('change', applyDiscount);
             tdDiscount.append(select, input);
+            if (!isInitializing) {
+                isDirty = true;
+            }
 
         } else {
             tdDiscount.innerText = discountText;
@@ -234,13 +248,23 @@ function saskaita(inv) {
         if (window.IS_EDIT) {
             const tdActions = document.createElement('td');
             const deleteBtn = document.createElement('button');
+
             deleteBtn.innerText = '🗑️';
-            deleteBtn.title = 'Trinti prekę';
+
+            const itemIndex = index;
+
             deleteBtn.addEventListener('click', () => {
-                if (confirm('Ar tikrai norite ištrinti šią prekę?')) {
-                    inv.items.splice(index, 1);
-                    saskaita(inv);
-                }
+                showConfirm(
+                    'Ar tikrai norite ištrinti šią prekę?',
+                    () => {
+                        inv.items.splice(itemIndex, 1);
+                        if (!isInitializing) {
+                            isDirty = true;
+                        }
+                        saskaita(inv);
+                        showToast('Prekė pašalinta', 'success');
+                    }
+                );
             });
 
             tdActions.appendChild(deleteBtn);
@@ -328,6 +352,8 @@ function saskaita(inv) {
                     value: 0
                 }
             });
+            isDirty = true;
+            showToast('Prekė pridėta', 'success');
             saskaita(inv);
         });
         addBtn.classList.add('add-item-btn');

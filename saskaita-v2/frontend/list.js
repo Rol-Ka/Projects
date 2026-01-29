@@ -59,20 +59,33 @@ fetch('../backend/invoices_get.php')
       tbody.appendChild(tr);
     });
   })
-  .catch(err => {
-    console.error(err);
+  .catch(() => {
     tbody.innerHTML =
       '<tr><td colspan="4">Klaida kraunant sąskaitas</td></tr>';
+    showToast('Nepavyko užkrauti sąskaitų', 'error');
   });
 
 tbody.addEventListener('click', e => {
   if (!e.target.classList.contains('delete-btn')) return;
 
   const id = e.target.dataset.id;
+  const row = e.target.closest('tr');
 
-  if (!confirm('Ar tikrai norite ištrinti sąskaitą?')) return;
+  showConfirm(
+    'Ar tikrai norite ištrinti šią sąskaitą?',
+    () => {
+      deleteInvoice(id, row);
+    },
+    {
+      confirmText: 'Taip, trinti',
+      cancelText: 'Atšaukti',
+      confirmClass: 'btn-danger'
+    }
+  );
+});
 
-  fetch('/projects/saskaita-v2/backend/invoice_delete.php', {
+function deleteInvoice(id, row) {
+  fetch('../backend/invoice_delete.php', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ id })
@@ -80,15 +93,22 @@ tbody.addEventListener('click', e => {
     .then(res => res.json())
     .then(data => {
       if (data.error) {
-        alert('Klaida: ' + data.error);
+        showToast(data.error, 'error');
         return;
       }
 
-      alert('Sąskaita ištrinta');
-      location.reload();
+      row.remove();
+      checkEmptyList();
+      showToast('Sąskaita ištrinta', 'success');
     })
-    .catch(err => {
-      console.error(err);
-      alert('Klaida trinant sąskaitą');
+    .catch(() => {
+      showToast('Klaida trinant sąskaitą', 'error');
     });
-});
+}
+
+function checkEmptyList() {
+  if (!tbody.querySelector('tr')) {
+    tbody.innerHTML =
+      '<tr><td colspan="4">Sąskaitų nėra</td></tr>';
+  }
+}

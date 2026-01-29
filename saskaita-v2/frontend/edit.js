@@ -1,10 +1,11 @@
 
-
+let isDirty = false;
+let isInitializing = true;
 const params = new URLSearchParams(window.location.search);
 const id = params.get('id');
 
 if (!id) {
-  alert('Nėra sąskaitos ID');
+  showToast('Nėra sąskaitos ID', 'error');
   window.location.href = 'list.html';
 }
 
@@ -14,7 +15,7 @@ fetch(`/projects/saskaita-v2/backend/invoice_get.php?id=${id}`)
   .then(res => res.json())
   .then(inv => {
     if (inv.error) {
-      alert('Sąskaita nerasta');
+      showToast('Sąskaita nerasta', 'error');
       window.location.href = 'list.html';
       return;
     }
@@ -22,57 +23,67 @@ fetch(`/projects/saskaita-v2/backend/invoice_get.php?id=${id}`)
     currentInvoice = inv;
     window.IS_EDIT = true;
     saskaita(inv);
+    isDirty = false;
+    isInitializing = false;
   })
-  .catch(err => {
-    console.error(err);
-    alert('Klaida kraunant sąskaitą');
+  .catch(() => {
+    showToast('Klaida kraunant sąskaitą', 'error');
     window.location.href = 'list.html';
   });
 
 
 
 document.querySelector('#save').addEventListener('click', () => {
+
   if (!validateInvoice(currentInvoice)) return;
 
   fetch('/projects/saskaita-v2/backend/invoice_update.php', {
-    method: 'PUT',
+    method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(currentInvoice)
   })
-    .then(res => res.json())
-    .then(data => {
-      if (data.error) {
-        alert(data.error);
+    .then(async res => {
+      const text = await res.text();
+
+      let data = null;
+      try {
+        data = JSON.parse(text);
+      } catch (e) {
+
+      }
+
+      if (data?.error) {
+        showToast(data.error, 'error');
         return;
       }
 
       showToast('Sąskaita atnaujinta', 'success');
 
+
+      isDirty = false;
+      isInitializing = true;
+
+
+      setTimeout(() => {
+        isInitializing = false;
+      }, 0);
     })
-    .catch(err => {
-      console.error(err);
+    .catch(() => {
       showToast('Klaida saugant duomenis', 'error');
     });
 });
 
 document.querySelector('#back').addEventListener('click', () => {
-  window.location.href = 'list.html';
+  if (!isDirty) {
+    window.location.href = 'list.html';
+    return;
+  }
+
+  showConfirm(
+    'Ar tikrai norite grįžti? Neįrašyti pakeitimai bus prarasti.',
+    () => {
+      window.location.href = 'list.html';
+    }
+  );
 });
 
-function showToast(message, type = 'info', duration = 3000) {
-  const container = document.getElementById('toast-container');
-  if (!container) return;
-
-  const toast = document.createElement('div');
-  toast.className = `toast ${type}`;
-  toast.innerText = message;
-
-  container.appendChild(toast);
-
-  setTimeout(() => toast.classList.add('show'), 10);
-
-  setTimeout(() => {
-    toast.classList.remove('show');
-    setTimeout(() => toast.remove(), 300);
-  }, duration);
-}
