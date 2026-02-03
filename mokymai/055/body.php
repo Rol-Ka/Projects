@@ -18,10 +18,6 @@
     <?php
     if ($_SERVER['REQUEST_METHOD'] === 'GET'): ?>
 
-
-
-
-
         <form method="post" action="body.php">
             <input type="text" name="a">
             <input type="text" name="b">
