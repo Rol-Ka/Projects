@@ -1,42 +1,51 @@
 <?php
 
-// klases deklaracija
-class Stotele // pavadinimas prasideda didziaja raide
+// klasės deklaracija
+
+class Stotele
 {
-    public $vardas; // savybes aprasymas
-    public $autobusai = []; // savybes aprasymas
-    private $id; // savybes aprasymas
+
+    public $vardas;
+    public $autobusai = [];
+    private $id;
+    private $paslaptis = 'Bebras';
 
 
-    function __construct($pavadinimas) // konstruktorius, kuris paleidziamas kuriant objekta
+    public function __construct($pavadinimas)
     {
-        $this->vardas = $pavadinimas; // $this nurodo i esama objekta
-        $this->id = rand(1000, 9999); // priskiriama atsitiktine reiksme is intervalo
-
+        $this->id = rand(1000, 9999); // $ prieš savybę NĖRA!
+        $this->vardas = $pavadinimas;
     }
 
-    public function __destruct() // destruktorius, kuris paleidziamas sunaikinant objekta
+    public function __destruct()
     {
-        echo '<h1 style="color:crimson;">Objekto nebėra</h1>'; // veikia, kai objektas sunaikinamas
+        echo '<h1 style="color:crimson;">Objekto nebėra</h1>';
     }
 
-
-    //pasileidzia kai bandoma pasiekti neegzistuojancia private savybe
+    // pasileidžia kai mes bandome paimti nematomą arba neegzistuojantį propsą (savybę)
     public function __get($prop)
     {
-        // $prop ==> 'id'
+        if ($prop == 'auto') {
+            $this->rodytiAutobusus();
+            return 'b88';
+        }
 
-        return $this->$prop; // $ yra, nes tai yra savybes kintamasis
+        // $prop ==> 'id'
+        return $this->$prop; // $ yra, nes tai yra savybės vardo kintamasis
+    }
+
+    // pasileidžia kai mes bandome pakeisti nematomą arba neegzistuojantį propsą (savybę)
+    public function __set($prop, $value)
+    {
+        // būtinai reikia kažkokio tikrinimo
+        $this->$prop = $value;
     }
 
 
-
-
-
-    public function rodytiAutobusus() // metodas, kuris priklauso klasei
+    public function rodytiAutobusus()
     {
-        if (count($this->autobusai) === 0) { // patikrina ar masyvas tuscias
-            echo '<h2 style="color: red;">Autobusu nera</h2>'; // isveda zinute, jei masyvas tuscias
+        if (count($this->autobusai) === 0) {
+            echo '<h2 style="color:skyblue;">Autobusų nėra</h2>';
         }
     }
 }

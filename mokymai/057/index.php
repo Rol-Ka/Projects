@@ -1,36 +1,41 @@
 <?php
 
-// include __DIR__ . '/Stotele.php'; // jeigu failas nerastas, bus klaida
+// include __DIR__ . '/Stotele.php'; // jeigu failas nerastas, viskas veikia toliau tik su įspėjimu
 
-// include_once __DIR__ . '/Stotele.php'; // tapati faila ikeliama tik vieną kartą
+// include_once __DIR__ . '/Stotele.php'; // tą patį failą įdeda tik 1 kartą
 
-
-// require_once __DIR__ . '/Stotele.php'; // grieztai tikrina failo egzistyyavima, tapati faila ikeliama tik vieną kartą
-require __DIR__ . '/Stotele.php'; // grieztai tikrina failo egzistyyavima
+// require_once __DIR__ . '/Stotele.php'; // griežtai tikrina failo egzistavimą ir deda tik 1 kartą
 
 
-$stotele1 = new Stotele('Žaliakalnis');
-
-$stotele2 = new Stotele('Pilaite');
+require __DIR__ . '/Stotele.php'; // griežtai tikrina failo egzistavimą
 
 
+$stotele1 = new Stotele('Uragano Anatolijaus Skersgatvis');
+
+$stotele2 = new Stotele('Užkandinė "Bebro Kebabas"');
 
 
 
-echo "<pre>";
+
+$stotele1->paslaptis = 'Barsukas';
+
+
+echo '<pre>';
+
 var_dump($stotele1);
+echo '<br>';
 var_dump($stotele2);
 
-echo $stotele1->vardas . PHP_EOL; // veikia, nes vardas yra public
-// echo $stotele1->id . PHP_EOL; // klaida, nes id yra private
+echo '<br>';
 
+unset($stotele2);
 
-echo $stotele1->id . PHP_EOL; // veikia, nes naudojamas magiskas metodas __get
-
-
+echo $stotele1->paslaptis; // privatus per __get metodą
 
 
 
-$stotele1->rodytiAutobusus();
+echo '<br>';
 
-echo 'viskas gerai';
+var_dump($stotele1->auto);
+
+echo 'Viskai gerai';
