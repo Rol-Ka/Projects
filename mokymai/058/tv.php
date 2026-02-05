@@ -16,7 +16,7 @@ class Tv
     }
 
 
-    public function __construct($gamintojas, $ekranoDydis)
+    public function __construct($gamintojas, $ekranoDydis) //
     {
         $this->gamintojas = $gamintojas;
         $this->ekranoDydis = $ekranoDydis;
