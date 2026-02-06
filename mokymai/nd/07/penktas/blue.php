@@ -2,7 +2,7 @@
 
 if (isset($_GET['eiti'])) {
     header("Location: red.php");
-    exit();
+    die;
 }
 ?>
 
