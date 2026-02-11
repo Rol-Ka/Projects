@@ -1,0 +1,19 @@
+{
+    "name": "rolan/059",
+    "autoload": {
+        "psr-4": {
+            "AI\\GPT5\\": "biblioteka/",
+            "Ka\\Ziureti\\Dabar\\": "",
+            "Mano\\Ir\\Tik\\Mano\\": ""
+        }
+    },
+    "authors": [
+        {
+            "name": "Rol-Ka",
+            "email": "rolandaskakta1@gmail.com"
+        }
+    ],
+    "require": {
+        "ramsey/uuid": "^4.9"
+    }
+}

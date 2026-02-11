@@ -2,79 +2,104 @@
 
 function router()
 {
-
-    $uri = $_SERVER['REQUEST_URI']; // Gauname užklausos URI
-    $uri = str_replace(INSTALL_DIR, '', $uri); // Pašaliname diegimo katalogą iš URI
-    $uri = explode('/', $uri); // Padalijame URI į dalis
-    $method = $_SERVER['REQUEST_METHOD']; // Gauname užklausos metodą
+    $uri = $_SERVER['REQUEST_URI'];
+    $uri = str_replace(INSTALL_DIR, '', $uri);
+    $uri = explode('/', $uri);
+    $method = $_SERVER['REQUEST_METHOD'];
 
     if ('GET' == $method && $uri[0] == '') {
-        return homeController(); // Grąžina pagrindinį šabloną
+        return homeController();
     }
+
     if ('GET' == $method && $uri[0] == 'note') {
-        return noteController(); // Grąžina pagrindinį šabloną
+        return noteController($uri[1]);
     }
+
     if ('GET' == $method && $uri[0] == 'create') {
-        return createController(); // Grąžina pagrindinį šabloną
+        return createController();
     }
+
     if ('POST' == $method && $uri[0] == 'store') {
-        return storeController(); // Grąžina pagrindinį šabloną
+        return storeController();
     }
 }
-
-
 
 
 function homeController()
 {
-
     $pageData = [];
+
     $pageData['title'] = 'Home';
 
-    $notes = json_decode(file_get_contents(DIR . 'data/notes.json'), true) ?? []; // Gauname esamus užrašus iš failo, jei failas tuščias, grąžina tuščią masyvą
-    $pageData['notes'] = $notes; // Pridedame užrašus į puslapio duomenis
+    $notes = json_decode(file_get_contents(DIR . 'data/notes.json'), true) ?? [];
 
-    return view('home', $pageData); // Grąžina pagrindinį šabloną su duomenimis
+    $pageData['notes'] = $notes;
+
+    return view('home', $pageData);
 }
-function noteController()
+
+function noteController($id)
 {
-    return view('note'); // Grąžina pagrindinį šabloną su duomenimis
+    $pageData = [];
+
+    // read from data/notes.json
+    $notes = json_decode(file_get_contents(DIR . 'data/notes.json'), true) ?? [];
+    // find note by id
+    $note = null;
+    foreach ($notes as $n) {
+        if ($n['id'] == $id) {
+            $note = $n;
+            break;
+        }
+    }
+    if (!$note) {
+        header('Location: ' . URL); // jeigu tokio id nerasta, grąžina į home
+        return '';
+    }
+
+    $pageData['note'] = $note;
+    $pageData['title'] = $note['title'] ?? 'Note';
+
+    return view('note', $pageData);
 }
+
 function createController()
 {
-
     $pageData = [];
-    $pageData['title'] = 'Create Note';
 
-    return view('create', $pageData); // Grąžina pagrindinį šabloną su duomenimis
+    $pageData['title'] = 'Create';
+
+    return view('create', $pageData);
 }
 
 function storeController()
 {
-
     $storeData['date'] = $_POST['date'] ?? '';
     $storeData['title'] = $_POST['title'] ?? '';
     $storeData['content'] = $_POST['content'] ?? '';
-    $storeData['id'] = rand(100000000, 999999999); // Sugeneruojame atsitiktinį ID
+    $storeData['id'] = rand(100000000, 999999999);
 
-    $notes = json_decode(file_get_contents(DIR . 'data/notes.json'), true) ?? []; // Gauname esamus užrašus iš failo, jei failas tuščias, grąžina tuščią masyvą
-    $notes[] = $storeData; // Pridedame naują užrašą į masyvą
-    file_put_contents(DIR . 'data/notes.json', json_encode($notes, JSON_PRETTY_PRINT)); // Išsaugome atnaujintą masyvą į failą
+    // read from data/notes.json
+    $notes = json_decode(file_get_contents(DIR . 'data/notes.json'), true) ?? [];
+    // add new note to array
+    $notes[] = $storeData;
+    // save back to data/notes.json
+    file_put_contents(DIR . 'data/notes.json', json_encode($notes, JSON_PRETTY_PRINT));
 
-    header('Location: ' . URL); // Peradresuojame į pagrindinį puslapį
-    return ''; // Grąžiname tuščią stringą, nes header() jau išsiuntė atsakymą
+    header('Location: ' . URL);
+    return '';
 }
-
-
 
 
 function view(string $template, array $data = [])
 {
-    extract($data); // Išskleidžiame duomenis į atskirus kintamuosius
-    // viskas bus buferinimas, tai reiškia, kad viskas, kas bus išspausdinta, bus saugoma atmintyje, o ne iškart išsiųsta į naršyklę
-    ob_start(); // Pradeda buferį
-    require DIR . 'view/top.php'; // Įtraukia bendrą šabloną
-    require DIR . "view/{$template}.php"; // Įtraukia šablono failą
-    require DIR . 'view/bottom.php'; // Įtraukia bendrą šabloną
-    return ob_get_clean(); // Grąžina buferio turinį ir išvalo buferį
+    extract($data); // indeksai iš masyvo yra paverčiami atskirais kintamaisiais
+
+    // start output buffering
+    ob_start();
+    require DIR . 'view/top.php';
+    require DIR . "view/{$template}.php";
+    require DIR . 'view/bottom.php';
+    // clear output buffer and return result
+    return ob_get_clean();
 }

@@ -14,7 +14,7 @@
         <div class="logo">Stellar Notes</div>
         <nav class="nav">
             <a class="nav-link" href="<?= URL ?>">Home</a>
-            <a class="nav-link" href="<?= URL ?>note">Sample Note</a>
+            <a class="nav-link" href="<?= URL ?>note/<?= $notes[0]['id'] ?>">Sample Note</a>
             <a class="nav-link" href="<?= URL ?>create">Create</a>
         </nav>
     </header>

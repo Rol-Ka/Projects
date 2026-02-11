@@ -3,8 +3,8 @@
         <h1>Personal Astronomical Notes</h1>
         <p>Quiet observations, tracked across dark skies and colder nights.</p>
         <div class="hero-actions">
-            <a class="button primary" href="create.html">Create New Note</a>
-            <a class="button ghost" href="note1.html">View Sample</a>
+            <a class="button primary" href="create">Create New Note</a>
+            <a class="button ghost" href="<?= URL ?>note/<?= $notes[0]['id'] ?>">View Sample</a>
         </div>
     </section>
 
