@@ -1,0 +1,14 @@
+@use 'variables' as *;
+
+.input {
+    border: 1px solid $border;
+    padding: 6px;
+}
+
+.input-error {
+    border: 1px solid red;
+}
+
+label {
+    font-weight: bold;
+}

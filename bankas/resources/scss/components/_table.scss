@@ -1,0 +1,33 @@
+@use '../variables' as *;
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table th {
+    text-align: left;
+    font-weight: 600;
+    font-size: 14px;
+    color: $muted;
+    padding: 12px;
+    border-bottom: 1px solid $border;
+}
+
+.table td {
+    padding: 14px 12px;
+    border-bottom: 1px solid $border;
+}
+
+.table tr:hover {
+    background: #f8fafc;
+}
+
+.balance-positive {
+    color: $success;
+    font-weight: 600;
+}
+
+.balance-zero {
+    color: $muted;
+}

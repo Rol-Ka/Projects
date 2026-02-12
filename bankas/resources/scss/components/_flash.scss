@@ -1,0 +1,18 @@
+@use '../variables' as *;
+
+.flash {
+    padding: 14px 18px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    font-size: 14px;
+}
+
+.flash-success {
+    background: $success;
+    color: green;
+}
+
+.flash-error {
+    background: $error;
+    color: crimson;
+}
