@@ -32,21 +32,21 @@
         <tbody>
             @foreach ($accounts as $acc)
             <tr>
-                <td>{{ $loop->iteration }}</td>
-                <td>{{ $acc['name'] }}</td>
-                <td>{{ $acc['surname'] }}</td>
-                <td>{{ $acc['iban'] }}</td>
-                <td class="balance {{ $acc['balance'] > 0 ? 'balance-positive' : 'balance-zero' }}">
+                <td data-label="#">{{ $loop->iteration }}</td>
+                <td data-label="Vardas">{{ $acc['name'] }}</td>
+                <td data-label="Pavardė">{{ $acc['surname'] }}</td>
+                <td data-label="IBAN">{{ $acc['iban'] }}</td>
+                <td data-label="Balansas" class="balance {{ $acc['balance'] > 0 ? 'balance-positive' : 'balance-zero' }}">
                     {{ number_format($acc['balance'], 2) }} €
                 </td>
 
-                <td class="actions">
-                    <a href="{{ route('accounts.add.form', $acc['id']) }}" class="btn btn-primary">
-                        Pridėti lėšų
+                <td data-label="Veiksmai" class="actions">
+                    <a href="{{ route('accounts.add.form', $acc['id']) }}">
+                        <button type="button">Pridėti lėšų</button>
                     </a>
 
-                    <a href="{{ route('accounts.withdraw.form', $acc['id']) }}" class="btn btn-primary">
-                        Atimti lėšų
+                    <a href=" {{ route('accounts.withdraw.form', $acc['id']) }}">
+                        <button type="button">Nuskaičiuoti lėšas</button>
                     </a>
 
                     <form method="POST" action="{{ route('accounts.destroy', $acc['id']) }}" class="delete-form">
@@ -72,7 +72,7 @@
             <p id="modal-text">Ar tikrai norite ištrinti šią sąskaitą?</p>
 
             <div class="modal-actions">
-                <button id="cancel" class="btn">Atšaukti</button>
+                <button id="cancel" class="btn-cancel">Atšaukti</button>
                 <button id="confirm" class="btn btn-danger">Taip, trinti</button>
             </div>
 

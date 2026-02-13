@@ -2,17 +2,17 @@
 
 
 
-nav {
-    background: $primary;
-    padding: 12px 20px;
+// nav {
+//     background: $primary;
+//     padding: 12px 20px;
 
-    a {
-        color: white;
-        margin-right: 15px;
-        text-decoration: none;
-        font-weight: bold;
-    }
-}
+//     a {
+//         color: white;
+//         margin-right: 15px;
+//         text-decoration: none;
+//         font-weight: bold;
+//     }
+// }
 
 
 
@@ -74,4 +74,46 @@ td {
 td.actions {
     display: flex;
     gap: 10px;
+}
+
+.nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    background: #2f5fe3; // 👈 mėlyna juosta
+    padding: 14px 24px;
+    color: white;
+}
+
+.nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.nav a:hover {
+    opacity: 0.85;
+}
+
+.nav-left {
+    display: flex;
+    gap: 20px;
+}
+
+.nav-right {
+    display: flex;
+}
+
+.btn-logout {
+    background: #e74c3c;
+    border: none;
+    color: white;
+    padding: 6px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.btn-logout:hover {
+    background: #c0392b;
 }

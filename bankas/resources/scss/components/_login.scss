@@ -1,0 +1,114 @@
+.login-body {
+    min-height: 100vh;
+    background: white;
+    position: relative;
+    overflow: hidden;
+}
+
+/* LOGO kaip background elementas */
+.login-bg-logo {
+    position: absolute;
+    top: -150px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 0;
+
+}
+
+.login-bg-logo img {
+    width: 1020px; // gali didinti kiek nori
+}
+
+/* LOGIN visada centre */
+.login-center {
+    position: relative;
+    z-index: 1;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.login-card {
+    width: 340px;
+    padding: 30px;
+    border-radius: 14px;
+    background: white;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+}
+
+.login-title {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* GRID layout label | input */
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.login-row {
+    display: grid;
+    grid-template-columns: 110px 1fr;
+    align-items: center;
+    gap: 10px;
+}
+
+.login-row label {
+    font-weight: 600;
+}
+
+.login-row input {
+    padding: 8px 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+/* Button center */
+.login-actions {
+    margin-top: 10px;
+    text-align: center;
+}
+
+/* LOGIN BUTTON */
+.login-btn {
+    background: #2563eb;
+    color: white;
+    border: none;
+    padding: 10px 22px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: 0.2s;
+}
+
+/* Hover → GREEN */
+.login-btn:hover {
+    background: #16a34a;
+}
+
+/* TELEFONAS */
+@media (max-width: 480px) {
+
+    .login-card {
+        width: 92%;
+        padding: 20px;
+    }
+
+    .login-row {
+        grid-template-columns: 1fr; // label virš input
+        gap: 6px;
+    }
+
+    .login-title {
+        font-size: 22px;
+    }
+
+    .login-bg-logo img {
+        width: 520px;
+        top: 50px;
+
+    }
+}

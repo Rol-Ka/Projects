@@ -1,1 +1,1 @@
-.input{border:1px solid #ccc;padding:6px}.input-error{border:1px solid red}label{font-weight:bold}
+.input{border:1px solid #e5e7eb;padding:6px}.input-error{border:1px solid red}label{font-weight:bold}.form-center{display:flex;justify-content:center;margin-top:60px}.form-card{background:#fff;padding:30px;border-radius:14px;box-shadow:0 4px 14px rgba(0,0,0,.08);min-width:320px;text-align:center}.form-card input{width:100%;margin-top:8px;margin-bottom:18px}.form-actions{display:flex;justify-content:center;gap:10px}
