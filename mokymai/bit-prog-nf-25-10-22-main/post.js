@@ -1,23 +1,63 @@
-const createPost = () => {
+const init = (req, res) => {
+  const urlSearch = location.search;
+  const urlSearchParams = new URLSearchParams(urlSearch);
+  const postId = urlSearchParams.get("post-id");
+
+  fetch(`https://jsonplaceholder.typicode.com/posts/${postId}`)
+    .then((res) => res.json())
+    .then((data) => {
+      const pageContent = document.querySelector("#page-content");
+
+      const postElement = postContent(data);
+
+      pageContent.append(postElement);
+    });
+};
+
+//
+//
+//
+
+//
+//
+//
+//
+const postContent = (param) => {
+  // const title = param.title;
+  // const body = param.body;
+  // const userId = param.userId;
+  // const id = param.id;
+
+  const { title, body, userId, id } = param;
+
+  if (!title || !id) {
+    return "";
+  }
+
   const postWrapper = document.createElement("div");
   postWrapper.classList.add("post-wrapper");
 
   const postTitle = document.createElement("h1");
-  const postBody = document.createElement("p");
-  const postUserId = document.createElement("p");
+  postTitle.textContent = "Title: " + title;
+  postWrapper.append(postTitle);
+
+  if (body) {
+    const postBody = document.createElement("p");
+    postBody.textContent = "Body: " + body;
+    postWrapper.append(postBody);
+  }
+
+  if (userId) {
+    const postUserId = document.createElement("p");
+    postUserId.textContent = "User ID: " + userId;
+    postWrapper.append(postUserId);
+  }
+
   const postId = document.createElement("p");
-
-  postTitle.textContent = "Title: sunt";
-  postBody.textContent = "Body: quia";
-  postUserId.textContent = "User ID: 1";
-  postId.textContent = "ID: 1";
-
-  postWrapper.append(postTitle, postBody, postUserId, postId);
+  postId.textContent = "ID: " + id;
+  postWrapper.append(postId);
 
   return postWrapper;
 };
 
-const pageContent = document.querySelector("#page-content");
-
-const postElement = createPost();
-pageContent.append(postElement);
+init();

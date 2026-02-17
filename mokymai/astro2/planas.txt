@@ -1,0 +1,6 @@
+1. Duomenu bazes struktura. Migracijos.
+2. Seederiai
+3. Routingas
+4. Controleriai
+5. view
+6. Modeliai
