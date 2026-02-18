@@ -1,27 +1,23 @@
-const init = (req, res) => {
+const init = async () => {
   const urlSearch = location.search;
   const urlSearchParams = new URLSearchParams(urlSearch);
   const postId = urlSearchParams.get("post-id");
 
-  fetch(`https://jsonplaceholder.typicode.com/posts/${postId}`)
-    .then((res) => res.json())
-    .then((data) => {
-      const pageContent = document.querySelector("#page-content");
+  const pageContent = document.querySelector("#content");
 
-      const postElement = postContent(data);
+  const postData = await fetchPost(postId);
+  const postElement = postContent(postData);
 
-      pageContent.append(postElement);
-    });
+  pageContent.append(postElement);
 };
 
-//
-//
-//
+const fetchPost = async (id) => {
+  const res = await fetch(`https://jsonplaceholder.typicode.com/posts/${id}`);
+  const post = await res.json();
 
-//
-//
-//
-//
+  return post;
+};
+
 const postContent = (param) => {
   // const title = param.title;
   // const body = param.body;
@@ -38,7 +34,7 @@ const postContent = (param) => {
   postWrapper.classList.add("post-wrapper");
 
   const postTitle = document.createElement("h1");
-  postTitle.textContent = "Title: " + title;
+  postTitle.textContent = id + ". " + title;
   postWrapper.append(postTitle);
 
   if (body) {
@@ -53,11 +49,32 @@ const postContent = (param) => {
     postWrapper.append(postUserId);
   }
 
-  const postId = document.createElement("p");
-  postId.textContent = "ID: " + id;
-  postWrapper.append(postId);
-
   return postWrapper;
 };
+
+const navigationElements = () => {
+  const navigationWrapper = document.createElement("nav");
+  navigationWrapper.classList.add("navigation-wrapper");
+
+  const menuLinks = [
+    { name: "Home", href: "index.html" },
+    { name: "Posts", href: "posts.html" },
+    { name: "Users", href: "users.html" },
+    { name: "Todos", href: "todos.html" },
+    { name: "Comments", href: "comments.html" },
+  ];
+
+  menuLinks.forEach((link) => {
+    const menuItem = document.createElement("li");
+    const menuLink = document.createElement("a");
+    menuLink.textContent = link.name;
+    menuLink.href = link.href;
+    menuItem.append(menuLink);
+    navigationWrapper.append(menuItem);
+  });
+
+
+  return navigationWrapper;
+}
 
 init();
