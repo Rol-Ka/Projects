@@ -1,0 +1,2 @@
+<h2 style="color: <?php echo e($bebroSpalva); ?>">Labas,  bebrai</h2>
+<p> Cia yra bebro puslapis</p><?php /**PATH C:\xampp\htdocs\projects\hello-lara\resources\views/bebras/spalvotas.blade.php ENDPATH**/ ?>
