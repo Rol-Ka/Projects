@@ -3,6 +3,10 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BebrasController;
 use App\Http\Controllers\Bebras2Controller;
+use App\Http\Controllers\Suma2Controller;
+use App\Http\Controllers\SumaController;
+use App\Http\Controllers\BijunasController;
+use App\Http\Controllers\FormController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,3 +41,12 @@ Route::get('/spalvotas-bebras/{bebroSpalva}', [BebrasController::class, 'spalvot
 // Surautinti to kontrolerio metodą route faile
 // Patikrinti ar veikia
 Route::get('/paprastas-bebras2', [Bebras2Controller::class, 'paprastasBebras2']);
+
+// Route::get('/suma/{a}/{b}', [SumaController::class, 'suma']);
+Route::get('/suma/8/9', [Suma2Controller::class, 'suma']);
+
+
+Route::get('/bijunas', [BijunasController::class, 'bijunas']);
+
+Route::get('/get', [FormController::class, 'showGetForm']);
+Route::get('/get/sum/{d1}/{d2}', [FormController::class, 'showSumFromGet']);
