@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 
 class FormController extends Controller
 {
+
+
+    // GET forma
     public function showGetForm()
     {
         return view('forms.get');
@@ -13,9 +16,40 @@ class FormController extends Controller
 
     public function showSumFromGet(Request $req)
     {
+        $d1 = $req->query('digit1');
+        $d2 = $req->query('digit2');
+        $rez = $d1 + $d2;
+        return view('forms.get_result', ['rez' => $rez]);
+    }
+
+
+
+
+
+    // POST forma
+    public function showPostForm()
+    {
+        return view('forms.post');
+    }
+
+    public function makeSumFromPost(Request $req)
+    {
         $d1 = $req->input('digit1');
         $d2 = $req->input('digit2');
         $rez = $d1 + $d2;
-        return view('forms.get_result', ['rez' => $rez]);
+
+        session(['rez' => $rez]); // saugome sesijoje, kad galėtume pasiekti po redirekto
+
+        return redirect()->route('rezultato-rodymas');
+        //->with(['rez' => $rez]); // flash to session, galime pasiekti tik po redirekto, vienkartinis
+    }
+
+
+
+
+    public function showSumFromPost()
+    {
+        $rez = session('rez', 'Nera rezultato');
+        return view('forms.post_result', ['rez' => $rez]);
     }
 }
