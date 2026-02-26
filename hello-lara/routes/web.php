@@ -7,7 +7,7 @@ use App\Http\Controllers\Suma2Controller;
 use App\Http\Controllers\SumaController;
 use App\Http\Controllers\BijunasController;
 use App\Http\Controllers\FormController;
-
+use App\Http\Controllers\SkaiciusController as S;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -66,7 +66,7 @@ Route::get('/post-result', [FormController::class, 'showSumFromPost'])->name('re
 // atsakyme rodytų "8 + 9 = 17"
 // po post metodoto turi būti redirectas
 // reikia naujo kontrolerio, metodų, routų ir bladų failų
- 
+
 // padaryti surinkėją kuris yra POST forma
 // į formą suvedus skaičių 7
 // rodytų 7
@@ -76,3 +76,6 @@ Route::get('/post-result', [FormController::class, 'showSumFromPost'])->name('re
 // rodytų 7 9 10
 // reikia naujo kontrolerio, metodų, routų ir bladų failų
 // dar galit pagalvoti apie mygtuką, kuris viską ištrina
+Route::get('/du-skaiciai', [S::class, 'forma2Skaiciai']);
+Route::post('/du-skaiciai-rezultatas', [S::class, 'formos2SkaiciaiApdorojimas'])->name('apdorojimas-2');
+Route::get('/du-skaiciai-rezultatas', [S::class, 'formos2SkaiciaiRezultatas'])->name('rodymas-2');
