@@ -29,14 +29,25 @@
 
             <p>{{ $story->content }}</p>
             <p>
-    @foreach($story->tags as $tag)
-        <span style="color:blue;">#{{ $tag->name }}</span>
-    @endforeach
-</p>
-
-            <p>
-                Surinkta: €{{ $story->current_amount }} / €{{ $story->goal_amount }}
+                @foreach($story->tags as $tag)
+                <span style="color:blue;">#{{ $tag->name }}</span>
+                @endforeach
             </p>
+
+            <p>Surinkta: €{{ $story->current_amount }} / €{{ $story->goal_amount }}</p>
+            @if($story->donations->count())
+            <div style="margin-top:10px; padding:10px; background:#f8f8f8;">
+                <strong>Aukojimo istorija:</strong>
+
+                <ul style="margin:5px 0; padding-left:15px;">
+                 @foreach($story->donations as $donation)
+                    <li>
+                    {{ $donation->user->name }} – €{{ $donation->amount }}
+                    </li>
+                @endforeach
+                </ul>
+            </div>
+@endif
             <p>❤️ {{ $story->likes->count() }}</p>
 
 @auth
@@ -62,6 +73,15 @@
             @if($story->main_image)
                 <img src="{{ asset('storage/' . $story->main_image) }}" width="200">
             @endif
+
+            @if($story->images->count())
+    <div style="margin-top:10px;">
+        @foreach($story->images as $image)
+            <img src="{{ asset('storage/' . $image->image_path) }}" 
+                 style="width:120px; margin-right:5px;">
+        @endforeach
+    </div>
+@endif
 
         </div>
     @empty

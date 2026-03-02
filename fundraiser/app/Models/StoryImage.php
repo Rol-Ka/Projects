@@ -5,18 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Donation extends Model
+class StoryImage extends Model
 {
     use HasFactory;
-    protected $fillable = ['user_id', 'story_id', 'amount'];
+    protected $fillable = ['story_id', 'image_path'];
 
     public function story()
     {
         return $this->belongsTo(Story::class);
-    }
-
-    public function user()
-    {
-        return $this->belongsTo(User::class);
     }
 }

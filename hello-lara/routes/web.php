@@ -8,6 +8,7 @@ use App\Http\Controllers\SumaController;
 use App\Http\Controllers\BijunasController;
 use App\Http\Controllers\FormController;
 use App\Http\Controllers\SkaiciusController as S;
+use App\Http\Controllers\FarmController as Farm;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -61,6 +62,10 @@ Route::get('/post-result', [FormController::class, 'showSumFromPost'])->name('re
 
 
 
+Route::get('/du-skaiciai', [S::class, 'forma2Skaiciai']);
+Route::post('/du-skaiciai-rezultatas', [S::class, 'formos2SkaiciaiApdorojimas'])->name('apdorojimas-2');
+Route::get('/du-skaiciai-rezultatas', [S::class, 'formos2SkaiciaiRezultatas'])->name('rodymas-2');
+
 // padaryti sumatorių kuri yra POST forma.
 // į formą suvedus 8 ir 9
 // atsakyme rodytų "8 + 9 = 17"
@@ -76,6 +81,23 @@ Route::get('/post-result', [FormController::class, 'showSumFromPost'])->name('re
 // rodytų 7 9 10
 // reikia naujo kontrolerio, metodų, routų ir bladų failų
 // dar galit pagalvoti apie mygtuką, kuris viską ištrina
-Route::get('/du-skaiciai', [S::class, 'forma2Skaiciai']);
-Route::post('/du-skaiciai-rezultatas', [S::class, 'formos2SkaiciaiApdorojimas'])->name('apdorojimas-2');
-Route::get('/du-skaiciai-rezultatas', [S::class, 'formos2SkaiciaiRezultatas'])->name('rodymas-2');
+
+Route::get('/trys-skaiciai', [S::class, 'forma3Skaiciai']);
+Route::post('/trys-skaiciai-rezultatas', [S::class, 'formos3SkaiciaiApdorojimas'])->name('apdorojimas-3');
+Route::get('/trys-skaiciai-rezultatas', [S::class, 'formos3SkaiciaiRezultatas'])->name('rodymas-3');
+
+Route::post('/valyti', [S::class, 'formos3SkaiciaiValymas'])->name('valom-lauka');
+
+
+
+// 3 gyvuliu CRUD'as
+
+Route::prefix('/farm')->name('farm-')->group(function () {
+    Route::get('/', [Farm::class, 'read'])->name('read');
+    Route::get('/create', [Farm::class, 'create'])->name('create');
+    Route::post('/', [Farm::class, 'store'])->name('store');
+    Route::get('/{id}', [Farm::class, 'show'])->name('show');
+    Route::get('/{id}/edit', [Farm::class, 'edit'])->name('edit');
+    Route::put('/{id}', [Farm::class, 'update'])->name('update');
+    Route::delete('/{id}', [Farm::class, 'destroy'])->name('destroy');
+});

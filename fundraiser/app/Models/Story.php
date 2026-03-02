@@ -18,6 +18,7 @@ class Story extends Model
         'content',
         'goal_amount',
         'main_image',
+        'is_approved',
     ];
     public function likes()
     {
@@ -31,5 +32,10 @@ class Story extends Model
     public function tags()
     {
         return $this->belongsToMany(Tag::class);
+    }
+
+    public function images()
+    {
+        return $this->hasMany(StoryImage::class);
     }
 }

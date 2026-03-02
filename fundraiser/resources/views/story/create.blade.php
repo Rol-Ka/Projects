@@ -33,6 +33,10 @@
             <label>Pagrindinė nuotrauka</label>
             <input type="file" name="main_image" class="form-control">
         </div>
+        <div style="margin-bottom:10px;">
+    <label>Galerijos nuotraukos</label>
+    <input type="file" name="gallery_images[]" multiple class="form-control">
+</div>
        <div style="margin-bottom:10px;">
     <label>#Tag (rašyk su #, pvz: #kelione #pagalba)</label>
     <input type="text" name="tags_text" class="form-control" placeholder="#kelione #auka">

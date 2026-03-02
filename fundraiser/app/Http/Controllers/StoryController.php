@@ -58,13 +58,27 @@ class StoryController extends Controller
             }
         }
 
+        // gallery upload
+        if ($request->hasFile('gallery_images')) {
+
+            foreach ($request->file('gallery_images') as $image) {
+
+                $path = $image->store('stories/gallery', 'public');
+
+                \App\Models\StoryImage::create([
+                    'story_id' => $story->id,
+                    'image_path' => $path,
+                ]);
+            }
+        }
+
         return redirect('/dashboard')->with('success', 'Istorija sukurta!');
     }
     public function index(Request $request)
     {
         $query = \App\Models\Story::where('is_approved', true)
             ->withCount('likes')
-            ->with('tags');
+            ->with(['tags', 'donations.user', 'images']);
 
         // jei yra tag filter
         if ($request->tag) {

@@ -48,4 +48,22 @@ Route::get('/tags-json', function () {
     return \App\Models\Tag::orderBy('name')->pluck('name');
 });
 
+Route::middleware(['auth'])->group(function () {
+
+    Route::get('/admin/stories', [\App\Http\Controllers\AdminController::class, 'index'])
+        ->name('admin.stories');
+
+    Route::post('/admin/stories/{story}/approve', [\App\Http\Controllers\AdminController::class, 'approve'])
+        ->name('admin.stories.approve');
+
+    Route::delete('/admin/stories/{story}', [\App\Http\Controllers\AdminController::class, 'destroy'])
+        ->name('admin.stories.destroy');
+});
+
+
+
+
+
+
+
 require __DIR__ . '/auth.php';
