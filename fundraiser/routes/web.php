@@ -58,6 +58,12 @@ Route::middleware(['auth'])->group(function () {
 
     Route::delete('/admin/stories/{story}', [\App\Http\Controllers\AdminController::class, 'destroy'])
         ->name('admin.stories.destroy');
+
+    Route::get('/story/{story}/edit', [StoryController::class, 'edit'])
+        ->name('story.edit');
+
+    Route::put('/story/{story}', [StoryController::class, 'update'])
+        ->name('story.update');
 });
 
 

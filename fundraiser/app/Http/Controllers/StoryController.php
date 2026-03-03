@@ -96,4 +96,50 @@ class StoryController extends Controller
 
         return view('story.index', compact('stories', 'tags'));
     }
+
+    public function edit(Story $story)
+    {
+        // tik savo story
+        if ($story->user_id !== auth()->id()) {
+            abort(403);
+        }
+
+        // jei jau patvirtinta – nebeleidžiam
+        if ($story->is_approved) {
+            return redirect('/dashboard')->with('error', 'Istorija jau patvirtinta ir nebegali būti redaguojama.');
+        }
+
+        return view('story.edit', compact('story'));
+    }
+
+    public function update(Request $request, Story $story)
+    {
+        if ($story->user_id !== auth()->id()) {
+            abort(403);
+        }
+
+        if ($story->is_approved) {
+            abort(403);
+        }
+
+        $request->validate([
+            'title' => 'required',
+            'content' => 'required',
+            'goal_amount' => 'required|numeric|min:1',
+            'main_image' => 'nullable|image|max:2048'
+        ]);
+
+        if ($request->hasFile('main_image')) {
+            $path = $request->file('main_image')->store('stories', 'public');
+            $story->main_image = $path;
+        }
+
+        $story->title = $request->title;
+        $story->content = $request->content;
+        $story->goal_amount = $request->goal_amount;
+
+        $story->save();
+
+        return redirect('/dashboard')->with('success', 'Istorija atnaujinta!');
+    }
 }

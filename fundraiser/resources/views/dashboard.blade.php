@@ -1,17 +1,58 @@
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Dashboard') }}
-        </h2>
-    </x-slot>
+@extends('layouts.app')
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900">
-                    {{ __("You're logged in!") }}
-                </div>
-            </div>
+@section('content')
+
+<div class="container mt-4">
+
+    <h2>Dashboard</h2>
+
+    @php
+        $story = auth()->user()->story;
+    @endphp
+
+    {{-- Jei neturi story --}}
+    @if(!$story)
+    <p>Jūs dar neturite savo istorijos. Sukurkite ją, kad galėtumėte pradėti rinkti lėšas!</p>
+        <div style="margin-bottom:15px;">
+            <a href="{{ route('story.create') }}">
+                ➕ Sukurti istoriją
+            </a>
         </div>
-    </div>
-</x-app-layout>
+    @endif
+
+    {{-- Jei turi story --}}
+    @if($story)
+        <div style="border:1px solid #ccc; padding:15px; margin-top:15px;">
+            <h3>Mano istorija</h3>
+
+            <strong>{{ $story->title }}</strong><br>
+
+            Statusas:
+            @if($story->is_approved)
+                <span style="color:green;">Patvirtinta</span>
+            @else
+                <span style="color:red;">Nepatvirtinta</span>
+            @endif
+
+            <br><br>
+
+            @if(!$story->is_approved)
+                <a href="{{ route('story.edit', $story) }}">
+                    ✏️ Redaguoti
+                </a>
+            @endif
+        </div>
+    @endif
+
+    {{-- Jei admin --}}
+    @if(auth()->user()->role === 'admin')
+        <div style="margin-top:20px;">
+            <a href="{{ route('admin.stories') }}">
+                ⚙️ Admin panel
+            </a>
+        </div>
+    @endif
+
+</div>
+
+@endsection
