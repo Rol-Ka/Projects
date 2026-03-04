@@ -142,4 +142,16 @@ class StoryController extends Controller
 
         return redirect('/dashboard')->with('success', 'Istorija atnaujinta!');
     }
+
+    public function show(Story $story)
+    {
+        $story->load([
+            'user',
+            'tags',
+            'images',
+            'donations.user'
+        ]);
+
+        return view('story.show', compact('story'));
+    }
 }

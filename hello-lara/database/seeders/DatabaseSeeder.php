@@ -14,10 +14,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        for ($i = 0; $i < 22; $i++) {
+        for ($i = 0; $i < 2222; $i++) {
             DB::table('farms')->insert([
                 'animal' => Farm::ANIMALS[rand(0, count(Farm::ANIMALS) - 1)],
-                'weight' => rand(50, 4000) / 100, // rand 3875 => 38.75
+                'weight' => rand(50, 9999) / 100, // rand 3875 => 38.75
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);

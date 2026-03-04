@@ -25,7 +25,10 @@ class AdminController extends Controller
             abort(403);
         }
 
-        $story->update(['is_approved' => true]);
+        $story->update([
+            'is_approved' => true,
+            'approved_at' => now()
+        ]);
 
         return back();
     }

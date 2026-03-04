@@ -29,7 +29,12 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended(RouteServiceProvider::HOME);
+        if (session('start_fundraiser')) {
+            session()->forget('start_fundraiser');
+            return redirect()->route('story.create');
+        }
+
+        return redirect()->intended('/dashboard');
     }
 
     /**

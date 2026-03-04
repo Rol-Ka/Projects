@@ -17,6 +17,16 @@
         @else
             <span style="color:red;">Nepatvirtinta</span>
         @endif
+        <br>Sukurta: {{ $story->created_at }} <br>
+
+        @if($story->approved_at)
+        Patvirtinta: {{ $story->approved_at }}
+        @endif
+        <br>
+
+        @if($story->completed_at)
+        Tikslas pasiektas: {{ $story->completed_at }}
+        @endif
 
         <div style="margin-top:10px;">
 

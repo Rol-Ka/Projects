@@ -19,6 +19,8 @@ class Story extends Model
         'goal_amount',
         'main_image',
         'is_approved',
+        'approved_at',
+        'completed_at'
     ];
     public function likes()
     {

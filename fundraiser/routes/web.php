@@ -17,9 +17,9 @@ use App\Http\Controllers\DonationController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::view('/', 'welcome')->name('home');
+
+Route::get('/stories', [StoryController::class, 'index'])->name('stories.index');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -36,7 +36,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/story', [StoryController::class, 'store'])->name('story.store');
 });
 
-Route::get('/', [StoryController::class, 'index'])->name('home');
+
 Route::middleware('auth')->group(function () {
     Route::post('/like/{story}', [LikeController::class, 'toggle'])->name('like.toggle');
 });
@@ -47,6 +47,19 @@ Route::middleware('auth')->group(function () {
 Route::get('/tags-json', function () {
     return \App\Models\Tag::orderBy('name')->pluck('name');
 });
+
+Route::get('/story/{story}', [StoryController::class, 'show'])->name('story.show');
+
+Route::get('/start-fundraiser', function () {
+
+    if (auth()->check()) {
+        return redirect()->route('story.create');
+    }
+
+    session(['start_fundraiser' => true]);
+
+    return view('auth.start');
+})->name('fundraiser.start');
 
 Route::middleware(['auth'])->group(function () {
 

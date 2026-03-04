@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Farm;
+use App\Http\Requests\StoreFarmRequest;
+use App\Http\Requests\UpdateFarmRequest;
 
 
 /*
@@ -51,10 +53,15 @@ class FarmController extends Controller
 {
     public function read()
     {
-        $animals = Farm::all(); // visi gyvuliai iš DB
-        // $animals yra KOLEKCIJA (gudrus masyvas apiformintas kaip objektas)
+        // $animals = Farm::all(); // visi gyvuliai iš DB
+        // // $animals yra KOLEKCIJA (gudrus masyvas apiformintas kaip objektas)
 
-        $animals = $animals->sortByDesc('weight'); // Gautą kolekciją parūšiuojam pagal svorį atgal
+        // $animals = $animals->sortByDesc('weight'); // Gautą kolekciją parūšiuojam pagal svorį atgal
+
+        $animals = Farm::orderBy('weight', 'desc')
+            // ->where('animal', 'antis') // tik antys
+            // ->get(); // Visi gyvuliai iš DB, išrūšiuoti pagal svorį atgal
+            ->paginate(15); // Puslapiavimas, po 10 įrašų puslapyje
 
         $weightSum = $animals->sum('weight'); // Gautos kolekcijos svorio suma
 
@@ -66,39 +73,39 @@ class FarmController extends Controller
         return view('farm.create', ['animals' => Farm::ANIMALS]);
     }
 
-    public function store(Request $req)
+    public function store(StoreFarmRequest $req)
     {
         Farm::create($req->all()); // prideda naują į DB 
         // $req->all() viskas ką siunčia requestas
 
-        return redirect()->route('farm-read');
+        return redirect()->route('farm-read')->with('success_zinute', 'Gyvulys pridėtas!'); // su session flash žinute
     }
 
     public function delete(int $id)
     {
-        $animal = FARM::find($id);
+        $animal = Farm::find($id);
 
         return view('farm.delete', ['animal' => $animal]);
     }
 
     public function destroy(int $id)
     {
-        $animal = FARM::find($id);
+        $animal = Farm::find($id);
         $animal->delete();
 
-        return redirect()->route('farm-read');
+        return redirect()->route('farm-read')->with('info_zinute', 'Gyvulys pašalintas!');
     }
 
     public function edit(int $id)
     {
-        $animal = FARM::find($id);
+        $animal = Farm::find($id);
 
         return view('farm.edit', ['animal' => $animal, 'animals' => Farm::ANIMALS]);
     }
 
-    public function update(Request $req, int $id)
+    public function update(UpdateFarmRequest $req, int $id)
     {
-        $animal = FARM::find($id);
+        $animal = Farm::find($id);
         $animal->update($req->all());
 
         return redirect()->route('farm-read');
@@ -106,7 +113,7 @@ class FarmController extends Controller
 
     public function show(int $id)
     {
-        $animal = FARM::find($id);
+        $animal = Farm::find($id);
 
         return view('farm.show', ['animal' => $animal]);
     }

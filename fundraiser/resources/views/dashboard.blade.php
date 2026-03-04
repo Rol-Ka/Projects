@@ -44,14 +44,6 @@
         </div>
     @endif
 
-    {{-- Jei admin --}}
-    @if(auth()->user()->role === 'admin')
-        <div style="margin-top:20px;">
-            <a href="{{ route('admin.stories') }}">
-                ⚙️ Admin panel
-            </a>
-        </div>
-    @endif
 
 </div>
 

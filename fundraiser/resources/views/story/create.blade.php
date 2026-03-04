@@ -1,52 +1,79 @@
 @extends('layouts.app')
 
+@section('page','create-story')
+
 @section('content')
-<div class="container mt-4" style="max-width: 600px;">
 
-    <h2>Sukurti istoriją</h2>
+<div class="create-container">
 
-    @if(session('error'))
-        <div style="color:red; margin-bottom:10px;">
-            {{ session('error') }}
-        </div>
-    @endif
+<h2>Sukurti istoriją</h2>
 
-    <form method="POST" action="{{ route('story.store') }}" enctype="multipart/form-data">
-        @csrf
-
-        <div style="margin-bottom:10px;">
-            <label>Pavadinimas</label>
-            <input type="text" name="title" class="form-control" required>
-        </div>
-
-        <div style="margin-bottom:10px;">
-            <label>Aprašymas</label>
-            <textarea name="content" class="form-control" required></textarea>
-        </div>
-
-        <div style="margin-bottom:10px;">
-            <label>Tikslinė suma (€)</label>
-            <input type="number" step="0.01" name="goal_amount" class="form-control" required>
-        </div>
-
-        <div style="margin-bottom:10px;">
-            <label>Pagrindinė nuotrauka</label>
-            <input type="file" name="main_image" class="form-control">
-        </div>
-        <div style="margin-bottom:10px;">
-    <label>Galerijos nuotraukos</label>
-    <input type="file" name="gallery_images[]" multiple class="form-control">
+@if(session('error'))
+<div class="form-error">
+{{ session('error') }}
 </div>
-       <div style="margin-bottom:10px;">
-    <label>#Tag (rašyk su #, pvz: #kelione #pagalba)</label>
-    <input type="text" name="tags_text" class="form-control" placeholder="#kelione #auka">
+@endif
+
+<form method="POST"
+      action="{{ route('story.store') }}"
+      enctype="multipart/form-data"
+      class="story-form">
+
+@csrf
+
+<div class="form-group">
+<label>Pavadinimas</label>
+<input type="text" name="title" required>
 </div>
 
-        <button type="submit">
-            Sukurti
-        </button>
 
-    </form>
+<div class="form-group">
+<label>Aprašymas</label>
+<textarea name="content" required></textarea>
+</div>
+
+
+<div class="form-group">
+<label>Tikslinė suma (€)</label>
+<input type="number" step="0.01" name="goal_amount" required>
+</div>
+
+
+<div class="form-group">
+<label>Pagrindinė nuotrauka</label>
+<input type="file" name="main_image">
+</div>
+
+
+<div class="form-group">
+<label>Galerijos nuotraukos</label>
+<input type="file" name="gallery_images[]" multiple>
+</div>
+
+
+<div class="form-group">
+
+<label>Įrašykite norimus tag'us</label>
+
+<input
+type="text"
+id="tags-input"
+placeholder="Pvz.: kelione pagalba auka"
+autocomplete="off"
+>
+
+<div id="tags-suggestions" class="tags-suggestions"></div>
+
+<input type="hidden" name="tags_text" id="tags-hidden">
+
+</div>
+
+
+<button type="submit" class="create-btn">
+Sukurti
+</button>
+
+</form>
 
 </div>
 @endsection

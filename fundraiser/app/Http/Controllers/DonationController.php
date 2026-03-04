@@ -31,9 +31,13 @@ class DonationController extends Controller
         $story->current_amount = $story->donations()->sum('amount');
 
         if ($story->current_amount >= $story->goal_amount) {
+
             $story->is_completed = true;
-        } else {
-            $story->is_completed = false;
+
+            // nustatom completed_at tik jei dar nebuvo nustatytas
+            if (!$story->completed_at) {
+                $story->completed_at = now();
+            }
         }
 
         $story->save();

@@ -11,6 +11,9 @@
 
     {{-- @include('nav') --}}
     {{-- @include('errors') --}}
+    @include('succsess')
+    @include('errors')
+    @include('info')
     @yield('turinys')
 </body>
 </html>

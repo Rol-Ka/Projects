@@ -1,0 +1,97 @@
+.hero {
+    text-align: center;
+    padding: 80px 20px;
+    background: #f6f7f6;
+}
+
+.hero h1 {
+    font-size: 48px;
+    margin-bottom: 20px;
+    color: #222;
+}
+
+.hero p {
+    font-size: 18px;
+    max-width: 600px;
+    margin: auto;
+    color: #555;
+}
+
+.hero-buttons {
+    margin-top: 30px;
+}
+
+.btn-primary {
+    background: #3a7d44;
+    color: white;
+    padding: 14px 28px;
+    border-radius: 25px;
+    text-decoration: none;
+    margin-right: 10px;
+}
+
+.btn-primary:hover {
+    background: #2f6637;
+}
+
+.btn-secondary {
+    border: 1px solid #3a7d44;
+    color: #3a7d44;
+    padding: 14px 28px;
+    border-radius: 25px;
+    text-decoration: none;
+}
+
+.hero-images {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 40px;
+    padding-bottom: 60px;
+}
+
+.hero-images img {
+    width: 280px;
+    border-radius: 20px;
+    object-fit: cover;
+}
+
+.landing-info {
+    text-align: center;
+    padding: 80px 20px;
+    background: white;
+}
+
+.landing-info h2 {
+    font-size: 36px;
+    margin-bottom: 20px;
+}
+
+.landing-info p {
+    max-width: 600px;
+    margin: auto;
+    color: #666;
+}
+
+
+
+.start-container {
+    text-align: center;
+    padding: 100px 20px;
+}
+
+.start-container h1 {
+    font-size: 36px;
+    margin-bottom: 20px;
+}
+
+.start-container p {
+    color: #555;
+    margin-bottom: 30px;
+}
+
+.start-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
