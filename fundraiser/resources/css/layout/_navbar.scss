@@ -1,0 +1,103 @@
+@use "../base/variables" as *;
+
+
+
+.main-nav {
+    background: white;
+    border-bottom: 1px solid $border-light;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 12px 20px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+}
+
+.logo {
+    color: $primary;
+    font-weight: bold;
+    font-size: 20px;
+    text-decoration: none;
+}
+
+.nav-links {
+    display: flex;
+    gap: 30px;
+}
+
+.nav-left,
+.nav-right {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.nav-left a,
+.nav-right a {
+    text-decoration: none;
+    color: $text;
+}
+
+.logout-btn {
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+/* hamburger */
+
+.nav-toggle {
+    display: none;
+    font-size: 26px;
+    cursor: pointer;
+    margin-left: auto;
+}
+
+/* MOBILE */
+
+@media (max-width: 768px) {
+
+    .nav-container {
+        flex-wrap: wrap;
+    }
+
+    .nav-toggle {
+        display: block;
+    }
+
+    /* paslepiam menu */
+
+    .nav-links {
+        position: absolute;
+        top: 60px;
+        left: 0;
+
+        width: 100%;
+        background: white;
+
+        flex-direction: column;
+        display: none;
+        padding: 20px;
+    }
+
+    /* atidarytas */
+
+    .nav-links.active {
+        display: flex;
+    }
+
+    .nav-left,
+    .nav-right {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+}

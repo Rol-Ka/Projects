@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StoryController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\DonationController;
+use App\Http\Controllers\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -78,6 +79,10 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/story/{story}', [StoryController::class, 'update'])
         ->name('story.update');
 });
+
+
+
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 
 

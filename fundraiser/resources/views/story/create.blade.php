@@ -4,7 +4,7 @@
 
 @section('content')
 
-<div class="create-container">
+<div class="container-sm">
 
 <h2>Sukurti istoriją</h2>
 

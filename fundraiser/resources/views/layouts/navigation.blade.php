@@ -1,58 +1,63 @@
+
+
 <nav class="main-nav">
 
-    <div class="nav-container">
+<div class="nav-container">
 
-        <!-- LEFT -->
-       <div class="nav-left">
+<a href="{{ route('home') }}" class="logo">
+PaaukokMan
+</a>
 
-    <a href="{{ route('home') }}">Home</a>
+<div class="nav-toggle" id="navToggle">
+☰
+</div>
+
+<div class="nav-links" id="navLinks">
+
+<div class="nav-left">
 
 <a href="{{ route('stories.index') }}">Istorijos</a>
 
+<a href="{{ route('home') }}">Apie mus</a>
+
 </div>
 
-        <!-- RIGHT -->
-        <div class="nav-right">
+<div class="nav-right">
 
-            @auth
+@auth
 
-                <a href="/dashboard">
-                    Dashboard
-                </a>
+<a href="/dashboard">Mano paskyra</a>
 
-                @if(!auth()->user()->story)
-                    <a href="{{ route('story.create') }}">
-                        Sukurti istoriją
-                    </a>
-                @endif
+@if(!auth()->user()->story)
+<a href="{{ route('story.create') }}">
+Sukurti istoriją
+</a>
+@endif
 
-                @if(auth()->user()->role === 'admin')
-                    <a href="{{ route('admin.stories') }}">
-                        Admin
-                    </a>
-                @endif
+@if(auth()->user()->role === 'admin')
+<a href="{{ route('admin.stories') }}">
+Administratorius panelė
+</a>
+@endif
 
-                <form method="POST" action="{{ route('logout') }}">
-                    @csrf
-                    <button type="submit" class="logout-btn">
-                        Logout
-                    </button>
-                </form>
+<form method="POST" action="{{ route('logout') }}">
+@csrf
+<button type="submit" class="logout-btn">
+Atsijungti
+</button>
+</form>
 
-            @else
+@else
 
-                <a href="{{ route('login') }}">
-                    Login
-                </a>
+<a href="{{ route('login') }}">Prisijungti</a>
+<a href="{{ route('register') }}">Registruotis</a>
 
-                <a href="{{ route('register') }}">
-                    Register
-                </a>
+@endauth
 
-            @endauth
+</div>
 
-        </div>
+</div>
 
-    </div>
+</div>
 
 </nav>

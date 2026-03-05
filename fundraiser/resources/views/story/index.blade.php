@@ -4,7 +4,7 @@
 
 @section('content')
 
-<div class="stories-container">
+<div class="container-sm">
 
 <h2>Istorijos</h2>
 
