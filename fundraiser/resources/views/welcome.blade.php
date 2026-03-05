@@ -88,7 +88,7 @@ tapti realybe.
 
 <div class="discover-image">
 
-<img src="{{ asset('storage/'.$story->image) }}" alt="{{ $story->title }}">
+<img src="{{ asset('storage/'.$story->main_image) }}" alt="{{ $story->title }}">
 
 <span class="donations">
 {{ $story->donations_count }} donations
