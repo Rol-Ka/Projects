@@ -1,5 +1,12 @@
 @use "../base/variables" as *;
 
+body {
+    min-width: 400px;
+    overflow-x: hidden;
+}
+
+
+
 .page-container {
     max-width: 1200px;
     margin: 0 auto;
@@ -11,14 +18,14 @@
     width: 100%;
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 20px;
+
 }
 
 .container-sm {
     width: 100%;
     max-width: 900px;
     margin: 0 auto;
-    padding: 0 20px;
+
 }
 
 .container-xs {

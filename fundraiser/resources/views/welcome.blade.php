@@ -78,7 +78,6 @@ tapti realybe.
 
 <div class="container">
 
-<h2>Discover fundraisers inspired by what you care about</h2>
 
 <div class="discover-grid">
 
@@ -91,7 +90,7 @@ tapti realybe.
 <img src="{{ asset('storage/'.$story->main_image) }}" alt="{{ $story->title }}">
 
 <span class="donations">
-{{ $story->donations_count }} donations
+{{ $story->donations_count }} Paukojimai
 </span>
 
 </div>
@@ -100,14 +99,14 @@ tapti realybe.
 
 <div class="progress">
 
-{{-- <div class="progress-bar"
-style="width: {{ ($story->raised / $story->goal) * 100 }}%">
-</div> --}}
+<div class="progress-bar"
+style="width: {{ $story->goal_amount > 0 ? ($story->current_amount / $story->goal_amount) * 100 : 0 }}%">
+</div>
 
 </div>
 
 <p class="raised">
-€{{ number_format($story->raised) }} raised
+€{{ number_format($story->current_amount) }} Paaukota
 </p>
 
 </a>

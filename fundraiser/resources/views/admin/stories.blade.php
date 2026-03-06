@@ -1,9 +1,9 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 
 @section('content')
 <div class="container">
 
-<h2>Admin - Istorijos</h2>
+<h2>Administratorius - Istorijos</h2>
 
 @foreach($stories as $story)
     <div style="border:1px solid #ccc; padding:10px; margin-bottom:10px;">

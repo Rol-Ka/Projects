@@ -44,4 +44,13 @@ class AdminController extends Controller
 
         return back();
     }
+
+    public function dashboard()
+    {
+        if (auth()->user()->role !== 'admin') {
+            abort(403);
+        }
+
+        return view('admin.dashboard');
+    }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Story;
+use App\Http\Requests\StoreStoryRequest;
 
 
 class StoryController extends Controller
@@ -13,7 +14,7 @@ class StoryController extends Controller
         return view('story.create');
     }
 
-    public function store(Request $request)
+    public function store(StoreStoryRequest $request)
     {
         // 1 story per user
         if (auth()->user()->story) {
@@ -33,7 +34,7 @@ class StoryController extends Controller
             $imagePath = $request->file('main_image')->store('stories', 'public');
         }
 
-        // ⭐ PIRMIAUSIA sukuriam story
+
         $story = Story::create([
             'user_id' => auth()->id(),
             'title' => $request->title,

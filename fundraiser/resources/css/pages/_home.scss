@@ -151,7 +151,7 @@
 
 /* TABLET */
 
-@media (max-width: 900px) {
+@media (max-width: $tablet) {
 
     .hero-slider {
         padding: 0 20px;
@@ -165,7 +165,7 @@
 
 /* MOBILE */
 
-@media (max-width: 600px) {
+@media (max-width: $mobile) {
 
     .hero {
         padding: 70px 20px;
@@ -274,7 +274,7 @@
 
 }
 
-@media (max-width:900px) {
+@media (max-width:$tablet) {
 
     .discover-grid {
         grid-template-columns: 1fr 1fr;
@@ -286,7 +286,7 @@
 
 }
 
-@media (max-width:600px) {
+@media (max-width:$mobile) {
 
     .discover-grid {
         grid-template-columns: 1fr;

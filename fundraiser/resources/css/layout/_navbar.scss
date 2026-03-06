@@ -61,9 +61,16 @@
     margin-left: auto;
 }
 
+.navbar {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: white;
+}
+
 /* MOBILE */
 
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
 
     .nav-container {
         flex-wrap: wrap;

@@ -6,6 +6,8 @@ use App\Http\Controllers\StoryController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\DonationController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AdminTagController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,7 +20,8 @@ use App\Http\Controllers\HomeController;
 |
 */
 
-Route::view('/', 'welcome')->name('home');
+// Route::view('/', 'welcome')->name('home');
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::get('/stories', [StoryController::class, 'index'])->name('stories.index');
 
@@ -64,14 +67,19 @@ Route::get('/start-fundraiser', function () {
 
 Route::middleware(['auth'])->group(function () {
 
-    Route::get('/admin/stories', [\App\Http\Controllers\AdminController::class, 'index'])
+    Route::get('/admin', [AdminController::class, 'dashboard'])
+        ->name('admin.dashboard');
+
+    Route::get('/admin/stories', [AdminController::class, 'index'])
         ->name('admin.stories');
 
-    Route::post('/admin/stories/{story}/approve', [\App\Http\Controllers\AdminController::class, 'approve'])
+    Route::post('/admin/stories/{story}/approve', [AdminController::class, 'approve'])
         ->name('admin.stories.approve');
 
-    Route::delete('/admin/stories/{story}', [\App\Http\Controllers\AdminController::class, 'destroy'])
+    Route::delete('/admin/stories/{story}', [AdminController::class, 'destroy'])
         ->name('admin.stories.destroy');
+    Route::get('/admin/tags', [AdminTagController::class, 'index'])
+        ->name('admin.tags');
 
     Route::get('/story/{story}/edit', [StoryController::class, 'edit'])
         ->name('story.edit');
@@ -82,7 +90,6 @@ Route::middleware(['auth'])->group(function () {
 
 
 
-Route::get('/', [HomeController::class, 'index'])->name('home');
 
 
 

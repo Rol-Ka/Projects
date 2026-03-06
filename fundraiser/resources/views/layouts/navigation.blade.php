@@ -34,11 +34,11 @@ Sukurti istoriją
 </a>
 @endif
 
+@auth
 @if(auth()->user()->role === 'admin')
-<a href="{{ route('admin.stories') }}">
-Administratorius panelė
-</a>
+<a href="{{ route('admin.dashboard') }}">Admin</a>
 @endif
+@endauth
 
 <form method="POST" action="{{ route('logout') }}">
 @csrf
