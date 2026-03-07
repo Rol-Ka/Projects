@@ -1,52 +1,113 @@
 @extends('layouts.admin')
 
 @section('content')
-<div class="container">
 
-<h2>Administratorius - Istorijos</h2>
+<div class="admin-stories container">
 
-@foreach($stories as $story)
-    <div style="border:1px solid #ccc; padding:10px; margin-bottom:10px;">
+<h2>Istorijos</h2>
 
-        <strong>{{ $story->title }}</strong><br>
-        Autorius: {{ $story->user->name ?? 'Nėra' }} <br>
+<div class="admin-filters">
 
-        Statusas:
-        @if($story->is_approved)
-            <span style="color:green;">Patvirtinta</span>
-        @else
-            <span style="color:red;">Nepatvirtinta</span>
-        @endif
-        <br>Sukurta: {{ $story->created_at }} <br>
+<div class="filter-status">
 
-        @if($story->approved_at)
-        Patvirtinta: {{ $story->approved_at }}
-        @endif
-        <br>
+<a href="{{ route('admin.stories',[
+'search'=>request('search'),
+'sort'=>request('sort')
+]) }}"
+class="{{ !request('status') ? 'active-filter' : '' }}">
+Visos
+</a>
 
-        @if($story->completed_at)
-        Tikslas pasiektas: {{ $story->completed_at }}
-        @endif
+<a href="{{ route('admin.stories',[
+'status'=>'pending',
+'search'=>request('search'),
+'sort'=>request('sort')
+]) }}"
+class="{{ request('status')=='pending' ? 'active-filter' : '' }}">
+Nepatvirtintos
+</a>
 
-        <div style="margin-top:10px;">
+<a href="{{ route('admin.stories',[
+'status'=>'approved',
+'search'=>request('search'),
+'sort'=>request('sort')
+]) }}"
+class="{{ request('status')=='approved' ? 'active-filter' : '' }}">
+Patvirtintos
+</a>
 
-            @if(!$story->is_approved)
-                <form method="POST" action="{{ route('admin.stories.approve', $story) }}">
-                    @csrf
-                    <button type="submit">Patvirtinti</button>
-                </form>
-            @endif
-
-            <form method="POST" action="{{ route('admin.stories.destroy', $story) }}">
-                @csrf
-                @method('DELETE')
-                <button type="submit" style="color:red;">Ištrinti</button>
-            </form>
-
-        </div>
-
-    </div>
-@endforeach
+<a href="{{ route('admin.stories',[
+'status'=>'completed',
+'search'=>request('search'),
+'sort'=>request('sort')
+]) }}"
+class="{{ request('status')=='completed' ? 'active-filter' : '' }}">
+Baigtos
+</a>
 
 </div>
+
+
+<div class="filter-actions">
+
+<form method="GET" class="admin-search">
+
+<input
+type="text"
+name="search"
+id="admin-search"
+placeholder="Ieškoti istorijos arba autoriaus..."
+value="{{ request('search') }}"
+>
+
+@if(request('status'))
+<input type="hidden" name="status" value="{{ request('status') }}">
+@endif
+
+@if(request('sort'))
+<input type="hidden" name="sort" value="{{ request('sort') }}">
+@endif
+
+</form>
+
+
+<form method="GET" class="admin-sort">
+
+@if(request('status'))
+<input type="hidden" name="status" value="{{ request('status') }}">
+@endif
+
+@if(request('search'))
+<input type="hidden" name="search" value="{{ request('search') }}">
+@endif
+
+<select name="sort" onchange="this.form.submit()">
+
+<option value="created_desc"
+{{ request('sort')=='created_desc' ? 'selected' : '' }}>
+Naujausios
+</option>
+
+<option value="created_asc"
+{{ request('sort')=='created_asc' ? 'selected' : '' }}>
+Seniausios
+</option>
+
+</select>
+
+</form>
+
+</div>
+
+</div>
+
+
+<div id="stories-container">
+
+@include('admin.partials.stories-list')
+
+</div>
+
+</div>
+
 @endsection

@@ -7,3 +7,4 @@ import './components/navbar.js'
 import Swiper from 'swiper';
 import 'swiper/css';
 import './components/hero-slider.js';
+import './pages/admin.js';
