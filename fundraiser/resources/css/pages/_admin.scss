@@ -11,7 +11,7 @@
 .admin-sidebar {
     width: 250px;
     background: $background;
-    color: white;
+    color: $text;
     padding: 30px;
 }
 
@@ -21,14 +21,14 @@
 
 .admin-sidebar a {
     display: block;
-    color: white;
+    color: $text;
     text-decoration: none;
     margin-bottom: 15px;
 }
 
 .admin-sidebar a.active {
     font-weight: 600;
-    color: #4ade80;
+    color: $text-dark ;
 }
 
 .admin-content {
@@ -222,5 +222,266 @@
     color: white;
     cursor: pointer;
     border-radius: 4px;
+
+}
+
+
+
+.admin-tags {
+
+    max-width: 700px;
+
+}
+
+.tag-create {
+
+    margin-bottom: 30px;
+
+}
+
+.tag-create input {
+
+    padding: 8px 10px;
+    margin-right: 10px;
+
+}
+
+.tags-list {
+
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+}
+
+.tag-row {
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    border: 1px solid #ddd;
+    border-radius: 10px;
+
+    padding: 12px 16px;
+}
+
+.tag-info {
+
+    font-weight: 600;
+
+}
+
+.tag-count {
+
+    color: #777;
+    margin-left: 6px;
+    font-size: 14px;
+
+}
+
+.tag-row input {
+
+    padding: 6px 8px;
+    margin-right: 10px;
+
+}
+
+.tag-row button.delete {
+
+    color: red;
+
+}
+
+.tags-actions {
+
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+
+}
+
+.tag-create input,
+.tag-search input {
+
+    padding: 8px 10px;
+    margin-right: 10px;
+
+}
+
+.tag-create button,
+.tag-search button {
+
+    padding: 8px 14px;
+
+}
+
+@media (max-width: 900px) {
+
+    .admin-layout {
+        flex-direction: column;
+    }
+
+    .admin-sidebar {
+        width: 100%;
+        display: flex;
+        justify-content: space-around;
+        padding: 15px;
+    }
+
+    .admin-sidebar h2 {
+        display: none;
+    }
+
+    .admin-sidebar nav {
+        display: flex;
+        gap: 20px;
+    }
+
+    .admin-content {
+        padding: 20px;
+    }
+
+}
+
+@media (max-width: 700px) {
+
+    .admin-story {
+
+        flex-direction: column;
+    }
+
+    .admin-story-image {
+
+        width: 100%;
+    }
+
+    .admin-story-image img {
+
+        width: 100%;
+        height: auto;
+    }
+
+    .admin-story-info {
+
+        margin-top: 15px;
+    }
+
+}
+
+@media (max-width: 700px) {
+
+    .admin-filters {
+
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .filter-actions {
+
+        width: 100%;
+    }
+
+    .admin-search input {
+
+        width: 100%;
+    }
+
+}
+
+@media (max-width: 700px) {
+
+    .tags-actions {
+
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .tag-row {
+
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+
+}
+
+.admin-pagination {
+
+    margin-top: 30px;
+
+}
+
+.admin-pagination nav {
+
+    display: flex;
+    justify-content: center;
+
+}
+
+
+
+.story-actions {
+
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+
+}
+
+.story-actions a,
+.story-actions button {
+
+    padding: 6px 12px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+
+}
+
+/* peržiūrėti */
+
+.btn-view {
+
+    background: #e5e7eb;
+    color: #111;
+
+}
+
+/* redaguoti */
+
+.btn-edit {
+
+    background: #3b82f6;
+    color: white;
+
+}
+
+/* patvirtinti */
+
+.btn-approve {
+
+    background: #22c55e;
+    color: white;
+
+}
+
+/* delete */
+
+.btn-delete {
+
+    background: #ef4444;
+    color: white;
+
+}
+
+@media (max-width:600px) {
+
+    .story-actions {
+
+        flex-wrap: wrap;
+
+    }
 
 }

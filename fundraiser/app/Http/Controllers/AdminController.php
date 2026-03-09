@@ -15,6 +15,21 @@ class AdminController extends Controller
 
         $query = Story::with('user');
 
+        // STATUS FILTRAS
+        // STATUS FILTRAS
+        if ($request->status === 'pending') {
+            $query->where('is_approved', false);
+        }
+
+        if ($request->status === 'approved') {
+            $query->where('is_approved', true)
+                ->whereColumn('current_amount', '<', 'goal_amount');
+        }
+
+        if ($request->status === 'completed') {
+            $query->whereNotNull('completed_at');
+        }
+
         // PAIEŠKA
         if ($request->filled('search')) {
 
@@ -27,19 +42,6 @@ class AdminController extends Controller
             });
         }
 
-        // STATUS FILTRAS
-        if ($request->status === 'pending') {
-            $query->where('is_approved', false);
-        }
-
-        if ($request->status === 'approved') {
-            $query->where('is_approved', true);
-        }
-
-        if ($request->status === 'completed') {
-            $query->whereColumn('current_amount', '>=', 'goal_amount');
-        }
-
         // RŪŠIAVIMAS
         switch ($request->sort) {
 
@@ -47,19 +49,16 @@ class AdminController extends Controller
                 $query->orderBy('created_at', 'asc');
                 break;
 
-
             default:
                 $query->orderBy('created_at', 'desc');
         }
 
-        $stories = $query->get();
-
-        if ($request->ajax()) {
-            return view('admin.partials.stories-list', compact('stories'))->render();
-        }
+        $stories = $query->paginate(10)->appends($request->query());
 
         return view('admin.stories', compact('stories'));
     }
+
+
 
 
     public function approve(Story $story)
@@ -87,6 +86,7 @@ class AdminController extends Controller
 
         return back();
     }
+
 
     public function dashboard()
     {

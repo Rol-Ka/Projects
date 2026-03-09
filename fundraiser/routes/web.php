@@ -78,8 +78,20 @@ Route::middleware(['auth'])->group(function () {
 
     Route::delete('/admin/stories/{story}', [AdminController::class, 'destroy'])
         ->name('admin.stories.destroy');
-    Route::get('/admin/tags', [AdminTagController::class, 'index'])
-        ->name('admin.tags');
+    Route::middleware(['auth'])->group(function () {
+
+        Route::get('/admin/tags', [AdminTagController::class, 'index'])
+            ->name('admin.tags');
+
+        Route::post('/admin/tags', [AdminTagController::class, 'store'])
+            ->name('admin.tags.store');
+
+        Route::put('/admin/tags/{tag}', [AdminTagController::class, 'update'])
+            ->name('admin.tags.update');
+
+        Route::delete('/admin/tags/{tag}', [AdminTagController::class, 'destroy'])
+            ->name('admin.tags.destroy');
+    });
 
     Route::get('/story/{story}/edit', [StoryController::class, 'edit'])
         ->name('story.edit');

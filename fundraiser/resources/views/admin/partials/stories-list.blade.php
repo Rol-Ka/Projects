@@ -45,22 +45,50 @@
         @endif
         </p>
 
-        <div class="story-actions">
+       <div class="story-actions">
 
-            @if(!$story->is_approved)
-            <form method="POST" action="{{ route('admin.stories.approve',$story) }}">
-                @csrf
-                <button class="btn-approve">Patvirtinti</button>
-            </form>
-            @endif
+<a
+href="{{ route('story.show',$story) }}"
+class="btn-view"
+>
+Peržiūrėti
+</a>
 
-            <form method="POST" action="{{ route('admin.stories.destroy',$story) }}">
-                @csrf
-                @method('DELETE')
-                <button class="btn-delete">Ištrinti</button>
-            </form>
 
-        </div>
+<a
+href="{{ route('story.edit',$story) }}"
+class="btn-edit"
+>
+Redaguoti
+</a>
+
+
+@if(!$story->is_approved)
+
+<form method="POST" action="{{ route('admin.stories.approve',$story) }}">
+@csrf
+
+<button type="submit" class="btn-approve">
+Patvirtinti
+</button>
+
+</form>
+
+@endif
+
+
+<form method="POST" action="{{ route('admin.stories.destroy',$story) }}">
+
+@csrf
+@method('DELETE')
+
+<button class="btn-delete">
+Ištrinti
+</button>
+
+</form>
+
+</div>
 
     </div>
 

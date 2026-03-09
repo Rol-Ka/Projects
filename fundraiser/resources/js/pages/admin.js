@@ -1,12 +1,14 @@
-document.addEventListener("DOMContentLoaded", () => {
+const searchInput = document.getElementById('admin-search');
 
-    const input = document.getElementById('admin-search');
+if (searchInput) {
 
-    input.addEventListener('input', function () {
+    searchInput.addEventListener('input', function () {
 
-        const value = this.value;
+        const params = new URLSearchParams(window.location.search);
 
-        fetch(`/admin/stories?search=${value}`, {
+        params.set('search', this.value);
+
+        fetch(`/admin/stories?${params.toString()}`, {
             headers: {
                 'X-Requested-With': 'XMLHttpRequest'
             }
@@ -18,4 +20,4 @@ document.addEventListener("DOMContentLoaded", () => {
 
     });
 
-});
+}

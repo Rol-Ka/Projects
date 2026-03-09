@@ -55,7 +55,6 @@ Baigtos
 <input
 type="text"
 name="search"
-id="admin-search"
 placeholder="Ieškoti istorijos arba autoriaus..."
 value="{{ request('search') }}"
 >
@@ -67,6 +66,8 @@ value="{{ request('search') }}"
 @if(request('sort'))
 <input type="hidden" name="sort" value="{{ request('sort') }}">
 @endif
+
+<button type="submit">Ieškoti</button>
 
 </form>
 
@@ -106,6 +107,10 @@ Seniausios
 
 @include('admin.partials.stories-list')
 
+
+</div>
+<div class="admin-pagination">
+{{ $stories->links() }}
 </div>
 
 </div>
