@@ -66,6 +66,18 @@ Route::get('/start-fundraiser', function () {
 })->name('fundraiser.start');
 
 Route::middleware(['auth'])->group(function () {
+    Route::get('/admin/stories/{story}', [AdminController::class, 'show'])
+        ->name('admin.stories.show');
+
+    Route::get('/admin/stories/{story}/edit', [AdminController::class, 'edit'])
+        ->name('admin.stories.edit');
+
+    Route::put('/admin/stories/{story}', [AdminController::class, 'update'])
+        ->name('admin.stories.update');
+
+    Route::delete('/admin/images/{image}', [AdminController::class, 'deleteImage'])
+        ->name('admin.image.delete');
+
 
     Route::get('/admin', [AdminController::class, 'dashboard'])
         ->name('admin.dashboard');

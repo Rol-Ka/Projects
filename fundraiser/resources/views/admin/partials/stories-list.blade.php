@@ -1,6 +1,6 @@
 @foreach($stories as $story)
 
-<div class="admin-story">
+<a href="{{ route('admin.stories.show',$story) }}" class="admin-story">
 
     <div class="story-image">
         @if($story->main_image)
@@ -45,53 +45,21 @@
         @endif
         </p>
 
-       <div class="story-actions">
+      
 
-<a
-href="{{ route('story.show',$story) }}"
-class="btn-view"
->
-Peržiūrėti
-</a>
+       
 
 
-<a
-href="{{ route('story.edit',$story) }}"
-class="btn-edit"
->
-Redaguoti
-</a>
+     
 
 
-@if(!$story->is_approved)
 
-<form method="POST" action="{{ route('admin.stories.approve',$story) }}">
-@csrf
+  
 
-<button type="submit" class="btn-approve">
-Patvirtinti
-</button>
-
-</form>
-
-@endif
-
-
-<form method="POST" action="{{ route('admin.stories.destroy',$story) }}">
-
-@csrf
-@method('DELETE')
-
-<button class="btn-delete">
-Ištrinti
-</button>
-
-</form>
-
-</div>
+   
 
     </div>
 
-</div>
+</a>
 
 @endforeach
