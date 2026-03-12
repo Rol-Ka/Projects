@@ -2,7 +2,7 @@
 
 @section('content')
 
-<div class="admin-tags container">
+<div class="admin-container">
 
 <h2>Hashtag'ai</h2>
 

@@ -65,7 +65,7 @@
     position: sticky;
     top: 0;
     z-index: 1000;
-    background: white;
+    background: $background;
 }
 
 /* MOBILE */
@@ -74,6 +74,7 @@
 
     .nav-container {
         flex-wrap: wrap;
+
     }
 
     .nav-toggle {
@@ -86,9 +87,17 @@
         position: absolute;
         top: 60px;
         left: 0;
+        border-radius: 1%;
+        border-color: $primary;
+        // border: 1px solid $primary;
+
 
         width: 100%;
-        background: white;
+
+        background: $white;
+        // justify-content: flex-end;
+
+
 
         flex-direction: column;
         display: none;
@@ -99,6 +108,7 @@
 
     .nav-links.active {
         display: flex;
+
     }
 
     .nav-left,

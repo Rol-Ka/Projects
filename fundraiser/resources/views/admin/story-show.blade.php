@@ -2,7 +2,7 @@
 
 @section('content')
 
-<div class="admin-story-view container">
+<div class="admin-container">
 
 <h1>{{ $story->title }}</h1>
 

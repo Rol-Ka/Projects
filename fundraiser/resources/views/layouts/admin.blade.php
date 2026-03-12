@@ -3,6 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Admin</title>
     @vite(['resources/css/app.scss','resources/js/app.js'])
 </head>
@@ -11,7 +12,7 @@
 
 @include('layouts.navigation')
 
-<div class="admin-layout">
+<div class="admin-container">
 
     <aside class="admin-sidebar">
 

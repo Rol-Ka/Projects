@@ -149,8 +149,16 @@ class AdminController extends Controller
 
         return redirect()->route('admin.stories.show', $story);
     }
+    public function detachTag(Story $story, Tag $tag)
+    {
+        if (auth()->user()->role !== 'admin') {
+            abort(403);
+        }
 
+        $story->tags()->detach($tag->id);
 
+        return back();
+    }
 
     public function deleteImage(StoryImage $image)
     {

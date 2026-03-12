@@ -2,7 +2,7 @@
 
 @section('content')
 
-<div class="admin-edit container">
+<div class="admin-container">
 
 <h2>Redaguoti istoriją</h2>
 
@@ -21,15 +21,13 @@ enctype="multipart/form-data"
 <input
 type="text"
 name="title"
-value="{{ $story->title }}"
+value="{{ old('title',$story->title) }}"
 >
 
 
 <label>Aprašymas</label>
 
-<textarea name="content">
-{{ $story->content }}
-</textarea>
+<textarea name="content">{{ old('content',$story->content) }}</textarea>
 
 
 <label>Tikslas (€)</label>
@@ -37,46 +35,69 @@ value="{{ $story->title }}"
 <input
 type="number"
 name="goal_amount"
-value="{{ $story->goal_amount }}"
+value="{{ old('goal_amount',$story->goal_amount) }}"
 >
 
 
 <h3>Tagai</h3>
 
-<select name="tags[]" multiple>
+<div class="tags-container">
 
-@foreach($tags as $tag)
+@if($story->tags->count())
 
-<option
-value="{{ $tag->id }}"
-{{ $story->tags->contains($tag->id) ? 'selected' : '' }}
->
+@foreach($story->tags as $tag)
 
-{{ $tag->name }}
+<div class="tag-chip">
 
-</option>
+#{{ $tag->name }}
+
+<form method="POST" action="{{ route('admin.tag.detach',[$story,$tag]) }}">
+@csrf
+@method('DELETE')
+
+<button type="submit">✕</button>
+
+</form>
+
+</div>
 
 @endforeach
 
-</select>
+@else
 
+<p>Nėra priskirtų tagų</p>
 
-<button type="submit">
-Išsaugoti
-</button>
+@endif
+
+</div>
 
 </form>
+
+
+<h3>Pagrindinė nuotrauka</h3>
+
+@if($story->main_image)
+
+<div class="main-image">
+
+<img src="{{ asset('storage/'.$story->main_image) }}">
+
+</div>
+
+@endif
 
 
 <h3>Nuotraukos</h3>
 
 <div class="admin-gallery">
 
+@if($story->images->count())
+
 @foreach($story->images as $image)
 
 <div class="gallery-item">
 
-<img src="{{ asset('storage/'.$image->path) }}">
+<img src="{{ asset('storage/'.$image->image_path) }}" alt="story image">
 
 <form
 method="POST"
@@ -86,7 +107,7 @@ action="{{ route('admin.image.delete',$image) }}"
 @csrf
 @method('DELETE')
 
-<button class="delete">
+<button class="btn-delete">
 Ištrinti
 </button>
 
@@ -96,28 +117,13 @@ Ištrinti
 
 @endforeach
 
+@else
+
+<p>Nuotraukų nėra</p>
+
+@endif
+
 </div>
-
-
-<h3>Pridėti naujas nuotraukas</h3>
-
-<form
-method="POST"
-action="{{ route('admin.images.upload',$story) }}"
-enctype="multipart/form-data"
->
-
-@csrf
-
-<input
-type="file"
-name="images[]"
-multiple
->
-
-<button>Upload</button>
-
-</form>
 
 </div>
 

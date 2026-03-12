@@ -2,7 +2,7 @@
 
 @section('content')
 
-<div class="admin-stories container">
+<div class="admin-container admin-stories">
 
 <h2>Istorijos</h2>
 
