@@ -18,7 +18,7 @@
         required
         >
 
-        <button type="submit">Pridėti</button>
+        <button type="submit" class="btn-approve">Pridėti</button>
     </form>
 
 
@@ -67,7 +67,7 @@ name="name"
 value="{{ $tag->name }}"
 >
 
-<button type="submit">Išsaugoti</button>
+<button type="submit" class="btn-approve">Išsaugoti</button>
 
 </form>
 
@@ -77,7 +77,7 @@ value="{{ $tag->name }}"
 @csrf
 @method('DELETE')
 
-<button class="delete">Ištrinti</button>
+<button class="btn-delete">Ištrinti</button>
 
 </form>
 

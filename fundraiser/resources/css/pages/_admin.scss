@@ -24,7 +24,7 @@
 .admin-sidebar {
     background: $background;
     border-radius: 10px;
-    padding: 25px;
+    padding: 10px;
 
 }
 
@@ -126,12 +126,12 @@ button,
 }
 
 .btn-approve {
-    background: #22c55e;
+    background: #51ab72;
     color: white;
 }
 
 .btn-delete {
-    background: #ef4444;
+    background: #cb4e4e;
     color: white;
 }
 
@@ -257,9 +257,113 @@ button,
     margin-top: 40px;
 }
 
-.admin-pagination nav {
+
+
+/* numbers */
+
+/* ========================== */
+/* ADMIN PAGINATION PRO */
+/* ========================== */
+
+.admin-pagination-ui {
+
     display: flex;
     justify-content: center;
+    align-items: center;
+
+    gap: 8px;
+
+    margin-top: 40px;
+
+}
+
+
+/* page numbers */
+
+.page-number {
+
+    width: 40px;
+    height: 40px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    text-decoration: none;
+
+    border: 1px solid #e5e7eb;
+
+    color: $text;
+
+    font-weight: 500;
+
+    transition: 0.15s;
+
+}
+
+.page-number:hover {
+
+    background: #f3f4f6;
+
+}
+
+
+/* active */
+
+.page-number.active {
+
+    background: $primary;
+    color: white;
+    border: none;
+
+}
+
+
+/* arrows */
+
+.page-btn {
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 42px;
+    height: 42px;
+
+    border-radius: 50%;
+
+    border: 1px solid #e5e7eb;
+
+    text-decoration: none;
+
+    font-size: 18px;
+
+}
+
+.page-btn:hover {
+
+    background: #f3f4f6;
+
+}
+
+.page-btn.disabled {
+
+    opacity: 0.4;
+    pointer-events: none;
+
+}
+
+
+/* ellipsis */
+
+.page-ellipsis {
+
+    padding: 0 6px;
+
+    color: #999;
+
 }
 
 
@@ -277,9 +381,16 @@ button,
     margin-bottom: 30px;
 }
 
+.tag-create,
+.tag-search {
+    display: flex;
+    justify-content: space-between;
+}
+
 .tag-create input,
 .tag-search input {
     margin-right: 10px;
+    width: 100%;
 }
 
 .tags-list {
@@ -312,6 +423,8 @@ button,
 
 .tag-row input {
     margin-right: 10px;
+    margin-bottom: 10px;
+    width: auto;
 }
 
 
@@ -403,6 +516,30 @@ button,
         gap: 15px;
     }
 
+    .filter-actions {
+
+        display: flex;
+        align-items: center;
+        gap: 12px;
+
+    }
+
+    .pagination {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        justify-content: center;
+    }
+
+    input,
+    select,
+    textarea {
+        padding: 8px 20px;
+        border: 1px solid #d1d5db;
+        border-radius: 6px;
+        font-size: 14px;
+    }
+
 }
 
 @media (max-width: $mobile) {
@@ -423,10 +560,38 @@ button,
     .admin-filters {
         flex-direction: column;
         align-items: flex-start;
+        justify-content: space-between;
+    }
+
+    .admin-search {
+
+        display: flex;
+        align-items: center;
+
+    }
+
+    .admin-sidebar {
+        display: flex;
+        flex-direction: column;
     }
 
     .admin-search input {
-        width: 100%;
+
+        border-radius: 6px 0 0 6px;
+        border-right: none;
+        width: 220px;
+
+    }
+
+    .admin-search button {
+
+        border-radius: 0 6px 6px 0;
+
+        background: $border;
+        color: white;
+
+        padding: 8px 12px;
+
     }
 
     .tags-actions {
@@ -442,6 +607,70 @@ button,
 
     .story-actions {
         flex-wrap: wrap;
+    }
+
+    .filter-actions {
+
+        display: flex;
+        width: 100%;
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+
+    }
+
+    .filter-status {
+        display: flex;
+        width: 100%;
+        flex-wrap: wrap;
+        gap: 10px;
+
+        justify-content: space-between;
+    }
+
+
+
+    .admin-pagination-ui {
+
+        gap: 6px;
+
+    }
+
+    .page-number {
+
+        width: 34px;
+        height: 34px;
+
+        font-size: 14px;
+
+    }
+
+    .page-btn {
+
+        width: 34px;
+        height: 34px;
+
+    }
+
+
+
+    h2 {
+        display: flex;
+        justify-content: center;
+    }
+
+    select {
+        padding: 8px 12px;
+        border: 1px solid #d1d5db;
+        border-radius: 6px;
+        font-size: 14px;
+    }
+
+
+
+    select:focus {
+        outline: none;
+        border-color: $primary;
     }
 
 }

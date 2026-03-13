@@ -55,9 +55,13 @@ Baigtos
 <input
 type="text"
 name="search"
-placeholder="Ieškoti istorijos arba autoriaus..."
+placeholder="Ieškoti istorijos, autoriaus..."
 value="{{ request('search') }}"
 >
+
+<button type="submit">
+🔍
+</button>
 
 @if(request('status'))
 <input type="hidden" name="status" value="{{ request('status') }}">
@@ -67,7 +71,6 @@ value="{{ request('search') }}"
 <input type="hidden" name="sort" value="{{ request('sort') }}">
 @endif
 
-<button type="submit">Ieškoti</button>
 
 </form>
 
@@ -110,7 +113,7 @@ Seniausios
 
 </div>
 <div class="admin-pagination">
-{{ $stories->links() }}
+{{ $stories->links('vendor.pagination.pagination') }}
 </div>
 
 </div>
