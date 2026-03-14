@@ -21,3 +21,23 @@ if (searchInput) {
     });
 
 }
+
+window.editTag = function (id) {
+
+    const el = document.getElementById(`edit-${id}`);
+
+    if (el) {
+        el.classList.add("active");
+    }
+
+}
+
+window.cancelEdit = function (id) {
+
+    const el = document.getElementById(`edit-${id}`);
+
+    if (el) {
+        el.classList.remove("active");
+    }
+
+}

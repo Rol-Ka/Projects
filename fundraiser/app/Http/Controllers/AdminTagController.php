@@ -20,7 +20,10 @@ class AdminTagController extends Controller
             $query->where('name', 'like', '%' . $request->search . '%');
         }
 
-        $tags = $query->orderBy('name')->get();
+        $tags = $query
+            ->orderBy('name')
+            ->paginate(10)
+            ->withQueryString();
 
         return view('admin.tags', compact('tags'));
     }
