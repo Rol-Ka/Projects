@@ -145,7 +145,9 @@ class AdminController extends Controller
         ]);
 
         // 👇 ČIA PRIDEDI TAG SYNC
-        $story->tags()->sync($request->tags ?? []);
+        if ($request->has('tags')) {
+            $story->tags()->sync($request->tags);
+        }
 
         return redirect()->route('admin.stories.show', $story);
     }
