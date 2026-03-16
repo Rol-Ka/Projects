@@ -5,7 +5,7 @@
 <div class="nav-container">
 
 <a href="{{ route('home') }}" class="logo">
-PaaukokMan
+<img src="/images/mainlogo.png" alt="PaaukokMan">
 </a>
 
 <div class="nav-toggle" id="navToggle">
@@ -16,17 +16,24 @@ PaaukokMan
 
 <div class="nav-left">
 
-<a href="{{ route('stories.index') }}">Istorijos</a>
 
-<a href="{{ route('home') }}">Apie mus</a>
 
 </div>
 
 <div class="nav-right">
+    <a href="{{ route('stories.index') }}"
+     class="{{ request()->routeIs('stories.index') ? 'active' : '' }}">
+        Istorijos</a>
+
+<a href="{{ route('home') }}" 
+class= "{{ request()->routeIs('home') ? 'active' : '' }}">
+    Apie mus</a>
 
 @auth
 
-<a href="/dashboard">Mano paskyra</a>
+<a href="{{ route('dashboard') }}"
+class="{{ request()->routeIs('dashboard') ? 'active' : '' }}">
+Mano paskyra</a>
 
 @if(!auth()->user()->story)
 <a href="{{ route('story.create') }}">
@@ -36,7 +43,9 @@ Sukurti istoriją
 
 @auth
 @if(auth()->user()->role === 'admin')
-<a href="{{ route('admin.dashboard') }}">Admin</a>
+<a href="{{ route('admin.dashboard') }}" 
+class="{{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
+Administratorius</a>
 @endif
 @endauth
 

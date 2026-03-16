@@ -1,36 +1,120 @@
 @use "../base/variables" as *;
 
 body {
-    min-width: 400px;
+    font-family: $font-main;
     overflow-x: hidden;
 }
 
+.site-wrapper {
 
-
-.page-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
+.page-container {
+
+    width: 100%;
+    max-width: 1200px;
+
+    margin: 30px auto;
+    padding: 0 20px;
+
+    flex: 1;
+}
+
+/* CONTAINERS */
 
 .container {
     width: 100%;
     max-width: 1200px;
     margin: 0 auto;
-
 }
 
 .container-sm {
     width: 100%;
     max-width: 900px;
     margin: 0 auto;
-
 }
 
 .container-xs {
     width: 100%;
     max-width: 600px;
     margin: 0 auto;
-    padding: 0 20px;
+}
+
+/* FOOTER */
+
+.site-footer {
+    margin-top: 60px;
+}
+
+.footer-info {
+
+    width: 100%;
+
+    background: $background;
+    color: $text;
+
+    padding: 40px 20px;
+}
+
+.footer-container {
+
+    max-width: 1200px;
+    margin: 0 auto;
+
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+}
+
+.footer-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+}
+
+.footer-col h4 {
+    margin-bottom: 10px;
+}
+
+.footer-col a {
+    display: block;
+    color: $text;
+    text-decoration: none;
+}
+
+.footer-col a:hover {
+    color: $text-dark;
+    font-weight: 700;
+}
+
+/* FOOTER BANNER */
+
+.footer-banner {
+
+    width: 100%;
+    height: 180px;
+    overflow: hidden;
+}
+
+.footer-banner img {
+
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+@media (max-width:$mobile) {
+
+    .footer-container {
+        grid-template-columns: 1fr;
+    }
+
+    .footer-banner {
+        height: 110px;
+    }
+
 }

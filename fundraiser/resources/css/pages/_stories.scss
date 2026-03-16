@@ -2,98 +2,275 @@
 
 
 
-.story-card {
-    border: 1px solid $border;
-    padding: 15px;
-    margin-bottom: 20px;
-    background: $white;
+.stories-title {
+
+    margin-bottom: 30px;
+
 }
 
-.story-card.completed {
-    background: $success-bg;
+/* TAG FILTER */
+
+.tag-filter {
+
+    margin-bottom: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+
 }
+
+.tag-filter a {
+
+    text-decoration: none;
+    background: #f3f4f6;
+    padding: 6px 10px;
+    border-radius: 20px;
+
+}
+
+/* GRID */
+
+.stories-grid {
+
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+
+}
+
+/* CARD */
+
+.story-card {
+
+    background: white;
+
+    border: 1px solid #e5e7eb;
+    border-radius: 16px;
+
+    overflow: hidden;
+
+}
+
+/* IMAGE */
+
+.story-image {
+
+    width: 100%;
+    height: 200px;
+
+    object-fit: cover;
+
+}
+
+/* BODY */
+
+.story-body {
+
+    padding: 18px;
+
+}
+
+.story-title {
+
+    font-size: 18px;
+    margin-bottom: 8px;
+
+}
+
+.story-title a {
+
+    text-decoration: none;
+    color: #111;
+
+}
+
+/* CONTENT */
+
+.story-content {
+
+    font-size: 14px;
+    color: #6b7280;
+
+    margin-bottom: 10px;
+
+}
+
+/* TAGS */
 
 .story-tags {
-    margin: 10px 0;
+
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+
+    margin-bottom: 12px;
+
 }
 
 .tag {
-    color: blue;
-    margin-right: 5px;
+
+    background: #e5e7eb;
+    padding: 4px 8px;
+    border-radius: 20px;
+    font-size: 12px;
+
 }
+
+/* PROGRESS */
 
 .story-progress {
-    margin: 10px 0;
-    font-weight: bold;
+
+    font-weight: 600;
+    margin-bottom: 10px;
+
 }
 
-.donation-history {
-    background: #f8f8f8;
-    padding: 10px;
-    margin-top: 10px;
+/* ACTIONS */
+
+.story-actions {
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
 }
 
-.main-image {
-    width: 200px;
-    margin-top: 10px;
-}
-
-.gallery img {
-    width: 120px;
-    margin-right: 5px;
-    margin-top: 5px;
-}
-
-.goal-reached {
-    color: green;
-    font-weight: bold;
-}
-
-.like-btn {
-    cursor: pointer;
-}
+/* DONATE */
 
 .donate-form {
-    margin-top: 10px;
+
+    display: flex;
+    gap: 6px;
+
 }
 
-/* TAG INPUT */
+.donate-form input {
 
-#tags-input {
-    width: 100%;
-    padding: 14px;
-    font-size: 16px;
-    border: 1px solid $border;
-    border-radius: 10px;
+    width: 70px;
+
 }
 
-#tags-input:focus {
-    border-color: $primary;
-    box-shadow: $shadow-focus;
+.donate-form button {
+
+    padding: 6px 10px;
+
 }
 
-/* TAG AUTOCOMPLETE */
+/* PAGINATION */
 
-.tags-suggestions {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    width: 100%;
-    margin-top: 6px;
-    background: rgba(255, 255, 255, 0.85);
-    border-radius: 12px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-    backdrop-filter: blur(8px);
-    overflow: hidden;
-    z-index: 1000;
+.stories-pagination {
+
+    margin-top: 40px;
+
 }
 
-.tag-item {
-    padding: 10px 14px;
-    cursor: pointer;
-    font-size: 14px;
+
+
+/* ============================= */
+/* PAGINATION */
+/* ============================= */
+
+.admin-pagination {
+    margin-top: 40px;
 }
 
-.tag-item:hover {
-    background: $tag-hover;
+.admin-pagination-ui {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+}
+
+
+/* PAGE NUMBERS */
+
+.page-number {
+    width: 40px;
+    height: 40px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    text-decoration: none;
+
+    border: 1px solid #e5e7eb;
+
+    color: $text;
+
+    font-weight: 500;
+
+    transition: all 0.15s ease;
+}
+
+.page-number:hover {
+    background: #f3f4f6;
+    transform: scale(1.08);
+}
+
+.page-number.active {
+    background: $primary;
+    color: white;
+    border: none;
+}
+
+
+/* ARROWS */
+
+.page-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 42px;
+    height: 42px;
+
+    border-radius: 50%;
+
+    border: 1px solid #e5e7eb;
+
+    text-decoration: none;
+
+    font-size: 18px;
+}
+
+.page-btn:hover {
+    background: #f3f4f6;
+}
+
+.page-btn.disabled {
+    opacity: 0.4;
+    pointer-events: none;
+}
+
+.page-ellipsis {
+    padding: 0 6px;
+    color: #999;
+}
+
+
+/* TABLET */
+
+@media (max-width:900px) {
+
+    .stories-grid {
+
+        grid-template-columns: 1fr 1fr;
+
+    }
+
+}
+
+/* MOBILE */
+
+@media (max-width:600px) {
+
+    .stories-grid {
+
+        grid-template-columns: 1fr;
+
+    }
+
 }

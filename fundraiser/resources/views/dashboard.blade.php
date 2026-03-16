@@ -4,7 +4,7 @@
 
 <div class="container mt-4">
 
-    <h2>Dashboard</h2>
+    <h2>Mano paskyra</h2>
 
     @php
         $story = auth()->user()->story;

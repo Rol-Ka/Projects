@@ -3,7 +3,7 @@
 
 
 .main-nav {
-    background: white;
+    background: $nav;
     border-bottom: 1px solid $border-light;
     position: sticky;
     top: 0;
@@ -44,6 +44,11 @@
 .nav-right a {
     text-decoration: none;
     color: $text;
+}
+
+.nav-left,
+.nav-right a.active {
+    font-weight: 600;
 }
 
 .logout-btn {

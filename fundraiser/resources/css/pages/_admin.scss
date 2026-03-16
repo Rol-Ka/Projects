@@ -7,8 +7,9 @@
 .admin-container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 40px 20px;
+    padding: 20px;
 }
+
 
 
 /* ============================= */
@@ -25,6 +26,7 @@
     background: $background;
     border-radius: 10px;
     padding: 10px;
+
 }
 
 .admin-sidebar h2 {
@@ -48,6 +50,17 @@
 
 .admin-content {
     width: 100%;
+
+
+}
+
+
+.admin-content h1 {
+    margin-bottom: 20px;
+}
+
+.admin-page-div {
+    margin: 20px;
 }
 
 
@@ -59,7 +72,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 20px;
+
 
     margin-bottom: 30px;
 }
@@ -67,6 +80,7 @@
 .filter-status {
     display: flex;
     gap: 15px;
+    margin: 20px 0;
 }
 
 .filter-status a {
@@ -85,7 +99,7 @@
 }
 
 .filter-actions button {
-    margin-top: 2px;
+    // margin-top: px;
 }
 
 
@@ -139,8 +153,8 @@ button,
 }
 
 .btn-edit {
-    background: #3b82f6;
-    color: white;
+    background: $completed;
+    color: $white;
     padding: 7px 14px;
     border-radius: 6px;
     border: none;
@@ -151,12 +165,12 @@ button,
 }
 
 .btn-approve {
-    background: #51ab72;
+    background: $approved;
     color: white;
 }
 
 .btn-delete {
-    background: #cb4e4e;
+    background: $pending;
     color: white;
 }
 
@@ -169,11 +183,11 @@ button,
     display: flex;
     gap: 25px;
 
-    border: 1px solid #e5e7eb;
+    border: 1px solid $border;
     border-radius: 12px;
 
     padding: 20px;
-    background: white;
+    background: $white;
 
     text-decoration: none;
     color: inherit;
@@ -204,12 +218,12 @@ button,
 }
 
 .story-author {
-    color: #555;
+    color: $text-light;
 }
 
 .story-date {
     font-size: 14px;
-    color: #777;
+    color: $text-light;
     margin-bottom: 10px;
 }
 
@@ -220,7 +234,7 @@ button,
 
 .story-progress {
     height: 10px;
-    background: #eee;
+    background: $border;
     border-radius: 10px;
     overflow: hidden;
     margin: 10px 0;
@@ -228,12 +242,12 @@ button,
 
 .progress-bar {
     height: 100%;
-    background: #22c55e;
+    background: $primary;
 }
 
 .story-raised {
     font-size: 14px;
-    color: #666;
+    color: $text;
 }
 
 
@@ -413,7 +427,8 @@ button,
     border-radius: 12px;
     padding: 30px;
     max-width: 100%;
-    margin-top: 20px;
+    margin: 20px 0;
+
 }
 
 /* tags alignment */
@@ -522,7 +537,7 @@ button,
 
     text-decoration: none;
 
-    border: 1px solid #e5e7eb;
+    border: 1px solid $border;
 
     color: $text;
 
@@ -538,7 +553,7 @@ button,
 
 .page-number.active {
     background: $primary;
-    color: white;
+    color: $white;
     border: none;
 }
 
@@ -588,7 +603,7 @@ button,
 .tags-actions {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 30px;
+    margin: 30px 0;
 }
 
 .tag-create,
@@ -669,6 +684,7 @@ button,
 
 .tag-edit.active {
     display: flex;
+    margin: 0 20px
 }
 
 .tag-edit form {
@@ -730,6 +746,7 @@ button,
     .admin-sidebar nav {
         flex-direction: row;
         gap: 15px;
+        font-size: 15px;
     }
 
     .filter-actions {
@@ -752,9 +769,9 @@ button,
     select,
     textarea {
         padding: 8px 20px;
-        border: 1px solid #d1d5db;
+        border: 1px solid $border;
         border-radius: 6px;
-        font-size: 14px;
+        font-size: 13px;
     }
 
 }
@@ -805,9 +822,9 @@ button,
         border-radius: 0 6px 6px 0;
 
         background: $border;
-        color: white;
+        color: $white;
 
-        padding: 8px 12px;
+        padding: 7px 12px;
 
     }
 

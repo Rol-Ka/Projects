@@ -1,4 +1,4 @@
-@extends('layouts.app')
+{{-- @extends('layouts.app')
 
 @section('page','stories')
 
@@ -167,6 +167,151 @@ Tikslas pasiektas 🎉
 <p>Kol kas nėra patvirtintų istorijų</p>
 
 @endforelse
+
+</div>
+
+@endsection --}}
+
+@extends('layouts.app')
+
+@section('page','stories')
+
+@section('content')
+
+<div class="container">
+
+<h2>Istorijos</h2>
+
+<div class="tag-filter">
+
+<strong>Filtruoti pagal #tag:</strong>
+
+<a href="{{ route('stories.index') }}">Visi</a>
+
+@foreach($tags as $tag)
+
+<a href="{{ route('stories.index', ['tag' => $tag->name]) }}">
+#{{ $tag->name }}
+</a>
+
+@endforeach
+
+</div>
+
+
+@forelse($stories as $story)
+
+<div class="admin-story">
+
+@if($story->main_image)
+
+<div class="story-image">
+
+<a href="{{ route('story.show',$story) }}">
+
+<img src="{{ asset('storage/'.$story->main_image) }}">
+
+</a>
+
+</div>
+
+@endif
+
+
+<div class="story-info">
+
+<h3 class="story-title">
+
+<a href="{{ route('story.show',$story) }}">
+{{ $story->title }}
+</a>
+
+</h3>
+
+
+<p class="story-content">
+
+{{ Str::limit($story->content,150) }}
+
+</p>
+
+
+<div class="story-tags">
+
+@foreach($story->tags as $tag)
+
+<span class="tag">
+#{{ $tag->name }}
+</span>
+
+@endforeach
+
+</div>
+
+
+<div class="story-progress">
+
+<div class="progress-bar"
+style="width: {{ ($story->current_amount / $story->goal_amount) * 100 }}%">
+</div>
+
+</div>
+
+
+<div class="story-raised">
+
+€{{ $story->current_amount }} / €{{ $story->goal_amount }}
+
+</div>
+
+
+<div class="story-actions">
+
+<div class="story-likes">
+
+❤️ {{ $story->likes_count }}
+
+</div>
+
+
+@if(!$story->is_completed)
+
+@auth
+
+<form method="POST" action="{{ route('donate',$story->id) }}">
+
+@csrf
+
+<input type="number" step="0.01" name="amount" placeholder="€">
+
+<button class="btn btn-approve">
+Paaukoti
+</button>
+
+</form>
+
+@endauth
+
+@endif
+
+</div>
+
+</div>
+
+</div>
+
+@empty
+
+<p>Kol kas nėra patvirtintų istorijų</p>
+
+@endforelse
+
+
+<div class="stories-pagination">
+
+{{ $stories->links('vendor.pagination.pagination') }}
+
+</div>
 
 </div>
 

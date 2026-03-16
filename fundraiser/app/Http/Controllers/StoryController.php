@@ -91,7 +91,8 @@ class StoryController extends Controller
         $stories = $query
             ->orderBy('is_completed', 'asc')
             ->orderBy('likes_count', 'desc')
-            ->get();
+            ->paginate(9)
+            ->withQueryString();
 
         $tags = \App\Models\Tag::all();
 

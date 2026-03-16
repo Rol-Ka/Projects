@@ -20,15 +20,15 @@ new Swiper(".hero-slider", {
     breakpoints: {
 
         768: {
-            slidesPerView: 1.6,
+            slidesPerView: 1,
         },
 
         1024: {
-            slidesPerView: 1.8,
+            slidesPerView: 1,
         },
 
         1280: {
-            slidesPerView: 2.2
+            slidesPerView: 1
         }
 
     }

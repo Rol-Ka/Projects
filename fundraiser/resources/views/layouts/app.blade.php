@@ -5,8 +5,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
-    <title>Fundraiser</title>
+<link rel="icon" type="image/png" href="/images/icon.png">
+    <title>PaaukokMan</title>
 
     <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -19,7 +19,7 @@
 </head>
 
 <body class="font-sans antialiased" data-page="@yield('page')">
-
+<div class="site-wrapper"> 
     {{-- NAVBAR --}}
     @include('layouts.navigation')
 
@@ -27,7 +27,8 @@
     <main class="page-container">
         @yield('content')
     </main>
-
+    @include('layouts.footer')
+</div>
 </body>
 
 </html>

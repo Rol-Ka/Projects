@@ -58,6 +58,10 @@ Fundraiser platforma kur žmonės gali dalintis savo istorijomis ir gauti param�
 <img src="/images/hero7.jpg">
 </div>
 
+</div> {{-- swiper-wrapper --}}
+
+</div> {{-- hero-slider --}}
+
 </section>
 
 
@@ -73,6 +77,7 @@ tapti realybe.
 </p>
 
 </section>
+
 
 <section class="discover">
 
@@ -116,6 +121,18 @@ style="width: {{ $story->goal_amount > 0 ? ($story->current_amount / $story->goa
 </div>
 
 </div>
+
+</section>
+<section class="landing-info">
+
+<h2>
+Tūkstančiai žmonių jau pasiekė savo tikslus
+</h2>
+
+<p>
+Pasidalink savo istorija, gauk paramą ir padėk savo svajonėms
+tapti realybe.
+</p>
 
 </section>
 

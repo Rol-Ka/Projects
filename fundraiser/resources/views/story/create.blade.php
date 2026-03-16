@@ -41,7 +41,7 @@
 
 <div class="form-group">
 <label>Pagrindinė nuotrauka</label>
-<input type="file" name="main_image">
+<input type="file" name="main_image" >
 </div>
 
 

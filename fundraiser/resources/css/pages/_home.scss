@@ -43,59 +43,32 @@
     text-decoration: none;
 }
 
-/* SLIDER SECTION */
+/* SLIDER */
 
 .hero-gallery {
     position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
 }
-
-.hero-gallery::before,
-.hero-gallery::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    width: 120px;
-    z-index: 5;
-    pointer-events: none;
-}
-
-.hero-gallery::before {
-    left: 0;
-    background: linear-gradient(to right, $white, transparent);
-}
-
-.hero-gallery::after {
-    right: 0;
-    background: linear-gradient(to left, $white, transparent);
-}
-
-/* SWIPER */
 
 .hero-slider {
+    width: 100%;
     max-width: 1100px;
     margin: 70px auto 0;
-    overflow: visible;
-}
-
-/* SLIDE */
-
-.hero-slider .swiper-slide {
-    height: 420px;
-    border-radius: 20px;
     overflow: hidden;
-    transition: all .4s ease;
 }
 
-/* IMAGE */
-
 .hero-slider .swiper-slide {
-    aspect-ratio: 16 / 9;
+
+    height: 420px;
+    aspect-ratio: 16/9;
+
     border-radius: 20px;
     overflow: hidden;
 
     opacity: .45;
     transform: scale(.9);
+
     transition: all .4s ease;
 }
 
@@ -109,25 +82,14 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center;
 }
 
-/* NEXT + PREV */
+/* HIDE SIDE SLIDES */
 
 .hero-slider .swiper-slide-next,
 .hero-slider .swiper-slide-prev {
-    opacity: 0.6;
-    transform: scale(0.93);
-}
-
-.hero-slider .swiper-slide::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-
-    background: linear-gradient(to bottom,
-            rgba(0, 0, 0, 0.1),
-            rgba(0, 0, 0, 0.2));
+    opacity: 0;
+    transform: scale(.93);
 }
 
 /* INFO SECTION */
@@ -149,9 +111,20 @@
     color: $text-muted;
 }
 
+/* NAV */
+
+.nav-container {
+    background-color: $nav;
+}
+
+.logo img {
+    width: 200px;
+    height: 80px;
+}
+
 /* TABLET */
 
-@media (max-width: $tablet) {
+@media (max-width:$tablet) {
 
     .hero-slider {
         padding: 0 20px;
@@ -165,7 +138,12 @@
 
 /* MOBILE */
 
-@media (max-width: $mobile) {
+@media (max-width:$mobile) {
+
+    .logo img {
+        width: 140px;
+        height: 50px;
+    }
 
     .hero {
         padding: 70px 20px;
@@ -182,21 +160,28 @@
         text-align: center;
     }
 
+    .hero-slider {
+        margin: 30px auto 0;
+    }
+
     .hero-slider .swiper-slide {
-        height: 300px;
+        height: auto;
+        transform: none;
+        opacity: 1;
+    }
+
+    .hero-slider img {
+        width: 100%;
+        height: auto;
     }
 
 }
 
+/* DISCOVER */
+
 .discover {
     padding: 100px 20px;
     background: $white;
-}
-
-.discover h2 {
-    text-align: center;
-    font-size: 36px;
-    margin-bottom: 60px;
 }
 
 .discover-grid {
@@ -207,7 +192,6 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 32px;
-
 }
 
 .discover-card {
@@ -225,7 +209,6 @@
     width: 100%;
     height: 220px;
     object-fit: cover;
-    display: block;
 }
 
 .donations {
@@ -240,39 +223,32 @@
     padding: 6px 12px;
     border-radius: 20px;
     font-size: 14px;
-
 }
 
 .discover-card h3 {
-
     font-size: 16px;
     margin: 12px 0;
-
 }
 
 .progress {
-
     height: 6px;
     background: #eee;
     border-radius: 10px;
     overflow: hidden;
-
 }
 
 .progress-bar {
-
     height: 100%;
     background: #22c55e;
-
 }
 
 .raised {
-
     font-size: 14px;
     margin-top: 8px;
     color: $text-muted;
-
 }
+
+/* GRID RESPONSIVE */
 
 @media (max-width:$tablet) {
 
