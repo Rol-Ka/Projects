@@ -269,7 +269,15 @@ style="width: {{ ($story->current_amount / $story->goal_amount) * 100 }}%">
 
 <div class="story-likes">
 
-❤️ {{ $story->likes_count }}
+<button 
+    class="like-btn {{ $story->isLikedByAuth() ? 'liked' : '' }}"
+    data-id="{{ $story->id }}"
+>
+
+<span class="heart">❤️</span>
+<span class="like-count">{{ $story->likes_count }}</span>
+
+</button>
 
 </div>
 

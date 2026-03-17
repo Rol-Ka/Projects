@@ -6,25 +6,38 @@ use Illuminate\Http\Request;
 use App\Models\Like;
 use App\Models\Story;
 
+
 class LikeController extends Controller
 {
-    public function toggle($storyId)
+    public function toggle($id)
     {
-        $story = Story::findOrFail($storyId);
-
-        $like = Like::where('user_id', auth()->id())
-            ->where('story_id', $storyId)
-            ->first();
-
-        if ($like) {
-            $like->delete(); // unlike
-        } else {
-            Like::create([
-                'user_id' => auth()->id(),
-                'story_id' => $storyId
-            ]);
+        if (!auth()->check()) {
+            return response()->json([
+                'error' => 'Unauthorized'
+            ], 401);
         }
 
-        return back();
+        $story = Story::findOrFail($id);
+        $user = auth()->user();
+
+        $existing = Like::where('user_id', $user->id)
+            ->where('story_id', $story->id)
+            ->first();
+
+        if ($existing) {
+            $existing->delete();
+            $liked = false;
+        } else {
+            Like::create([
+                'user_id' => $user->id,
+                'story_id' => $story->id
+            ]);
+            $liked = true;
+        }
+
+        return response()->json([
+            'likes' => Like::where('story_id', $story->id)->count(),
+            'liked' => $liked
+        ]);
     }
 }

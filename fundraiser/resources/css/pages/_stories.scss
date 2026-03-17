@@ -251,6 +251,63 @@
 }
 
 
+
+
+.like-btn {
+
+    background: none;
+    border: none;
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    gap: 6px;
+
+    font-size: 16px;
+    color: #555;
+
+    transition: 0.2s;
+}
+
+.like-btn .heart {
+    transition: 0.2s;
+}
+
+/* liked state */
+.like-btn.liked {
+    color: #e11d48;
+}
+
+.like-btn.liked .heart {
+    transform: scale(1.2);
+}
+
+/* hover */
+.like-btn:hover {
+    transform: scale(1.05);
+}
+
+/* click animation */
+.like-btn.bounce .heart {
+    animation: pop 0.3s ease;
+}
+
+@keyframes pop {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.4);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+
+
 /* TABLET */
 
 @media (max-width:900px) {

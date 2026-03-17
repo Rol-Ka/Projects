@@ -40,4 +40,11 @@ class Story extends Model
     {
         return $this->hasMany(StoryImage::class);
     }
+
+    public function isLikedByAuth()
+    {
+        if (!auth()->check()) return false;
+
+        return $this->likes()->where('user_id', auth()->id())->exists();
+    }
 }
