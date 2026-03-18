@@ -1,3 +1,264 @@
+// @use "../base/variables" as *;
+
+// /* ============================= */
+// /* STORY SHOW */
+// /* ============================= */
+
+// .story-show-card {
+//     display: flex;
+//     gap: 40px;
+//     align-self: flex-start;
+//     background: white;
+//     border: 1px solid #e5e7eb;
+//     border-radius: 16px;
+//     padding: 30px;
+//     margin-top: 30px;
+// }
+
+// /* IMAGE */
+
+// .story-show-image {
+//     width: 420px;
+//     flex-shrink: 0;
+// }
+
+// .story-show-image img {
+//     width: 100%;
+//     border-radius: 12px;
+// }
+
+// .story-left {
+//     width: 420px;
+//     flex-shrink: 0;
+// }
+
+// /* CONTENT */
+
+// .story-show-content {
+//     flex: 1;
+//     display: flex;
+//     flex-direction: column;
+//     gap: 14px;
+//     min-width: 300px;
+// }
+
+
+// .story-title {
+//     font-size: 28px;
+// }
+
+// .story-author {
+//     color: #666;
+//     font-size: 14px;
+// }
+
+// .story-text {
+//     line-height: 1.6;
+//     color: #444;
+// }
+
+// /* PROGRESS */
+
+// .story-progress {
+//     height: 8px;
+//     background: #eee;
+//     border-radius: 10px;
+//     overflow: hidden;
+// }
+
+// .progress-bar {
+//     height: 100%;
+//     background: $primary;
+// }
+
+// .story-raised {
+//     font-weight: 500;
+// }
+
+// /* LIKE */
+
+// .story-like {
+//     margin-top: 10px;
+// }
+
+// .like-btn {
+//     background: none;
+//     border: none;
+//     cursor: pointer;
+//     display: flex;
+//     gap: 6px;
+//     align-items: center;
+// }
+
+// .heart.liked {
+//     color: red;
+//     transform: scale(1.2);
+// }
+
+// /* DONATE */
+
+// .donate-box {
+//     display: flex;
+//     gap: 10px;
+//     margin-top: 10px;
+// }
+
+// .donate-box input {
+//     flex: 1;
+//     padding: 10px;
+//     border-radius: 6px;
+//     border: 1px solid #ddd;
+// }
+
+// .donate-box button {
+//     background: $primary;
+//     color: white;
+//     border: none;
+//     padding: 10px 16px;
+//     border-radius: 6px;
+// }
+
+// /* ============================= */
+// /* 🔥 GALLERY SLIDER */
+// /* ============================= */
+
+// .story-gallery-wrapper {
+//     margin-top: 30px;
+//     margin-right: 20px;
+//     overflow: hidden;
+// }
+
+// .story-gallery-track {
+//     display: flex;
+//     gap: 12px;
+//     overflow-x: auto;
+//     scroll-snap-type: x mandatory;
+// }
+
+// .gallery-item {
+//     min-width: calc(33.333% - 8px);
+//     flex-shrink: 0;
+//     scroll-snap-align: start;
+// }
+
+// .gallery-item img {
+//     width: 100%;
+//     height: 120px;
+//     object-fit: cover;
+//     border-radius: 10px;
+//     cursor: pointer;
+// }
+
+// .lightbox {
+//     position: fixed;
+//     inset: 0;
+//     background: rgba(0, 0, 0, 0.9);
+
+//     display: flex;
+//     align-items: center;
+//     justify-content: center;
+
+//     opacity: 0;
+//     pointer-events: none;
+//     transition: 0.3s;
+
+//     z-index: 9999;
+// }
+
+// .lightbox.active {
+//     opacity: 1;
+//     pointer-events: all;
+// }
+
+// .lightbox-content {
+//     position: relative;
+//     display: flex;
+//     align-items: center;
+//     justify-content: center;
+// }
+
+// .lightbox-img {
+//     max-width: 90vw;
+//     max-height: 85vh;
+//     border-radius: 12px;
+// }
+
+// /* NAV */
+
+// .nav {
+//     position: absolute;
+//     top: 50%;
+//     transform: translateY(-50%);
+//     font-size: 40px;
+//     background: none;
+//     border: none;
+//     color: white;
+//     cursor: pointer;
+// }
+
+// .prev {
+//     left: -60px;
+// }
+
+// .next {
+//     right: -60px;
+// }
+
+// .lightbox-close {
+//     position: absolute;
+//     top: 20px;
+//     right: 30px;
+//     font-size: 40px;
+//     color: white;
+//     cursor: pointer;
+// }
+
+
+
+// /* ============================= */
+// /* TABLET */
+// /* ============================= */
+
+// @media (max-width: $tablet) {
+//     .story-show-card {
+//         flex-direction: column;
+//     }
+
+//     .story-show-image {
+//         width: 100%;
+//     }
+// }
+
+// /* ============================= */
+// /* MOBILE */
+// /* ============================= */
+
+// @media (max-width: $mobile) {
+
+//     .story-title {
+//         font-size: 22px;
+//     }
+
+//     .gallery-item {
+//         min-width: 50%;
+//     }
+
+//     .donate-box {
+//         flex-direction: column;
+//     }
+
+//     .nav {
+//         display: none; // swipe naudojam
+//     }
+
+//     .lightbox-img {
+//         max-width: 95vw;
+//         max-height: 80vh;
+//     }
+
+// }
+
+
 @use "../base/variables" as *;
 
 /* ============================= */
@@ -7,6 +268,10 @@
 .story-show-card {
     display: flex;
     gap: 40px;
+
+    align-items: flex-start; // 🔥 svarbiausia
+    flex-wrap: nowrap; // 🔥 neleidžia kristi žemyn
+
     background: white;
     border: 1px solid #e5e7eb;
     border-radius: 16px;
@@ -14,11 +279,19 @@
     margin-top: 30px;
 }
 
+/* ============================= */
+/* LEFT SIDE */
+/* ============================= */
+
+.story-left {
+    width: 420px;
+    flex-shrink: 0;
+}
+
 /* IMAGE */
 
 .story-show-image {
-    width: 420px;
-    flex-shrink: 0;
+    width: 100%;
 }
 
 .story-show-image img {
@@ -26,20 +299,20 @@
     border-radius: 12px;
 }
 
-.story-left {
-    width: 420px;
-    flex-shrink: 0;
-}
-
-/* CONTENT */
+/* ============================= */
+/* CONTENT (RIGHT) */
+/* ============================= */
 
 .story-show-content {
     flex: 1;
+    min-width: 300px; // 🔥 labai svarbu (fix overflow bug)
+
     display: flex;
     flex-direction: column;
     gap: 14px;
 }
 
+/* TEXT */
 
 .story-title {
     font-size: 28px;
@@ -55,7 +328,9 @@
     color: #444;
 }
 
+/* ============================= */
 /* PROGRESS */
+/* ============================= */
 
 .story-progress {
     height: 8px;
@@ -73,7 +348,9 @@
     font-weight: 500;
 }
 
+/* ============================= */
 /* LIKE */
+/* ============================= */
 
 .story-like {
     margin-top: 10px;
@@ -83,6 +360,7 @@
     background: none;
     border: none;
     cursor: pointer;
+
     display: flex;
     gap: 6px;
     align-items: center;
@@ -93,7 +371,9 @@
     transform: scale(1.2);
 }
 
+/* ============================= */
 /* DONATE */
+/* ============================= */
 
 .donate-box {
     display: flex;
@@ -117,11 +397,11 @@
 }
 
 /* ============================= */
-/* 🔥 GALLERY SLIDER */
+/* 🔥 GALLERY */
 /* ============================= */
 
 .story-gallery-wrapper {
-    margin-top: 30px;
+    margin-top: 20px;
     overflow: hidden;
 }
 
@@ -147,16 +427,95 @@
 }
 
 /* ============================= */
+/* LIGHTBOX */
+/* ============================= */
+
+.lightbox {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.9);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    opacity: 0;
+    pointer-events: none;
+    transition: 0.3s;
+
+    z-index: 9999;
+}
+
+.lightbox.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.lightbox-content {
+    position: relative;
+    width: 900px;
+    height: 600px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.lightbox-img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: cover;
+    border-radius: 12px;
+}
+
+/* NAV */
+
+.nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 40px;
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+}
+
+.prev {
+    left: -60px;
+}
+
+.next {
+    right: -60px;
+}
+
+.lightbox-close {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    font-size: 40px;
+    color: white;
+    cursor: pointer;
+}
+
+/* ============================= */
 /* TABLET */
 /* ============================= */
 
-@media (max-width: 900px) {
+@media (max-width: $tablet) {
+
     .story-show-card {
         flex-direction: column;
     }
 
-    .story-show-image {
+    .story-left {
         width: 100%;
+        flex: none;
+    }
+
+    .story-show-image img {
+        width: 100%;
+        height: 400px;
+        object-fit: cover;
     }
 }
 
@@ -164,18 +523,26 @@
 /* MOBILE */
 /* ============================= */
 
-@media (max-width: 600px) {
+@media (max-width: $mobile) {
 
     .story-title {
         font-size: 22px;
     }
 
     .gallery-item {
-        min-width: 80%;
+        min-width: 50%;
     }
 
     .donate-box {
         flex-direction: column;
     }
 
+    .nav {
+        display: none; // swipe naudojam
+    }
+
+    .lightbox-img {
+        max-width: 95vw;
+        max-height: 80vh;
+    }
 }

@@ -41,12 +41,11 @@ Route::middleware('auth')->group(function () {
 });
 
 
-Route::middleware('auth')->group(function () {
-    Route::post('/like/{story}', [LikeController::class, 'toggle'])->name('like.toggle');
-});
-Route::middleware('auth')->group(function () {
-    Route::post('/donate/{story}', [DonationController::class, 'donate'])->name('donate');
-});
+Route::post('/like/{story}', [LikeController::class, 'toggle']);
+
+
+Route::post('/donate/{story}', [DonationController::class, 'donate'])->name('donate');
+
 
 Route::get('/tags-json', function () {
     return \App\Models\Tag::orderBy('name')->pluck('name');

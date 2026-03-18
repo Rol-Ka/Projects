@@ -29,6 +29,10 @@
     </main>
     @include('layouts.footer')
 </div>
+@include('components.toast')
+<script>
+    window.isLoggedIn = {{ auth()->check() ? 'true' : 'false' }};
+</script>
 </body>
 
 </html>

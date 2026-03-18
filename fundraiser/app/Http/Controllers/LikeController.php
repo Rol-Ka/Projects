@@ -9,35 +9,63 @@ use App\Models\Story;
 
 class LikeController extends Controller
 {
+    // public function toggle($id)
+    // {
+    //     if (!auth()->check()) {
+    //         return response()->json([
+    //             'error' => 'Unauthorized'
+    //         ], 401);
+    //     }
+
+    //     $story = Story::findOrFail($id);
+    //     $user = auth()->user();
+
+    //     $existing = Like::where('user_id', $user->id)
+    //         ->where('story_id', $story->id)
+    //         ->first();
+
+    //     if ($existing) {
+    //         $existing->delete();
+    //         $liked = false;
+    //     } else {
+    //         Like::create([
+    //             'user_id' => $user->id,
+    //             'story_id' => $story->id
+    //         ]);
+    //         $liked = true;
+    //     }
+
+    //     return response()->json([
+    //         'likes' => Like::where('story_id', $story->id)->count(),
+    //         'liked' => $liked
+    //     ]);
+    // }
+
     public function toggle($id)
     {
         if (!auth()->check()) {
             return response()->json([
-                'error' => 'Unauthorized'
+                'message' => 'Norint uždėti širdutę, turite būti prisijungęs'
             ], 401);
         }
 
         $story = Story::findOrFail($id);
-        $user = auth()->user();
 
-        $existing = Like::where('user_id', $user->id)
-            ->where('story_id', $story->id)
-            ->first();
+        $like = $story->likes()->where('user_id', auth()->id())->first();
 
-        if ($existing) {
-            $existing->delete();
+        if ($like) {
+            $like->delete();
             $liked = false;
         } else {
-            Like::create([
-                'user_id' => $user->id,
-                'story_id' => $story->id
+            $story->likes()->create([
+                'user_id' => auth()->id()
             ]);
             $liked = true;
         }
 
         return response()->json([
-            'likes' => Like::where('story_id', $story->id)->count(),
-            'liked' => $liked
+            'liked' => $liked,
+            'likes' => $story->likes()->count()
         ]);
     }
 }
