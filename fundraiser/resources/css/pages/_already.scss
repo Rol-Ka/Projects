@@ -1,0 +1,55 @@
+@use "../base/variables" as *;
+
+.already-exists {
+    display: flex;
+    justify-content: center;
+    margin-top: 60px;
+}
+
+.already-card {
+    max-width: 600px;
+    width: 100%;
+    background: white;
+    padding: 40px;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+    text-align: center;
+}
+
+.already-card h2 {
+    font-size: 28px;
+    margin-bottom: 10px;
+}
+
+.already-sub {
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.already-story {
+    margin-bottom: 30px;
+    font-size: 16px;
+}
+
+.already-actions {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+@media (max-width: 600px) {
+    .already-card {
+        padding: 25px;
+    }
+
+    .already-actions {
+        flex-direction: column;
+    }
+
+    .btn-primary,
+    .btn-secondary {
+        width: 100%;
+        text-align: center;
+    }
+}

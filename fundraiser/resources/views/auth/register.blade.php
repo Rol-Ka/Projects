@@ -1,52 +1,88 @@
-<x-guest-layout>
-    <form method="POST" action="{{ route('register') }}">
-        @csrf
+@extends('layouts.app')
 
-        <!-- Name -->
-        <div>
-            <x-input-label for="name" :value="__('Vardas')" />
-            <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
-            <x-input-error :messages="$errors->get('name')" class="mt-2" />
-        </div>
+@section('content')
 
-        <!-- Email Address -->
-        <div class="mt-4">
-            <x-input-label for="email" :value="__('Elektoninis paštas')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
-        </div>
+<div class="auth-container">
 
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Slaptažodis')" />
+    <div class="auth-card">
 
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="new-password" />
+        <h2>Registracija</h2>
 
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-        </div>
+        <form method="POST" action="{{ route('register') }}" novalidate>
+            @csrf
 
-        <!-- Confirm Password -->
-        <div class="mt-4">
-            <x-input-label for="password_confirmation" :value="__('Patvirtinkite slaptažodį')" />
+            {{-- NAME --}}
+            <div class="form-group">
+                <label>Vardas</label>
 
-            <x-text-input id="password_confirmation" class="block mt-1 w-full"
-                            type="password"
-                            name="password_confirmation" required autocomplete="new-password" />
+                <input 
+                    type="text" 
+                    name="name"
+                    value="{{ old('name') }}"
+                    class="form-input {{ $errors->has('name') ? 'error' : '' }}"
+                >
 
-            <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
-        </div>
+                @error('name')
+                    <div class="input-error">{{ $message }}</div>
+                @enderror
+            </div>
 
-        <div class="flex items-center justify-end mt-4">
-            <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('login') }}">
-                {{ __('Jau esate prisiregistravęs?') }}
-            </a>
+            {{-- EMAIL --}}
+            <div class="form-group">
+                <label>El. paštas</label>
 
-            <x-primary-button class="ms-4">
-                {{ __('Registruotis') }}
-            </x-primary-button>
-        </div>
-    </form>
-</x-guest-layout>
+                <input 
+                    type="email" 
+                    name="email"
+                    value="{{ old('email') }}"
+                    class="form-input {{ $errors->has('email') ? 'error' : '' }}"
+                >
+
+                @error('email')
+                    <div class="input-error">{{ $message }}</div>
+                @enderror
+            </div>
+
+            {{-- PASSWORD --}}
+            <div class="form-group">
+                <label>Slaptažodis</label>
+
+                <input 
+                    type="password" 
+                    name="password"
+                    class="form-input {{ $errors->has('password') ? 'error' : '' }}"
+                >
+
+                @error('password')
+                    <div class="input-error">{{ $message }}</div>
+                @enderror
+            </div>
+
+            {{-- CONFIRM --}}
+            <div class="form-group">
+                <label>Pakartok slaptažodį</label>
+
+                <input 
+                    type="password" 
+                    name="password_confirmation"
+                    class="form-input"
+                >
+            </div>
+
+            <button type="submit" class="btn-primary btn-block">
+                Registruotis
+            </button>
+
+            <div class="auth-links">
+                <a href="{{ route('login') }}">
+                    Jau turi paskyrą?
+                </a>
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+@endsection

@@ -1,0 +1,44 @@
+@use "../base/variables" as *;
+
+
+.start-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* vertikalus centras */
+    align-items: center;
+    /* horizontalus centras */
+    text-align: center;
+
+    min-height: 70vh;
+    /* kad būtų per vidurį ekrano */
+    padding: 20px;
+}
+
+.start-buttons {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+@media (max-width: $mobile) {
+    .start-buttons {
+        flex-direction: column;
+        width: 100%;
+        align-items: center;
+    }
+
+    .btn-primary,
+    .btn-secondary {
+        width: 80%;
+        text-align: center;
+    }
+
+    h1 {
+        font-size: 24px;
+    }
+
+    p {
+        font-size: 14px;
+    }
+}

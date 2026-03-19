@@ -1,0 +1,134 @@
+@use "../base/variables" as *;
+
+
+.auth-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 70vh;
+}
+
+.auth-card {
+    width: 100%;
+    max-width: 420px;
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+
+    h2 {
+        margin-bottom: 20px;
+        text-align: center;
+    }
+}
+
+.form-group {
+    margin-bottom: 16px;
+
+    label {
+        display: block;
+        margin-bottom: 6px;
+        font-weight: 500;
+    }
+}
+
+.form-input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    transition: 0.2s;
+
+    &:focus {
+        border-color: #3b7d3b;
+        outline: none;
+    }
+
+    &.error {
+        border-color: #e74c3c;
+        background: #fff5f5;
+    }
+}
+
+.input-error {
+    color: #e74c3c;
+    font-size: 13px;
+    margin-top: 4px;
+}
+
+.form-remember {
+    margin: 10px 0;
+}
+
+.btn-block {
+    width: 100%;
+}
+
+.auth-links {
+    margin-top: 10px;
+    text-align: center;
+
+    a {
+        font-size: 14px;
+        color: #666;
+    }
+}
+
+.auth-subtext {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.success-msg {
+    background: #e8f8f0;
+    color: #2ecc71;
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.btn-link {
+    margin-top: 10px;
+    background: none;
+    border: none;
+    color: #666;
+    cursor: pointer;
+}
+
+/* 📱 MOBILE */
+@media (max-width: $tablet) {
+
+    .auth-container {
+        padding: 20px;
+        align-items: flex-start;
+    }
+
+    .auth-card {
+        padding: 20px;
+        border-radius: 10px;
+    }
+
+    .form-input {
+        padding: 12px;
+        font-size: 16px; // mobile UX 🔥
+    }
+
+    .btn-primary {
+        padding: 14px;
+    }
+}
+
+/* 📲 SMALL MOBILE */
+@media (max-width: $mobile) {
+
+    .auth-card {
+        padding: 16px;
+    }
+
+    h2 {
+        font-size: 20px;
+    }
+}

@@ -1,0 +1,111 @@
+@use "../base/variables" as *;
+
+.dashboard {
+    margin-top: 40px;
+
+    flex-direction: column;
+
+}
+
+.dashboard-title {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* CARD */
+
+.dashboard-card {
+    background: white;
+    border: 1px solid $border-light;
+    border-radius: 16px;
+    padding: 30px;
+    width: 100%;
+    max-width: 900px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+/* EMPTY STATE */
+
+.dashboard-card.empty {
+    max-width: 700px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.dashboard-text {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.dashboard-sub {
+    color: $text-muted;
+    margin-bottom: 20px;
+}
+
+/* HEADER */
+
+.dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+/* STATUS */
+
+.status {
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 13px;
+}
+
+.status.approved {
+    background: $success-bg;
+    color: $approved;
+}
+
+.status.pending {
+    background: #fdecea;
+    color: $pending;
+}
+
+/* ACTIONS */
+
+.dashboard-actions {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+}
+
+/* STORY inside dashboard */
+
+.dashboard-story {
+    margin-top: 20px;
+}
+
+/* 📱 MOBILE */
+
+@media (max-width: $mobile) {
+
+    .dashboard-card {
+        padding: 20px;
+    }
+
+    .dashboard-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .dashboard-actions {
+        flex-direction: column;
+    }
+
+    .btn-primary,
+    .btn-secondary {
+        width: 100%;
+        text-align: center;
+    }
+}

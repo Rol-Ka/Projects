@@ -1,25 +1,47 @@
-<x-guest-layout>
-    <div class="mb-4 text-sm text-gray-600">
-        {{ __('Pamiršote slaptažodį? Ne problema. Įveskite savo elektroninį paštą ir mes išsiūsime slaptažodžio antaujinimo nuorodą.') }}
+@extends('layouts.app')
+
+@section('content')
+
+<div class="auth-container">
+
+    <div class="auth-card">
+
+        <h2>Slaptažodžio atstatymas</h2>
+
+        <p class="auth-subtext">
+            Įveskite el. paštą ir atsiųsime atstatymo nuorodą.
+        </p>
+
+        @if (session('status'))
+            <div class="success-msg">{{ session('status') }}</div>
+        @endif
+
+        <form method="POST" action="{{ route('password.email') }}" novalidate>
+            @csrf
+
+            <div class="form-group">
+                <label>El. paštas</label>
+
+                <input 
+                    type="email" 
+                    name="email"
+                    value="{{ old('email') }}"
+                    class="form-input {{ $errors->has('email') ? 'error' : '' }}"
+                >
+
+                @error('email')
+                    <div class="input-error">{{ $message }}</div>
+                @enderror
+            </div>
+
+            <button class="btn-primary btn-block">
+                Siųsti nuorodą
+            </button>
+
+        </form>
+
     </div>
 
-    <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('status')" />
+</div>
 
-    <form method="POST" action="{{ route('password.email') }}">
-        @csrf
-
-        <!-- Email Address -->
-        <div>
-            <x-input-label for="email" :value="__('Elektroninis paštas')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
-        </div>
-
-        <div class="flex items-center justify-end mt-4">
-            <x-primary-button>
-                {{ __('Atnaujinti slaptažodį') }}
-            </x-primary-button>
-        </div>
-    </form>
-</x-guest-layout>
+@endsection

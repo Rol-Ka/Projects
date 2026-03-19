@@ -11,6 +11,10 @@ class StoryController extends Controller
 {
     public function create()
     {
+        if (auth()->user()->story) {
+            return view('story.already-exists');
+        }
+
         return view('story.create');
     }
 
