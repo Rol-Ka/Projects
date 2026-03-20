@@ -104,26 +104,6 @@
 
 
 
-/* ============================= */
-/* INPUTS */
-/* ============================= */
-
-input,
-select,
-textarea {
-    padding: 8px 12px;
-    border: 1px solid #d1d5db;
-    border-radius: 6px;
-    font-size: 14px;
-}
-
-input:focus,
-textarea:focus,
-select:focus {
-    outline: none;
-    border-color: $primary;
-}
-
 
 /* ============================= */
 /* BUTTONS */

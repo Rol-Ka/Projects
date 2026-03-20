@@ -20,17 +20,11 @@ class StoryController extends Controller
 
     public function store(StoreStoryRequest $request)
     {
-        // 1 story per user
         if (auth()->user()->story) {
             return back()->with('error', 'Jūs jau turite sukūrę istoriją');
         }
 
-        $request->validate([
-            'title' => 'required',
-            'content' => 'required',
-            'goal_amount' => 'required|numeric|min:1',
-            'main_image' => 'nullable|image|max:2048'
-        ]);
+
 
         $imagePath = null;
 
@@ -47,8 +41,6 @@ class StoryController extends Controller
             'main_image' => $imagePath,
         ]);
 
-
-        // parse #tags from input
         if ($request->tags_text) {
 
             preg_match_all('/#(\w+)/u', $request->tags_text, $matches);
@@ -63,7 +55,6 @@ class StoryController extends Controller
             }
         }
 
-        // gallery upload
         if ($request->hasFile('gallery_images')) {
 
             foreach ($request->file('gallery_images') as $image) {
@@ -85,32 +76,48 @@ class StoryController extends Controller
             ->withCount('likes')
             ->with(['tags', 'donations.user', 'images']);
 
-        // jei yra tag filter
         if ($request->tag) {
             $query->whereHas('tags', function ($q) use ($request) {
                 $q->where('name', $request->tag);
             });
         }
 
-        $stories = $query
-            ->orderBy('is_completed', 'asc')
-            ->orderBy('likes_count', 'desc')
-            ->paginate(9)
-            ->withQueryString();
+        // 🔥 SORT LOGIKA
+        if ($request->sort === 'likes_desc') {
+            $query->orderBy('likes_count', 'desc');
+        } elseif ($request->sort === 'likes_asc') {
+            $query->orderBy('likes_count', 'asc');
+        } else {
+            $query->orderBy('created_at', 'desc'); // default
+        }
+
+        // 🔥 ACTIVE STORIES
+        $activeStories = $query->clone()
+            ->where('is_completed', false)
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        // 🔥 COMPLETED STORIES
+        $completedStories = $query->clone()
+            ->where('is_completed', true)
+            ->orderBy('completed_at', 'desc')
+            ->get();
 
         $tags = \App\Models\Tag::all();
 
-        return view('story.index', compact('stories', 'tags'));
+        return view('story.index', [
+            'activeStories' => $activeStories,
+            'completedStories' => $completedStories,
+            'tags' => $tags
+        ]);
     }
 
     public function edit(Story $story)
     {
-        // tik savo story
         if ($story->user_id !== auth()->id()) {
             abort(403);
         }
 
-        // jei jau patvirtinta – nebeleidžiam
         if ($story->is_approved) {
             return redirect('/dashboard')->with('error', 'Istorija jau patvirtinta ir nebegali būti redaguojama.');
         }

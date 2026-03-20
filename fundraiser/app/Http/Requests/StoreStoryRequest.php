@@ -29,4 +29,23 @@ class StoreStoryRequest extends FormRequest
             'main_image' => 'required|image|mimes:jpg,jpeg,png,webp|max:2048',
         ];
     }
+
+    public function messages(): array
+    {
+        return [
+            'title.required' => 'Įveskite pavadinimą.',
+            'title.max' => 'Pavadinimas per ilgas.',
+
+            'content.required' => 'Įveskite aprašymą.',
+
+            'goal_amount.required' => 'Įveskite tikslinę sumą.',
+            'goal_amount.numeric' => 'Suma turi būti skaičius.',
+            'goal_amount.min' => 'Suma turi būti didesnė nei 0.',
+
+            'main_image.required' => 'Pasirinkite pagrindinę nuotrauką.',
+            'main_image.image' => 'Failas turi būti nuotrauka.',
+            'main_image.mimes' => 'Leidžiami formatai: jpg, png, webp.',
+            'main_image.max' => 'Nuotrauka per didelė (max 2MB).',
+        ];
+    }
 }
