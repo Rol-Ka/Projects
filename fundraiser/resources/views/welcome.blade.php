@@ -88,38 +88,76 @@ tapti realybe.
 
 @foreach($stories as $story)
 
-<a href="{{ route('story.show', $story) }}" class="discover-card">
+<a href="{{ route('story.show', $story) }}" class="story-link">
+    <div class="story-card">
 
-<div class="discover-image">
+    {{-- IMAGE --}}
+    @if($story->main_image)
+        <div class="story-image-wrap">
+            <img src="{{ asset('storage/'.$story->main_image) }}">
+        </div>
+    @endif
 
-<img src="{{ asset('storage/'.$story->main_image) }}" alt="{{ $story->title }}">
+    {{-- BODY --}}
+    <div class="story-body">
 
-<span class="donations">
-{{ $story->donations_count }} Paukojimai
-</span>
+        <h3 class="story-title">
+            {{ $story->title }}
+        </h3>
+
+        <p class="story-content">
+            {{ Str::limit($story->content, 90) }}
+        </p>
+
+        {{-- PROGRESS --}}
+        @php
+    $current = $story->current_amount;
+    $goal = $story->goal_amount;
+@endphp
+
+@include('components.progress')
+
+        <div class="story-money">
+
+    <div class="story-amounts">
+        <span class="raised">
+            €{{ number_format($story->current_amount, 0) }}
+        </span>
+        <span class="goal">
+            iš €{{ number_format($story->goal_amount, 0) }}
+        </span>
+    </div>
+
+    <div class="story-left">
+        Liko €{{ number_format($goal - $current, 0) }}
+    </div>
 
 </div>
 
-<h3>{{ Str::limit($story->title, 40) }}</h3>
+        {{-- FOOTER --}}
+        <div class="story-footer">
 
-<div class="progress">
+            <div class="likes">
+                ❤️ {{ $story->likes_count }}
+            </div>
 
-<div class="progress-bar"
-style="width: {{ $story->goal_amount > 0 ? ($story->current_amount / $story->goal_amount) * 100 : 0 }}%">
+        </div>
+
+    </div>
+
 </div>
-
-</div>
-
-<p class="raised">
-€{{ number_format($story->current_amount) }} Paaukota
-</p>
-
 </a>
+
+
 
 @endforeach
 
-</div>
 
+</div>
+<div class="hero-buttons-bottom">
+
+<a href="{{ route('stories.index') }}" class="btn-secondary">Peržiūrėti visas istorijas</a>
+</div>
 </div>
 
 </section>

@@ -56,7 +56,7 @@
 <div class="stories-grid">
 
 @forelse($activeStories as $story)
-
+<a href="{{ route('story.show', $story) }}" class="story-link">
     <div class="story-card">
 
     {{-- IMAGE --}}
@@ -79,33 +79,28 @@
 
         {{-- PROGRESS --}}
         @php
-            $percent = $story->goal_amount > 0 
-                ? ($story->current_amount / $story->goal_amount) * 100 
-                : 0;
+    $current = $story->current_amount;
+    $goal = $story->goal_amount;
+@endphp
 
-            $left = max($story->goal_amount - $story->current_amount, 0);
-        @endphp
+@include('components.progress')
 
-        <div class="progress-bar">
-            <div class="progress-fill" style="width: {{ $percent }}%"></div>
-        </div>
+        <div class="story-money">
 
-        {{-- AMOUNTS --}}
-        <div class="story-amounts">
+    <div class="story-amounts">
+        <span class="raised">
+            €{{ number_format($story->current_amount, 0) }}
+        </span>
+        <span class="goal">
+            iš €{{ number_format($story->goal_amount, 0) }}
+        </span>
+    </div>
 
-            <span class="raised">
-                €{{ number_format($story->current_amount, 0) }}
-            </span>
+    <div class="story-left">
+        Liko €{{ number_format($goal - $current, 0) }}
+    </div>
 
-            <span class="goal">
-                iš €{{ number_format($story->goal_amount, 0) }}
-            </span>
-
-        </div>
-
-        <div class="story-amounts">
-            Liko €{{ number_format($left, 0) }}
-        </div>
+</div>
 
         {{-- FOOTER --}}
         <div class="story-footer">
@@ -119,6 +114,7 @@
     </div>
 
 </div>
+</a>
 
 @empty
 
@@ -133,7 +129,7 @@
 <div class="stories-grid">
 
 @forelse($completedStories as $story)
-
+<a href="{{ route('story.show', $story) }}" class="story-link">
     <div class="story-card completed">
 
     {{-- IMAGE --}}
@@ -161,17 +157,22 @@
         </div>
 
         {{-- AMOUNTS --}}
-        <div class="story-amounts">
+        <div class="story-money">
 
-            <span class="raised">
-                €{{ number_format($story->current_amount, 0) }}
-            </span>
+    <div class="story-amounts">
+        <span class="raised">
+            €{{ number_format($story->current_amount, 0) }}
+        </span>
+        <span class="goal">
+            iš €{{ number_format($story->goal_amount, 0) }}
+        </span>
+    </div>
 
-            <span class="goal">
-                iš €{{ number_format($story->goal_amount, 0) }}
-            </span>
+    <div class="story-left">
+        Surinkta 100%
+    </div>
 
-        </div>
+</div>
 
         <div class="story-footer">
 
@@ -184,7 +185,7 @@
     </div>
 
 </div>
-
+</a>
 @empty
 
 <p>Nėra baigtų istorijų</p>

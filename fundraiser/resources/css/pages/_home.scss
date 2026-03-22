@@ -36,6 +36,14 @@
     flex-wrap: wrap;
 }
 
+.hero-buttons-bottom {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    margin-top: 30px;
+    flex-wrap: wrap;
+}
+
 .hero-buttons a {
     padding: 14px 28px;
     border-radius: 28px;
@@ -190,7 +198,7 @@
     margin: 0 auto;
 
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: 32px;
 }
 
@@ -230,23 +238,7 @@
     margin: 12px 0;
 }
 
-.progress {
-    height: 6px;
-    background: #eee;
-    border-radius: 10px;
-    overflow: hidden;
-}
 
-.progress-bar {
-    height: 100%;
-    background: #22c55e;
-}
-
-.raised {
-    font-size: 14px;
-    margin-top: 8px;
-    color: $text-muted;
-}
 
 /* GRID RESPONSIVE */
 

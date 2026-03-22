@@ -1,0 +1,108 @@
+@use 'variables' as *;
+
+.progress-bar {
+    width: 100%;
+    height: 12px;
+
+    background: #e5e7eb;
+    border-radius: 999px;
+    overflow: hidden;
+
+    position: relative;
+}
+
+.progress-fill {
+    height: 100%;
+    min-width: 4px;
+
+    border-radius: 999px;
+    transition: width 0.4s ease;
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    padding-right: 6px;
+
+    color: $text-light;
+    font-size: 11px;
+    font-weight: 600;
+
+    background: linear-gradient(90deg,
+            #4ade80,
+            #22c55e,
+            #16a34a);
+
+    position: relative;
+    overflow: hidden;
+}
+
+
+
+/* TEXT DEFAULT (inside center) */
+
+.progress-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    transform: translate(-50%, -50%);
+
+    font-size: 11px;
+    font-weight: 600;
+
+    color: $text-dark;
+    pointer-events: none;
+}
+
+/* 🔥 SMALL PROGRESS → TEXT OUTSIDE */
+
+.progress-text--outside {
+    left: auto;
+    right: 0;
+    transform: translate(110%, -50%);
+    color: #111;
+}
+
+/* SHINE efektas */
+
+.progress-fill::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -50%;
+
+    width: 50%;
+    height: 100%;
+
+    background: linear-gradient(120deg,
+            transparent,
+            rgba(255, 255, 255, 0.4),
+            transparent);
+
+    animation: progress-shine 2.5s infinite;
+}
+
+@keyframes progress-shine {
+    0% {
+        left: -50%;
+    }
+
+    100% {
+        left: 120%;
+    }
+}
+
+/* COLORS */
+
+.progress-fill-low {
+    background: linear-gradient(90deg, #f87171, #ef4444);
+}
+
+.progress-fill-mid {
+    background: linear-gradient(90deg, #facc15, #f59e0b);
+}
+
+.progress-fill-high {
+    background: linear-gradient(90deg, #4ade80, #16a34a);
+}

@@ -1,303 +1,18 @@
 @use "../base/variables" as *;
 
-
-
-.stories-title {
-
-    margin-bottom: 30px;
-
-}
-
-/* TAG FILTER */
-
-.tag-filter {
-
-    margin-bottom: 30px;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-
-}
-
-.tag-filter a {
-
-    text-decoration: none;
-    background: #f3f4f6;
-    padding: 6px 10px;
-    border-radius: 20px;
-
-}
-
-/* GRID */
-
-
-
-.stories-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 24px;
-}
-
-
-
-/* CARD */
-
-.story-card {
-
-    background: white;
-
-    border: 1px solid #e5e7eb;
-    border-radius: 16px;
-
-    overflow: hidden;
-
-}
-
-/* IMAGE */
-
-.story-image {
-
-    width: 100%;
-    height: 200px;
-
-    object-fit: cover;
-
-}
-
-/* BODY */
-
-.story-body {
-
-    padding: 18px;
-
-}
-
-.story-title {
-
-    font-size: 18px;
-    margin-bottom: 8px;
-
-}
-
-.story-title a {
-
-    text-decoration: none;
-    color: #111;
-
-}
-
-/* CONTENT */
-
-.story-content {
-
-    font-size: 14px;
-    color: #6b7280;
-
-    margin-bottom: 10px;
-
-}
-
-/* TAGS */
-
-.story-tags {
-
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-
-    margin-bottom: 12px;
-
-}
-
-.tag {
-
-    background: #e5e7eb;
-    padding: 4px 8px;
-    border-radius: 20px;
-    font-size: 12px;
-
-}
-
-/* PROGRESS */
-
-.story-progress {
-
-    font-weight: 600;
-    margin-bottom: 10px;
-
-}
-
-/* ACTIONS */
-
-.story-actions {
-
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-}
-
-/* DONATE */
-
-.donate-form {
-
-    display: flex;
-    gap: 6px;
-
-}
-
-.donate-form input {
-
-    width: 70px;
-
-}
-
-.donate-form button {
-
-    padding: 6px 10px;
-
-}
-
-/* PAGINATION */
-
-.stories-pagination {
-
-    margin-top: 40px;
-
-}
-
-
-
 /* ============================= */
-/* PAGINATION */
+/* HEADER */
 /* ============================= */
 
-.admin-pagination {
-    margin-top: 40px;
-}
-
-.admin-pagination-ui {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 8px;
-}
-
-
-/* PAGE NUMBERS */
-
-.page-number {
-    width: 40px;
-    height: 40px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    border-radius: 50%;
-
-    text-decoration: none;
-
-    border: 1px solid #e5e7eb;
-
-    color: $text;
-
-    font-weight: 500;
-
-    transition: all 0.15s ease;
-}
-
-.page-number:hover {
-    background: #f3f4f6;
-    transform: scale(1.08);
-}
-
-.page-number.active {
-    background: $primary;
-    color: white;
-    border: none;
-}
-
-
-/* ARROWS */
-
-.page-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    width: 42px;
-    height: 42px;
-
-    border-radius: 50%;
-
-    border: 1px solid #e5e7eb;
-
-    text-decoration: none;
-
-    font-size: 18px;
-}
-
-.page-btn:hover {
-    background: #f3f4f6;
-}
-
-.page-btn.disabled {
-    opacity: 0.4;
-    pointer-events: none;
-}
-
-.page-ellipsis {
-    padding: 0 6px;
-    color: #999;
-}
-
-
-
-
-.like-btn {
-
-    background: none;
-    border: none;
-    cursor: pointer;
-
-    display: flex;
-    align-items: center;
-    gap: 6px;
-
-    font-size: 16px;
-    color: #555;
-
-    transition: 0.2s;
-}
-
-.like-btn .heart {
-    transition: 0.2s;
-}
-
-/* liked state */
-.like-btn.liked {
-    color: #e11d48;
-}
-
-.like-btn.liked .heart {
-    transform: scale(1.2);
-}
-
-/* hover */
-.like-btn:hover {
-    transform: scale(1.05);
-}
-
-/* click animation */
-.like-btn.bounce .heart {
-    animation: pop 0.3s ease;
+.stories-header {
+    text-align: center;
+    margin-bottom: 40px;
 }
 
 .stories-toolbar {
     display: flex;
-    justify-content: space-between;
-    margin-bottom: 20px;
+    justify-content: center;
+    margin-top: 10px;
 }
 
 .sort-box {
@@ -312,25 +27,31 @@
     border-radius: 20px;
     text-decoration: none;
     color: #333;
+    transition: 0.2s;
 }
 
 .sort-box a:hover {
     background: #e5e7eb;
 }
 
-
+/* ============================= */
+/* FILTER */
+/* ============================= */
 
 .filter-box {
+    margin-top: 15px;
+    display: inline-block;
+    justify-content: center;
     position: relative;
-    margin-bottom: 20px;
 }
 
 .filter-dropdown {
     position: absolute;
     top: 110%;
-    left: 0;
+    left: 50%;
+    transform: translateX(-50%);
 
-    width: 250px;
+    width: 100%;
     max-height: 300px;
 
     overflow-y: auto;
@@ -356,6 +77,19 @@
     background: #f3f4f6;
 }
 
+/* ============================= */
+/* GRID */
+/* ============================= */
+
+.stories-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 24px;
+}
+
+/* ============================= */
+/* CARD */
+/* ============================= */
 
 .story-card {
     background: #fff;
@@ -371,12 +105,19 @@
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
 }
 
+.story-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
 /* IMAGE */
 
 .story-image-wrap {
     width: 100%;
     height: 180px;
     overflow: hidden;
+    position: relative;
 }
 
 .story-image-wrap img {
@@ -385,97 +126,7 @@
     object-fit: cover;
 }
 
-/* BODY */
-
-.story-body {
-    padding: 16px;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    text-align: center;
-}
-
-/* TITLE */
-
-.story-title {
-    line-height: 1.3;
-    font-size: 18px;
-    font-weight: 600;
-    margin: 0;
-}
-
-/* TEXT */
-
-.story-content {
-    min-height: 40px;
-    font-size: 14px;
-    color: #6b7280;
-}
-
-/* PROGRESS */
-
-.progress-bar {
-    height: 6px;
-    background: #e5e7eb;
-    border-radius: 999px;
-    overflow: hidden;
-}
-
-.progress-fill {
-    height: 100%;
-    background: #22c55e;
-    border-radius: 999px;
-}
-
-/* AMOUNTS */
-
-.story-amounts {
-    font-size: 14px;
-}
-
-.story-amounts .raised {
-    font-weight: 600;
-    color: $primary;
-}
-
-.story-amounts .goal {
-    color: $primary;
-}
-
-/* LEFT */
-
-.story-left {
-    font-size: 13px;
-    text-align: center;
-    color: $primary;
-}
-
-/* FOOTER */
-
-.story-footer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 4px;
-}
-
-.story-money {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 4px;
-}
-
-.likes {
-    font-size: 14px;
-}
-
-
-.story-card.completed {
-    opacity: 0.85;
-}
-
-/* badge */
+/* COMPLETED BADGE */
 
 .badge-completed {
     position: absolute;
@@ -490,53 +141,103 @@
     border-radius: 999px;
 }
 
-/* reikia parent relative */
+/* BODY */
 
-.story-image-wrap {
-    position: relative;
+.story-body {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    gap: 12px;
+    text-align: center;
+    justify-content: space-between;
 }
 
-/* progress full */
+/* TITLE */
 
-.progress-fill.full {
-    width: 100%;
-    background: #9ca3af;
-    /* pilkesnis */
+.story-title {
+    font-size: 18px;
+    font-weight: 600;
+    margin: 0;
+    line-height: 1.3;
 }
+
+/* TEXT */
+
+.story-content {
+    min-height: 40px;
+    font-size: 14px;
+    color: #6b7280;
+}
+
+
+
+/* ============================= */
+/* MONEY */
+/* ============================= */
+
+.story-money {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+}
+
+.story-amounts {
+    font-size: 14px;
+}
+
+.story-amounts .raised {
+    font-weight: 600;
+    color: $primary;
+}
+
+.story-amounts .goal {
+    color: $primary;
+}
+
+.story-left {
+    font-size: 13px;
+    color: $primary;
+}
+
+/* ============================= */
+/* FOOTER */
+/* ============================= */
+
+.story-footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+}
+
+.likes {
+    font-size: 14px;
+}
+
+/* ============================= */
+/* COMPLETED CARD */
+/* ============================= */
 
 .story-card.completed {
+    opacity: 0.85;
     filter: grayscale(0.3);
 }
 
-
-.stories-header {
-    text-align: center;
-    margin-bottom: 40px;
-}
-
-.stories-toolbar {
-    display: flex;
-    justify-content: center;
-    margin-top: 10px;
-}
-
-.sort-box {
-    display: flex;
-    gap: 10px;
-    align-items: center;
-}
-
-.filter-box {
-    margin-top: 15px;
-    display: flex;
-    justify-content: center;
-}
+/* ============================= */
+/* HEADINGS */
+/* ============================= */
 
 h3 {
     margin-top: 50px;
     margin-bottom: 20px;
     font-size: 20px;
 }
+
+/* ============================= */
+/* ANIMATIONS */
+/* ============================= */
 
 @keyframes pop {
     0% {
@@ -552,28 +253,18 @@ h3 {
     }
 }
 
+/* ============================= */
+/* RESPONSIVE */
+/* ============================= */
 
-
-/* TABLET */
-
-@media (max-width:900px) {
-
+@media (max-width: $tablet) {
     .stories-grid {
-
         grid-template-columns: 1fr 1fr;
-
     }
-
 }
 
-/* MOBILE */
-
-@media (max-width:600px) {
-
+@media (max-width: $mobile) {
     .stories-grid {
-
         grid-template-columns: 1fr;
-
     }
-
 }

@@ -5,7 +5,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const page = document.body.dataset.page;
 
-    if (page !== "story") return;
 
     let currentIndex = 0;
 
@@ -26,6 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
             currentIndex = parseInt(el.dataset.index);
             showImage();
             lightbox.classList.add('active');
+
         });
     });
 

@@ -68,11 +68,12 @@
             </p>
 
             {{-- PROGRESS --}}
-            <div class="story-progress">
-                <div class="progress-bar"
-                     style="width: {{ ($story->current_amount / $story->goal_amount) * 100 }}%">
-                </div>
-            </div>
+           @php
+    $current = $story->current_amount;
+    $goal = $story->goal_amount;
+@endphp
+
+@include('components.progress')
 
             <p class="story-raised">
                 €{{ $story->current_amount }} / €{{ $story->goal_amount }}
