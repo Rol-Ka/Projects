@@ -16,10 +16,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const images = window.storyImages;
 
-    // 🔥 jei nėra elementų – stop (extra safety)
     if (!lightbox || !img || !nextBtn || !prevBtn) return;
 
-    // OPEN
+
     document.querySelectorAll('.gallery-open').forEach(el => {
         el.addEventListener('click', () => {
             currentIndex = parseInt(el.dataset.index);

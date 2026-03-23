@@ -53,10 +53,14 @@
             <button type="submit" class="btn-primary btn-block">
                 Prisijungti
             </button>
-
-            <div class="auth-links">
+<div class="auth-links">
                 <a href="{{ route('password.request') }}">
                     Pamiršote slaptažodį?
+                </a>
+            </div>
+            <div class="auth-links">
+                <a href="{{ route('register') }}">
+                    Neturite paskyros? Registruotis
                 </a>
             </div>
 

@@ -11,7 +11,7 @@
 <h1>Padėk žmonėms pasiekti savo tikslus</h1>
 
 <p>
-Fundraiser platforma kur žmonės gali dalintis savo istorijomis ir gauti paramą iš bendruomenės.
+PaaukokMan platforma kur žmonės gali dalintis savo istorijomis ir gauti paramą iš bendruomenės.
 </p>
 
 <div class="hero-buttons">
@@ -72,8 +72,7 @@ Tūkstančiai žmonių jau pasiekė savo tikslus
 </h2>
 
 <p>
-Pasidalink savo istorija, gauk paramą ir padėk savo svajonėms
-tapti realybe.
+Istorijos, kurios įkvepia, ir bendruomenė, kuri palaiko. Padėk žmonėms pasiekti savo svajones paaukodamas. Kartu galime kurti geresnį pasaulį.
 </p>
 
 </section>
@@ -105,9 +104,9 @@ tapti realybe.
             {{ $story->title }}
         </h3>
 
-        <p class="story-content">
+        {{-- <p class="story-content">
             {{ Str::limit($story->content, 90) }}
-        </p>
+        </p> --}}
 
         {{-- PROGRESS --}}
         @php

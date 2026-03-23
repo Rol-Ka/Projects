@@ -5,6 +5,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+        <meta name="description" content="@yield('description', 'Default description')">
+    <meta name="keywords" content="@yield('keywords', 'default, keywords')">
+    <meta name="author" content="@yield('author', 'Author')">
+    <meta property="og:title" content="@yield('pavadinimas')">
+    <meta property="og:description" content="@yield('description', 'Default description')">
+    <meta property="og:type" content="website">
 <link rel="icon" type="image/png" href="/images/icon.png">
     <title>PaaukokMan</title>
 
@@ -18,7 +24,7 @@
     @vite(['resources/css/app.scss', 'resources/js/app.js'])
 </head>
 
-<body class="font-sans antialiased" data-page="@yield('page')">
+<body  data-page="@yield('page')">
 <div class="site-wrapper"> 
     {{-- NAVBAR --}}
     @include('layouts.navigation')

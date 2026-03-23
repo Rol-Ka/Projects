@@ -1,21 +1,118 @@
-document.addEventListener('submit', async (e) => {
+// document.addEventListener('submit', async (e) => {
+
+//     const form = e.target.closest('.donate-box');
+//     if (!form) return;
+
+//     e.preventDefault();
+
+//     if (!window.isLoggedIn) {
+//         showToast('Norint aukoti, turite būti prisijungęs', 'warning');
+//         return;
+//     }
+
+//     const input = form.querySelector('.donate-input');
+//     const errorBox = form.querySelector('.input-error');
+
+//     // 🔥 reset
+//     input.classList.remove('error');
+//     errorBox.textContent = '';
+
+//     try {
+//         const res = await fetch(form.action, {
+//             method: 'POST',
+//             headers: {
+//                 'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
+//                 'Accept': 'application/json'
+//             },
+//             body: new FormData(form)
+//         });
+
+//         const data = await res.json();
+
+//         if (!res.ok) {
+
+//             // 🔥 VALIDATION ERROR
+//             if (res.status === 422 && data.errors) {
+//                 const msg = data.errors.amount?.[0];
+
+//                 input.classList.add('error');
+//                 errorBox.textContent = msg;
+
+//                 return;
+//             }
+
+//             showToast(data.message || 'Klaida', 'error');
+//             return;
+//         }
+
+//         showToast(data.message || 'Auka sėkminga 🎉', 'success');
+
+//         form.reset();
+
+//         location.reload();
+
+//     } catch (err) {
+//         console.error(err);
+//         showToast('Ryšio klaida', 'error');
+//     }
+
+// });
+
+
+
+let pendingForm = null;
+
+document.addEventListener('submit', (e) => {
 
     const form = e.target.closest('.donate-box');
     if (!form) return;
 
     e.preventDefault();
 
-    if (!window.isLoggedIn) {
-        showToast('Norint aukoti, turite būti prisijungęs', 'warning');
+    const input = form.querySelector('.donate-input');
+    const amount = input.value;
+    const left = parseFloat(form.dataset.left);
+
+
+    const errorBox = form.querySelector('.input-error');
+
+    // reset
+    if (input) input.classList.remove('error');
+    if (errorBox) errorBox.textContent = '';
+
+    if (!amount || amount <= 0) {
+        if (input) input.classList.add('error');
+        if (errorBox) errorBox.textContent = 'Įveskite sumą';
+
         return;
     }
 
-    const input = form.querySelector('.donate-input');
-    const errorBox = form.querySelector('.input-error');
+    if (amount > left) {
+        if (input) input.classList.add('error');
+        if (errorBox) errorBox.textContent = `Maksimali suma: €${left}`;
 
-    // 🔥 reset
-    input.classList.remove('error');
-    errorBox.textContent = '';
+        return;
+    }
+
+    // 🔥 parodyti modalą
+    const modal = document.getElementById('donate-modal');
+    const text = document.getElementById('donate-modal-text');
+
+    text.textContent = `Ar tikrai norite paaukoti €${amount}?`;
+
+    modal.classList.add('active');
+
+    pendingForm = form;
+});
+
+
+document.getElementById('confirm-donate')?.addEventListener('click', async () => {
+
+    if (!pendingForm) return;
+
+    const form = pendingForm;
+    const input = form.querySelector('.donate-input');
+    const amount = input.value;
 
     try {
         const res = await fetch(form.action, {
@@ -30,26 +127,20 @@ document.addEventListener('submit', async (e) => {
         const data = await res.json();
 
         if (!res.ok) {
-
-            // 🔥 VALIDATION ERROR
-            if (res.status === 422 && data.errors) {
-                const msg = data.errors.amount?.[0];
-
-                input.classList.add('error');
-                errorBox.textContent = msg;
-
-                return;
-            }
-
             showToast(data.message || 'Klaida', 'error');
             return;
         }
 
-        showToast(data.message || 'Auka sėkminga 🎉', 'success');
+        // 🔥 PASLEPIAM CONFIRM
+        document.getElementById('modal-confirm').style.display = 'none';
 
-        form.reset();
+        // 🔥 PARODOM SUCCESS
+        const successBox = document.getElementById('modal-success');
+        successBox.style.display = 'block';
 
-        location.reload();
+        document.getElementById('success-text').textContent = `Paaukojote €${amount}`;
+
+        startCountdown();
 
     } catch (err) {
         console.error(err);
@@ -57,3 +148,35 @@ document.addEventListener('submit', async (e) => {
     }
 
 });
+
+function startCountdown() {
+    let seconds = 5;
+
+    const btn = document.getElementById('continue-btn');
+
+    const interval = setInterval(() => {
+        seconds--;
+
+        btn.textContent = `Tęsti (${seconds})`;
+
+        if (seconds <= 0) {
+            clearInterval(interval);
+            location.reload();
+        }
+
+    }, 1000);
+
+    // manual click
+    btn.onclick = () => {
+        location.reload();
+    };
+}
+
+document.getElementById('cancel-donate')?.addEventListener('click', () => {
+    closeModal();
+});
+
+function closeModal() {
+    document.getElementById('donate-modal')?.classList.remove('active');
+    pendingForm = null;
+}

@@ -235,6 +235,13 @@ h3 {
     font-size: 20px;
 }
 
+.input-error {
+    color: red;
+    font-size: 13px;
+    margin-top: 4px;
+}
+
+
 /* ============================= */
 /* ANIMATIONS */
 /* ============================= */
@@ -267,4 +274,49 @@ h3 {
     .stories-grid {
         grid-template-columns: 1fr;
     }
+
+    .donate-btn {
+        display: inline-block;
+        width: 100%;
+
+        padding: 10px;
+        text-align: center;
+
+        background: $primary;
+        color: white;
+
+        border-radius: 25px;
+        text-decoration: none;
+    }
+
+    .btn-primary-donate {
+        display: inline-block;
+        width: 100%;
+        height: 36px;
+        justify-content: center;
+        padding: 10px;
+        text-align: center;
+
+        background: $primary;
+        color: white;
+
+        border-radius: 25px;
+        text-decoration: none;
+    }
+
+    .donate-box {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .donate-box button {
+        width: 100%;
+    }
+
+    .input-group {
+        width: 100%;
+    }
+
+
+
 }

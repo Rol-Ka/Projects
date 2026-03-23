@@ -4,5 +4,5 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (page !== "home") return;
 
-    console.log("Landing page loaded");
+
 });

@@ -17,11 +17,11 @@
 
         <a href="{{ route('stories.index') }}">Naujausi</a>
 
-        <a href="{{ route('stories.index', ['sort' => 'likes_desc']) }}">
+        <a href="{{ route('stories.index', array_merge(request()->all(), ['sort' => 'likes_desc'])) }}">
             ❤️ Daugiausiai
         </a>
 
-        <a href="{{ route('stories.index', ['sort' => 'likes_asc']) }}">
+        <a href="{{ route('stories.index', array_merge(request()->all(), ['sort' => 'likes_asc'])) }}">
             ❤️ Mažiausiai
         </a>
     </div>
@@ -29,7 +29,11 @@
 </div>
 
 <div class="filter-box">
-
+@if(request('tag'))
+        <div class="filter-active" style="margin-bottom: 10px;">
+            Filtruojama pagal: <strong>#{{ request('tag') }}</strong>
+        </div>
+    @endif
     <button id="filter-toggle">
         Filtruoti pagal tagus ▼
     </button>
@@ -39,12 +43,13 @@
         <a href="{{ route('stories.index') }}">Visi</a>
 
         @foreach($tags->sortBy('name') as $tag)
-            <a href="{{ route('stories.index', ['tag' => $tag->name]) }}">
+            <a href="{{ route('stories.index', array_merge(request()->all(), ['tag' => $tag->name])) }}">
                 #{{ $tag->name }}
             </a>
         @endforeach
 
     </div>
+    
 
 </div>
 

@@ -257,6 +257,74 @@
     cursor: pointer;
 }
 
+.donate-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+
+    display: none;
+    align-items: center;
+    justify-content: center;
+
+    z-index: 9999;
+}
+
+.donate-modal.active {
+    display: flex;
+}
+
+.donate-modal-box {
+    background: $white;
+    padding: 20px;
+    border-radius: 12px;
+    width: 320px;
+    text-align: center;
+}
+
+.donate-modal-box h3,
+.donate-modal-box p {
+
+
+    margin-top: 5px;
+    margin-bottom: 25px;
+}
+
+.donate-modal-actions {
+    margin-top: 5px;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+#confirm-donate {
+    background: $primary;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+#cancel-donate {
+    background: $gray ;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.donate-box {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start; // 🔥 svarbiausia
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
 
 
 /* ============================= */
@@ -307,4 +375,6 @@
         max-width: 95vw;
         max-height: 80vh;
     }
+
+
 }

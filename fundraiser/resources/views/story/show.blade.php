@@ -3,7 +3,9 @@
 @section('content')
 
 <div class="container">
-
+<a href="{{ route('stories.index') }}" class="btn btn-view back-btn">
+← Atgal
+</a>
     <div class="story-show-card"> {{-- 🔥 LABAI SVARBU --}}
 
         {{-- LEFT --}}
@@ -76,7 +78,10 @@
 @include('components.progress')
 
             <p class="story-raised">
-                €{{ $story->current_amount }} / €{{ $story->goal_amount }}
+                {{ $story->current_amount }}€ / {{ $story->goal_amount }}€
+            </p>
+            <p class="story-raised">
+                Likusi suma iki tikslo - {{ $goal - $current }}€        
             </p>
 
             {{-- ❤️ LIKE --}}
@@ -88,25 +93,42 @@
             </div>
 
             {{-- 💰 DONATE --}}
-            @auth
-            <form method="POST" action="{{ route('donate', $story->id) }}" class="donate-box" data-id="{{ $story->id }}">
-    @csrf
+            @php
+    $isCompleted = $story->current_amount >= $story->goal_amount;
+@endphp
 
-    <div class="form-group">
-        <input 
-            type="number" 
-            step="0.01" 
-            name="amount" 
-            placeholder="€ suma"
-            class="donate-input"
-        >
+{{-- 💰 DONATE --}}
+@if(!$isCompleted)
 
-        <div class="input-error"></div>
+    @auth
+        <form method="POST" action="{{ route('donate', $story->id) }}" class="donate-box" data-left="{{ $story->goal_amount - $story->current_amount }}">
+            @csrf
+<div class="input-group">
+            <input 
+                type="number" 
+                step="0.01" 
+                name="amount" 
+                placeholder="€ suma"
+                class="donate-input"
+            
+            >
+            <div class="input-error"></div>
+</div>
+            <button type="submit">Paaukoti</button>
+        </form>
+    @else
+        <a href="{{ route('login') }}?redirect={{ url()->current() }}" class="donate-btn">
+            Prisijunkite, kad paaukotumėte
+        </a>
+    @endauth
+
+@else
+
+    <div class="donate-closed">
+         Ši istorija jau pilnai finansuota
     </div>
 
-    <button type="submit">Paaukoti</button>
-</form>
-            @endauth
+@endif
 
             {{-- DONATIONS --}}
             <div class="story-donations">
@@ -124,6 +146,7 @@
     </div> {{-- 🔥 ČIA UŽSIDARO FLEX CONTAINER --}}
 
 </div>
+
 
 {{-- LIGHTBOX (paliekam už card ribų) --}}
 <div class="lightbox" id="lightbox">
@@ -144,7 +167,33 @@
 
 {{-- 🔥 perduodam images į JS --}}
 <script>
+   
+    window.isLoggedIn = {{ auth()->check() ? 'true' : 'false' }};
+
     window.storyImages = @json($allImages);
 </script>
+<div id="donate-modal" class="donate-modal">
+    <div class="donate-modal-box">
 
+        <div id="modal-confirm">
+            <h3>Patvirtinti auką</h3>
+            <p id="donate-modal-text"></p>
+
+            <div class="donate-modal-actions">
+                <button id="confirm-donate">Taip</button>
+                <button id="cancel-donate">Ne</button>
+            </div>
+        </div>
+
+        <div id="modal-success" style="display:none;">
+            <h3>✅ Ačiū už auką!</h3>
+            <p id="success-text"></p>
+
+            <button id="continue-btn">
+                Tęsti (5)
+            </button>
+        </div>
+
+    </div>
+</div>
 @endsection

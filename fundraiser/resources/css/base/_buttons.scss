@@ -33,3 +33,33 @@
 .create-btn:hover {
     background: $primary-hover;
 }
+
+
+.donate-btn {
+    display: inline-block;
+    width: 50%;
+    justify-content: center;
+    padding: 10px;
+    text-align: center;
+
+    background: $primary;
+    color: white;
+
+    border-radius: 25px;
+    text-decoration: none;
+}
+
+.btn-primary-donate {
+    display: inline-block;
+    width: 35%;
+    height: 36px;
+    justify-content: center;
+    padding: 10px;
+    text-align: center;
+
+    background: $primary;
+    color: white;
+
+    border-radius: 25px;
+    text-decoration: none;
+}
