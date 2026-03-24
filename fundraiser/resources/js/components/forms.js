@@ -1,7 +1,10 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    // 🔥 FILE NAME UPDATE
-    document.querySelectorAll('.file-input input').forEach(input => {
+    // =============================
+    // FILE NAME UPDATE
+    // =============================
+
+    document.querySelectorAll('.file-input input:not(#gallery-input)').forEach(input => {
         input.addEventListener('change', function () {
 
             let text = 'Nuotrauka nepasirinkta';
@@ -20,7 +23,11 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // 🔥 PREVIEW
+
+    // =============================
+    // GALLERY PREVIEW (NEW FILES)
+    // =============================
+
     const input = document.getElementById('gallery-input');
     const preview = document.getElementById('image-preview');
 
@@ -35,7 +42,6 @@ document.addEventListener('DOMContentLoaded', () => {
             filesArray = [...filesArray, ...newFiles].filter((file, index, self) =>
                 index === self.findIndex(f => f.name === file.name && f.size === file.size)
             );
-
 
             renderImages();
         });
@@ -54,40 +60,31 @@ document.addEventListener('DOMContentLoaded', () => {
                     div.classList.add('preview-item');
 
                     div.innerHTML = `
-                        <img src="${e.target.result}">
-                        <div class="preview-remove" data-index="${index}">×</div>
-                    `;
+                <img src="${e.target.result}">
+                <div class="preview-remove" data-index="${index}">×</div>
+            `;
 
                     preview.appendChild(div);
+
+                    // 🔥 čia update po kiekvieno append
+                    updateGalleryText();
                 };
 
                 reader.readAsDataURL(file);
             });
 
             updateInputFiles();
-
-            // 🔥 FIX ČIA
-            const fileName = input.closest('.file-input').querySelector('.file-name');
-
-            if (filesArray.length === 0) {
-                fileName.textContent = 'Nuotraukos nepasirinktos';
-            } else if (filesArray.length === 1) {
-                fileName.textContent = filesArray[0].name;
-            } else {
-                fileName.textContent = `Pasirinkta failų: ${filesArray.length}`;
-            }
         }
 
         preview.addEventListener('click', function (e) {
 
-            if (e.target.classList.contains('preview-remove')) {
+            if (!e.target.classList.contains('preview-remove')) return;
 
-                const index = e.target.dataset.index;
+            const index = e.target.dataset.index;
 
-                filesArray.splice(index, 1);
+            filesArray.splice(index, 1);
 
-                renderImages();
-            }
+            renderImages();
         });
 
         function updateInputFiles() {
@@ -103,12 +100,19 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 
+    // =============================
+    // MAIN IMAGE PREVIEW
+    // =============================
+
     const mainInput = document.getElementById('main-image-input');
     const mainPreview = document.getElementById('main-image-preview');
 
     if (mainInput && mainPreview) {
 
         mainInput.addEventListener('change', function (e) {
+
+            const existingMain = document.querySelector('[data-main-existing]');
+            if (existingMain) existingMain.remove();
 
             mainPreview.innerHTML = '';
 
@@ -124,9 +128,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 div.classList.add('preview-item');
 
                 div.innerHTML = `
-                <img src="${e.target.result}">
-                <div class="preview-remove">×</div>
-            `;
+            <img src="${e.target.result}">
+            <div class="preview-remove">×</div>
+        `;
 
                 mainPreview.appendChild(div);
             };
@@ -134,24 +138,22 @@ document.addEventListener('DOMContentLoaded', () => {
             reader.readAsDataURL(file);
         });
 
-        // remove main image
         mainPreview.addEventListener('click', function (e) {
 
-            if (e.target.classList.contains('preview-remove')) {
+            if (!e.target.classList.contains('preview-remove')) return;
 
-                mainInput.value = '';
-                mainPreview.innerHTML = '';
+            mainInput.value = '';
+            mainPreview.innerHTML = '';
 
-                // reset text
-                mainInput.closest('.file-input')
-                    .querySelector('.file-name')
-                    .textContent = 'Nuotrauka nepasirinkta';
-            }
+            mainInput.closest('.file-input')
+                .querySelector('.file-name')
+                .textContent = 'Nuotrauka nepasirinkta';
         });
     }
 
+
     // =============================
-    // TAG INPUT (CREATE STORY)
+    // TAG INPUT (ONLY CREATE)
     // =============================
 
     const page = document.body.dataset.page;
@@ -170,7 +172,6 @@ document.addEventListener('DOMContentLoaded', () => {
             .then(res => res.json())
             .then(data => tags = data);
 
-        // 🔥 auto #
         input.addEventListener("keydown", e => {
 
             if (e.key === " ") {
@@ -185,13 +186,11 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        // 🔥 main logic
         input.addEventListener("input", () => {
 
             let words = input.value.split(" ");
             let last = words[words.length - 1];
 
-            // jei pradedi naują žodį be #
             if (last && !last.startsWith("#")) {
                 words[words.length - 1] = "#" + last;
                 input.value = words.join(" ");
@@ -214,7 +213,7 @@ document.addEventListener('DOMContentLoaded', () => {
             filtered.slice(0, 5).forEach(tag => {
 
                 const div = document.createElement("div");
-                div.classList.add("tag-suggestion"); // 🔥 pakeitėm klasę
+                div.classList.add("tag-suggestion");
                 div.innerText = "#" + tag;
 
                 div.onclick = () => {
@@ -237,13 +236,92 @@ document.addEventListener('DOMContentLoaded', () => {
             hidden.value = input.value;
         });
 
-        // 🔥 close on outside click
         document.addEventListener("click", e => {
-
             if (!input.contains(e.target) && !suggestions.contains(e.target)) {
                 suggestions.innerHTML = "";
             }
         });
+    }
+
+
+    // =============================
+    // EXISTING IMAGES REMOVE (EDIT)
+    // =============================
+
+    document.addEventListener('click', (e) => {
+
+        if (!e.target.classList.contains('existing-remove')) return;
+
+        const wrapper = e.target.closest('.preview-item');
+        const checkbox = wrapper.querySelector('input[type="checkbox"]');
+
+        if (checkbox) {
+            checkbox.checked = true;
+        }
+
+        wrapper.remove();
+
+        updateGalleryText();
+    });
+
+
+    // =============================
+    // MAIN IMAGE REMOVE (EDIT)
+    // =============================
+
+    document.addEventListener('click', (e) => {
+
+        if (!e.target.classList.contains('main-remove')) return;
+
+        const deleteInput = document.getElementById('delete-main-image');
+
+        if (deleteInput) {
+            deleteInput.value = 1;
+        }
+
+        const wrapper = e.target.closest('.preview-item');
+        if (wrapper) wrapper.remove();
+
+        // 🔥 RESET TEXT
+        const mainInput = document.getElementById('main-image-input');
+
+        if (mainInput) {
+            mainInput.value = '';
+
+            mainInput.closest('.file-input')
+                .querySelector('.file-name')
+                .textContent = 'Nuotrauka nepasirinkta';
+        }
+    });
+
+
+    // =============================
+    // GALLERY TEXT UPDATE (EDIT + CREATE)
+    // =============================
+
+    function updateGalleryText() {
+
+        const fileName = document.querySelector('#gallery-input')
+            ?.closest('.file-input')
+            ?.querySelector('.file-name');
+
+        if (!fileName) return;
+
+        // 🔥 tik gallery existing (ne main!)
+        const existing = document.querySelectorAll('[data-gallery-existing] .preview-item').length;
+
+        // 🔥 naujai pridėtos
+        const newFiles = document.querySelectorAll('#image-preview .preview-item').length;
+
+        const total = existing + newFiles;
+
+        if (total === 0) {
+            fileName.textContent = 'Nuotraukos nepasirinktos';
+        } else if (total === 1) {
+            fileName.textContent = '1 nuotrauka';
+        } else {
+            fileName.textContent = `Nuotraukų: ${total}`;
+        }
     }
 
 });

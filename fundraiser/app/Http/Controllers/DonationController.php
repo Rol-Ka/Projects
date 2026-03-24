@@ -21,6 +21,12 @@ class DonationController extends Controller
 
         $story = Story::findOrFail($storyId);
 
+        if (!$story->is_approved) {
+            return response()->json([
+                'message' => 'Ši istorija dar nepatvirtinta'
+            ], 403);
+        }
+
         // 🔥 jei tikslas pasiektas
         if ($story->is_completed) {
             return response()->json([

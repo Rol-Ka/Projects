@@ -26,7 +26,7 @@ class StoreStoryRequest extends FormRequest
             'content' => 'required|string',
             'goal_amount' => 'required|numeric|min:1',
 
-            'main_image' => 'required|image|mimes:jpg,jpeg,png,webp|max:2048',
+            'main_image' => 'required|image|mimes:jpg,jpeg,png,webp,avif|max:2048',
         ];
     }
 
@@ -44,7 +44,7 @@ class StoreStoryRequest extends FormRequest
 
             'main_image.required' => 'Pasirinkite pagrindinę nuotrauką.',
             'main_image.image' => 'Failas turi būti nuotrauka.',
-            'main_image.mimes' => 'Leidžiami formatai: jpg, png, webp.',
+            'main_image.mimes' => 'Leidžiami formatai: jpg, jpeg, png, webp, avif.',
             'main_image.max' => 'Nuotrauka per didelė (max 2MB).',
         ];
     }

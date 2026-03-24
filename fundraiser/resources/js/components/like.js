@@ -8,6 +8,10 @@ document.addEventListener('click', async (e) => {
         showToast('Norint uždėti širdutę, turite būti prisijungęs', 'warning');
         return;
     }
+    if (btn.dataset.allowed === "0") {
+        showToast("Negalite pamėgti šios istorijos", "error");
+        return;
+    }
 
     const id = btn.dataset.id;
 

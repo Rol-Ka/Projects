@@ -8,6 +8,7 @@ use App\Http\Controllers\DonationController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AdminTagController;
+use App\Http\Controllers\StoryEditController;
 
 /*
 |--------------------------------------------------------------------------
@@ -111,7 +112,11 @@ Route::middleware(['auth'])->group(function () {
 
     Route::put('/story/{story}', [StoryController::class, 'update'])
         ->name('story.update');
+
+    Route::delete('/story/{story}', [StoryController::class, 'destroy'])->name('story.destroy');
 });
+
+
 
 
 

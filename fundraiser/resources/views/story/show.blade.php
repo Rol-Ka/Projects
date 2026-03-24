@@ -73,6 +73,7 @@
            @php
     $current = $story->current_amount;
     $goal = $story->goal_amount;
+    $isCompleted = $current >= $goal;
 @endphp
 
 @include('components.progress')
@@ -86,19 +87,20 @@
 
             {{-- ❤️ LIKE --}}
             <div class="story-like">
-                <button class="like-btn" data-id="{{ $story->id }}">
+                <button 
+    class="like-btn {{ (!$story->is_approved || $isCompleted) ? 'disabled' : '' }}" 
+    data-id="{{ $story->id }}"
+    data-allowed="{{ ($story->is_approved && !$isCompleted) ? 1 : 0 }}"
+>
                     <span class="heart {{ $story->isLikedByAuth() ? 'liked' : '' }}">❤️</span>
                     <span class="like-count">{{ $story->likes()->count() }}</span>
                 </button>
             </div>
 
-            {{-- 💰 DONATE --}}
-            @php
-    $isCompleted = $story->current_amount >= $story->goal_amount;
-@endphp
+            
 
 {{-- 💰 DONATE --}}
-@if(!$isCompleted)
+@if(!$isCompleted && $story->is_approved)
 
     @auth
         <form method="POST" action="{{ route('donate', $story->id) }}" class="donate-box" data-left="{{ $story->goal_amount - $story->current_amount }}">
@@ -108,7 +110,7 @@
                 type="number" 
                 step="0.01" 
                 name="amount" 
-                placeholder="€ suma"
+                placeholder="Suma €"
                 class="donate-input"
             
             >
@@ -122,11 +124,17 @@
         </a>
     @endauth
 
-@else
+@elseif($isCompleted)
 
     <div class="donate-closed">
          Ši istorija jau pilnai finansuota
     </div>
+
+@elseif(!$story->is_approved)
+
+<div class="donate-closed">
+    ⏳ Ši istorija dar nepatvirtinta
+</div>
 
 @endif
 
@@ -136,7 +144,7 @@
 
                 @foreach($story->donations as $donation)
                     <p>
-                        {{ $donation->user->name }} – €{{ $donation->amount }}
+                        {{ $donation->user->name }} – {{ $donation->amount }}€
                     </p>
                 @endforeach
             </div>

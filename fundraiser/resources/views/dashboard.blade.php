@@ -102,6 +102,15 @@
                         </a>
                         @endif
 
+                        <form method="POST" action="{{ route('story.destroy', $story) }}" class="delete-story-form">
+    @csrf
+    @method('DELETE')
+
+    <button type="submit" class="btn-danger">
+        Ištrinti
+    </button>
+</form>
+
                     </div>
 
                 </div>
@@ -111,7 +120,30 @@
         </div>
 
     @endif
+<div id="delete-modal" class="donate-modal">
+    <div class="donate-modal-box">
 
+        <div id="delete-confirm">
+            <h3>Ištrinti istoriją</h3>
+            <p>Ar tikrai norite ištrinti savo istoriją?</p>
+
+            <div class="donate-modal-actions">
+                <button id="confirm-delete">Taip</button>
+                <button id="cancel-delete">Ne</button>
+            </div>
+        </div>
+
+        <div id="delete-success" style="display:none;">
+            <h3>🗑️ Istorija ištrinta</h3>
+
+            <button id="delete-continue">
+                Tęsti (5)
+            </button>
+        </div>
+
+    </div>
 </div>
+</div>
+
 
 @endsection

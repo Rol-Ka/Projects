@@ -11,4 +11,7 @@ import './pages/stories.js';
 import './components/toast.js';
 import './components/like.js';
 import './components/donate.js';
-import './components/forms.js'
+import './components/forms.js';
+import './pages/create-story.js';
+import './pages/deleteStory.js';
+import './pages/edit.js';

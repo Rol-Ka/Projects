@@ -5,10 +5,12 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Story;
 use App\Http\Requests\StoreStoryRequest;
+use Illuminate\Support\Facades\Storage;
 
 
 class StoryController extends Controller
 {
+
     public function create()
     {
         if (auth()->user()->story) {
@@ -21,17 +23,22 @@ class StoryController extends Controller
     public function store(StoreStoryRequest $request)
     {
         if (auth()->user()->story) {
+
+            // 🔥 jei fetch (modal)
+            if ($request->expectsJson()) {
+                return response()->json([
+                    'message' => 'Jūs jau turite sukūrę istoriją'
+                ], 422);
+            }
+
             return back()->with('error', 'Jūs jau turite sukūrę istoriją');
         }
-
-
 
         $imagePath = null;
 
         if ($request->hasFile('main_image')) {
             $imagePath = $request->file('main_image')->store('stories', 'public');
         }
-
 
         $story = Story::create([
             'user_id' => auth()->id(),
@@ -41,6 +48,7 @@ class StoryController extends Controller
             'main_image' => $imagePath,
         ]);
 
+        // 🔥 TAGS
         if ($request->tags_text) {
 
             preg_match_all('/#(\w+)/u', $request->tags_text, $matches);
@@ -55,6 +63,7 @@ class StoryController extends Controller
             }
         }
 
+        // 🔥 GALLERY
         if ($request->hasFile('gallery_images')) {
 
             foreach ($request->file('gallery_images') as $image) {
@@ -68,8 +77,17 @@ class StoryController extends Controller
             }
         }
 
+        // 🔥 👇 SVARBIAUSIAS ADD
+        if ($request->expectsJson()) {
+            return response()->json([
+                'message' => 'Istorija sukurta',
+                'redirect' => url('/dashboard')
+            ]);
+        }
+
         return redirect('/dashboard')->with('success', 'Istorija sukurta!');
     }
+
     public function index(Request $request)
     {
         $query = \App\Models\Story::where('is_approved', true)
@@ -82,22 +100,20 @@ class StoryController extends Controller
             });
         }
 
-        // 🔥 SORT LOGIKA
+        // 🔥 SORT
         if ($request->sort === 'likes_desc') {
             $query->orderBy('likes_count', 'desc');
         } elseif ($request->sort === 'likes_asc') {
             $query->orderBy('likes_count', 'asc');
         } else {
-            $query->orderBy('created_at', 'desc'); // default
+            $query->orderBy('created_at', 'desc');
         }
 
-        // 🔥 ACTIVE STORIES
         $activeStories = $query->clone()
             ->where('is_completed', false)
             ->orderBy('created_at', 'desc')
             ->get();
 
-        // 🔥 COMPLETED STORIES
         $completedStories = $query->clone()
             ->where('is_completed', true)
             ->orderBy('completed_at', 'desc')
@@ -142,6 +158,12 @@ class StoryController extends Controller
             'main_image' => 'nullable|image|max:2048'
         ]);
 
+        // 🔥 ištrinam main image jei pažymėta
+        if ($request->delete_main_image && $story->main_image) {
+            Storage::disk('public')->delete($story->main_image);
+            $story->main_image = null;
+        }
+
         if ($request->hasFile('main_image')) {
             $path = $request->file('main_image')->store('stories', 'public');
             $story->main_image = $path;
@@ -152,6 +174,14 @@ class StoryController extends Controller
         $story->goal_amount = $request->goal_amount;
 
         $story->save();
+
+        // 🔥 ADD THIS
+        if ($request->expectsJson()) {
+            return response()->json([
+                'message' => 'Istorija atnaujinta',
+                'redirect' => url('/dashboard')
+            ]);
+        }
 
         return redirect('/dashboard')->with('success', 'Istorija atnaujinta!');
     }
@@ -166,5 +196,31 @@ class StoryController extends Controller
         ]);
 
         return view('story.show', compact('story'));
+    }
+
+    public function destroy(Story $story)
+    {
+        if ($story->user_id !== auth()->id()) {
+            abort(403);
+        }
+
+        // 🔥 ištrinam main image
+        if ($story->main_image) {
+            Storage::disk('public')->delete($story->main_image);
+        }
+
+        // 🔥 ištrinam galeriją
+        foreach ($story->images as $img) {
+            Storage::disk('public')->delete($img->image_path);
+            $img->delete();
+        }
+
+        // 🔥 ištrinam story
+        $story->delete();
+
+        return response()->json([
+            'message' => 'Istorija ištrinta',
+            'redirect' => url('/dashboard')
+        ]);
     }
 }

@@ -21,6 +21,20 @@ class LikeController extends Controller
 
         $story = Story::findOrFail($id);
 
+        // ❌ jei nepatvirtinta
+        if (!$story->is_approved) {
+            return response()->json([
+                'message' => 'Ši istorija dar nepatvirtinta'
+            ], 403);
+        }
+
+        // ❌ jei jau surinkta
+        if ($story->current_amount >= $story->goal_amount) {
+            return response()->json([
+                'message' => 'Ši istorija jau užbaigta'
+            ], 403);
+        }
+
         $like = $story->likes()->where('user_id', auth()->id())->first();
 
         if ($like) {
