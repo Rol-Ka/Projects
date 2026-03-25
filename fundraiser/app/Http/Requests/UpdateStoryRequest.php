@@ -26,8 +26,21 @@ class UpdateStoryRequest extends FormRequest
             'title' => 'required|string|max:255',
             'content' => 'required|string',
             'goal_amount' => 'required|numeric|min:1',
-            'main_image' => 'nullable|image|max:2048',
-            'gallery_images.*' => 'nullable|image|max:2048',
+            'main_image' => [
+                'nullable',
+                'image',
+                'max:2048',
+                function ($attribute, $value, $fail) {
+
+                    $delete = request()->input('delete_main_image');
+
+                    // jei ištrinta ir nėra naujos
+                    if ($delete && !$value) {
+                        $fail('Pasirinkite pagrindinę nuotrauką');
+                    }
+                }
+            ],
+            'gallery_images.*' => 'nullable|file|max:2048',
         ];
     }
 

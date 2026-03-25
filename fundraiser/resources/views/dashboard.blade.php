@@ -92,7 +92,7 @@
 
                     <div class="dashboard-actions">
 
-                        <a href="{{ route('story.show', $story) }}" class="btn-secondary">
+                        <a href="{{ route('story.show', $story) }}" class="btn-primary">
                             Peržiūrėti
                         </a>
 
@@ -106,7 +106,7 @@
     @csrf
     @method('DELETE')
 
-    <button type="submit" class="btn-danger">
+    <button type="submit" class="btn-delete-story">
         Ištrinti
     </button>
 </form>

@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="container">
-<a href="{{ route('stories.index') }}" class="btn btn-view back-btn">
+<a href="{{ route('dashboard') }}" class="btn btn-view back-btn">
 ← Atgal
 </a>
     <div class="story-show-card"> {{-- 🔥 LABAI SVARBU --}}

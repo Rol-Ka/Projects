@@ -110,7 +110,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/story/{story}/edit', [StoryController::class, 'edit'])
         ->name('story.edit');
 
-    Route::put('/story/{story}', [StoryController::class, 'update'])
+    Route::put('/story/{story}', [StoryEditController::class, 'update'])
         ->name('story.update');
 
     Route::delete('/story/{story}', [StoryController::class, 'destroy'])->name('story.destroy');

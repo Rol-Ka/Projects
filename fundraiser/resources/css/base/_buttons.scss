@@ -63,3 +63,17 @@
     border-radius: 25px;
     text-decoration: none;
 }
+
+.btn-delete-story {
+    background: $delete;
+    color: white;
+    padding: 14px 28px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-size: 16px;
+
+}
+
+.btn-delete-story:hover {
+    background: $delete-hover;
+}

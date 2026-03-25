@@ -16,7 +16,7 @@
 </div>
 @endif
 
-<form method="POST" action="{{ route('story.store') }}" enctype="multipart/form-data" class="story-form">
+<form method="POST" action="{{ route('story.store') }}" enctype="multipart/form-data" class="story-form story-form-create">
 @csrf
 
 @include('story._form')

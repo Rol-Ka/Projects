@@ -27,53 +27,45 @@ class StoryEditController extends Controller
 
     public function update(UpdateStoryRequest $request, Story $story)
     {
+
+
         if ($story->user_id !== Auth::id()) {
             abort(403);
         }
 
         $data = $request->validated();
 
-        // BASIC
         $story->update([
             'title' => $data['title'],
             'content' => $data['content'],
             'goal_amount' => $data['goal_amount'],
         ]);
-
-        // MAIN IMAGE
+        // ✅ MAIN IMAGE UPLOAD
         if ($request->hasFile('main_image')) {
 
             if ($story->main_image) {
                 Storage::disk('public')->delete($story->main_image);
             }
 
-            $path = $request->file('main_image')->store('stories', 'public');
+            $path = $request->file('main_image')->store('stories/main', 'public');
 
-            $story->update([
-                'main_image' => $path
-            ]);
+            $story->main_image = $path;
+            $story->save();
         }
 
-        // 🔥 delete main image
-        if ($request->delete_main_image && $story->main_image) {
+        // ✅ DELETE MAIN
+        if ($request->input('delete_main_image') && $story->main_image) {
             Storage::disk('public')->delete($story->main_image);
             $story->main_image = null;
-        }
-        if ($request->hasFile('main_image')) {
-
-            // 🔥 ištrinam seną
-            if ($story->main_image) {
-                Storage::disk('public')->delete($story->main_image);
-            }
-
-            $path = $request->file('main_image')->store('stories', 'public');
-            $story->main_image = $path;
+            $story->save();
         }
 
-        // DELETE GALLERY
-        if ($request->delete_images) {
+        // ✅ DELETE GALLERY
+        $deleteImages = $request->input('delete_images', []);
 
-            $images = $story->images()->whereIn('id', $request->delete_images)->get();
+        if (!empty($deleteImages)) {
+
+            $images = $story->images()->whereIn('id', $deleteImages)->get();
 
             foreach ($images as $img) {
                 Storage::disk('public')->delete($img->image_path);
@@ -81,17 +73,30 @@ class StoryEditController extends Controller
             }
         }
 
-        // ADD GALLERY
+        // ✅ ADD GALLERY
         if ($request->hasFile('gallery_images')) {
 
             foreach ($request->file('gallery_images') as $file) {
 
-                $path = $file->store('stories', 'public');
+                if (!$file) continue;
+
+                $path = $file->store('stories/gallery', 'public');
 
                 $story->images()->create([
                     'image_path' => $path
                 ]);
             }
+        }
+
+
+
+
+        // 🔥 modal support
+        if ($request->expectsJson()) {
+            return response()->json([
+                'message' => 'Istorija atnaujinta',
+                'redirect' => route('dashboard')
+            ]);
         }
 
         return redirect()

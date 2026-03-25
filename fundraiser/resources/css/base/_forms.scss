@@ -40,8 +40,9 @@ select:focus {
 
 /* ERROR STATE */
 
-input.error,
-textarea.error {
+.form-group input.error,
+.form-group textarea.error,
+.form-group select.error {
     border-color: $pending;
     background: #fff5f5;
 }

@@ -3,7 +3,9 @@
 @section('content')
 
 <div class="container-sm">
-
+<a href="{{ route('dashboard') }}" class="btn btn-view back-btn">
+← Atgal
+</a>
 <h2>Redaguoti istoriją</h2>
 
 <form method="POST" action="{{ route('story.update', $story) }}" enctype="multipart/form-data" class="story-form story-form-edit">

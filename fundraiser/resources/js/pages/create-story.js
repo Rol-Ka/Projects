@@ -2,7 +2,7 @@ let pendingForm = null;
 
 document.addEventListener('submit', (e) => {
 
-    const form = e.target.closest('.story-form');
+    const form = e.target.closest('.story-form-create');
     if (!form) return;
 
     e.preventDefault();

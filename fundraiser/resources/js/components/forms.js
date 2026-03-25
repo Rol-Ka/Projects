@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const input = document.getElementById('gallery-input');
     const preview = document.getElementById('image-preview');
 
-    let filesArray = [];
+    window.filesArray = [];
 
     if (input && preview) {
 
@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const newFiles = Array.from(e.target.files);
 
-            filesArray = [...filesArray, ...newFiles].filter((file, index, self) =>
+            window.filesArray = [...window.filesArray, ...newFiles].filter((file, index, self) =>
                 index === self.findIndex(f => f.name === file.name && f.size === file.size)
             );
 
@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             preview.innerHTML = '';
 
-            filesArray.forEach((file, index) => {
+            window.filesArray.forEach((file, index) => {
 
                 const reader = new FileReader();
 
@@ -73,7 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 reader.readAsDataURL(file);
             });
 
-            updateInputFiles();
+
         }
 
         preview.addEventListener('click', function (e) {
@@ -82,21 +82,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const index = e.target.dataset.index;
 
-            filesArray.splice(index, 1);
+            window.filesArray.splice(index, 1);
 
             renderImages();
         });
 
-        function updateInputFiles() {
-
-            const dataTransfer = new DataTransfer();
-
-            filesArray.forEach(file => {
-                dataTransfer.items.add(file);
-            });
-
-            input.files = dataTransfer.files;
-        }
     }
 
 
@@ -155,16 +145,15 @@ document.addEventListener('DOMContentLoaded', () => {
     // =============================
     // TAG INPUT (ONLY CREATE)
     // =============================
+    // =============================
+    // TAG INPUT (CREATE + EDIT)
+    // =============================
 
-    const page = document.body.dataset.page;
+    const tagInput = document.getElementById("tags-input");
+    const tagSuggestions = document.getElementById("tags-suggestions");
+    const tagHidden = document.getElementById("tags-hidden");
 
-    if (page === "create-story") {
-
-        const input = document.getElementById("tags-input");
-        const suggestions = document.getElementById("tags-suggestions");
-        const hidden = document.getElementById("tags-hidden");
-
-        if (!input || !suggestions || !hidden) return;
+    if (tagInput && tagSuggestions && tagHidden) {
 
         let tags = [];
 
@@ -172,35 +161,37 @@ document.addEventListener('DOMContentLoaded', () => {
             .then(res => res.json())
             .then(data => tags = data);
 
-        input.addEventListener("keydown", e => {
+        // 🔥 auto #
+        tagInput.addEventListener("keydown", e => {
 
             if (e.key === " ") {
 
                 e.preventDefault();
 
-                if (!input.value.endsWith(" ")) {
-                    input.value += " ";
+                if (!tagInput.value.endsWith(" ")) {
+                    tagInput.value += " ";
                 }
 
-                input.value += "#";
+                tagInput.value += "#";
             }
         });
 
-        input.addEventListener("input", () => {
+        // 🔥 main logic
+        tagInput.addEventListener("input", () => {
 
-            let words = input.value.split(" ");
+            let words = tagInput.value.split(" ");
             let last = words[words.length - 1];
 
             if (last && !last.startsWith("#")) {
                 words[words.length - 1] = "#" + last;
-                input.value = words.join(" ");
+                tagInput.value = words.join(" ");
             }
 
-            const lastWord = input.value.split(" ").pop().replace("#", "");
+            const lastWord = tagInput.value.split(" ").pop().replace("#", "");
 
             if (lastWord.length < 1) {
-                suggestions.innerHTML = "";
-                hidden.value = input.value;
+                tagSuggestions.innerHTML = "";
+                tagHidden.value = tagInput.value;
                 return;
             }
 
@@ -208,7 +199,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 tag.toLowerCase().startsWith(lastWord.toLowerCase())
             );
 
-            suggestions.innerHTML = "";
+            tagSuggestions.innerHTML = "";
 
             filtered.slice(0, 5).forEach(tag => {
 
@@ -218,27 +209,26 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 div.onclick = () => {
 
-                    let parts = input.value.split(" ");
+                    let parts = tagInput.value.split(" ");
                     parts.pop();
 
                     parts.push("#" + tag);
 
-                    input.value = parts.join(" ") + " ";
+                    tagInput.value = parts.join(" ") + " ";
+                    tagHidden.value = tagInput.value;
 
-                    hidden.value = input.value;
-
-                    suggestions.innerHTML = "";
+                    tagSuggestions.innerHTML = "";
                 };
 
-                suggestions.appendChild(div);
+                tagSuggestions.appendChild(div);
             });
 
-            hidden.value = input.value;
+            tagHidden.value = tagInput.value;
         });
 
         document.addEventListener("click", e => {
-            if (!input.contains(e.target) && !suggestions.contains(e.target)) {
-                suggestions.innerHTML = "";
+            if (!tagInput.contains(e.target) && !tagSuggestions.contains(e.target)) {
+                tagSuggestions.innerHTML = "";
             }
         });
     }
@@ -259,7 +249,7 @@ document.addEventListener('DOMContentLoaded', () => {
             checkbox.checked = true;
         }
 
-        wrapper.remove();
+        wrapper.style.display = 'none';
 
         updateGalleryText();
     });
@@ -308,10 +298,10 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!fileName) return;
 
         // 🔥 tik gallery existing (ne main!)
-        const existing = document.querySelectorAll('[data-gallery-existing] .preview-item').length;
+        const existing = document.querySelectorAll('[data-gallery-existing] .preview-item:not([style*="display: none"])').length;
 
         // 🔥 naujai pridėtos
-        const newFiles = document.querySelectorAll('#image-preview .preview-item').length;
+        const newFiles = document.querySelectorAll('#image-preview .preview-item:not([style*="display: none"])').length;
 
         const total = existing + newFiles;
 
