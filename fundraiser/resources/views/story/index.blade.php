@@ -15,7 +15,9 @@
     <div class="sort-box">
         <span>Rūšiuoti:</span>
 
-        <a href="{{ route('stories.index') }}">Naujausi</a>
+        <a href="{{ route('stories.index', array_merge(request()->all(), ['sort' => 'newest'])) }}">
+               Naujausi
+        </a>
 
         <a href="{{ route('stories.index', array_merge(request()->all(), ['sort' => 'likes_desc'])) }}">
             ❤️ Daugiausiai

@@ -62,5 +62,23 @@ const lightbox = GLightbox({
     closeButton: true
 });
 </script>
+
+<div id="admin-confirm-modal" class="donate-modal">
+
+    <div class="donate-modal-box">
+
+        <div id="admin-confirm-box">
+            <h3>Patvirtinimas</h3>
+            <p id="admin-confirm-text">Ar tikrai?</p>
+
+            <div class="donate-modal-actions">
+                <button id="admin-confirm-yes">Taip</button>
+                <button id="admin-confirm-no">Ne</button>
+            </div>
+        </div>
+
+    </div>
+
+</div>
 </body>
 </html>

@@ -104,6 +104,7 @@ if(old('tags_text')) {
 
 {{-- EXISTING MAIN --}}
 @if($isEdit && $story->main_image)
+<input type="hidden" id="existing-main-image" value="{{ $story->main_image }}">
 <div class="image-preview" data-main-existing> {{-- 🔥 pridėtas data attribute --}}
     <div class="preview-item">
 

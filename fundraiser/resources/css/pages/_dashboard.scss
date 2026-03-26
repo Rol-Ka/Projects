@@ -85,6 +85,28 @@
     margin-top: 20px;
 }
 
+.story-tags-show {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 10px;
+}
+
+.tag-show {
+    background: none;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 14px;
+    text-decoration: none;
+    color: $text;
+    transition: 0.2s;
+}
+
+.tag-show:hover {
+    background: $primary-hover;
+    color: $white;
+}
+
 /* 📱 MOBILE */
 
 @media (max-width: $mobile) {

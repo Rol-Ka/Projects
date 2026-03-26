@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="container">
-<a href="{{ route('dashboard') }}" class="btn btn-view back-btn">
+<a href="{{ url()->previous() }}" class="btn btn-view back-btn">
 ← Atgal
 </a>
     <div class="story-show-card"> {{-- 🔥 LABAI SVARBU --}}
@@ -84,6 +84,19 @@
             <p class="story-raised">
                 Likusi suma iki tikslo - {{ $goal - $current }}€        
             </p>
+
+            <div class="story-tags-show">
+
+    @foreach($story->tags as $tag)
+        <a 
+    href="{{ route('stories.index', ['tag' => $tag->name]) }}" 
+    class="tag-show"
+>
+    #{{ $tag->name }}
+</a>
+    @endforeach
+
+</div>
 
             {{-- ❤️ LIKE --}}
             <div class="story-like">

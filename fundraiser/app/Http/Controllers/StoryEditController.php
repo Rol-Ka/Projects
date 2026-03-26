@@ -11,12 +11,10 @@ class StoryEditController extends Controller
 {
     public function edit(Story $story)
     {
-        // 🔒 tik savininkas gali edit
         if ($story->user_id !== Auth::id()) {
             abort(403);
         }
 
-        // 🔒 negalima edit jei patvirtinta
         if ($story->is_approved) {
             return redirect()->route('dashboard')
                 ->with('error', 'Istorija jau patvirtinta ir negali būti redaguojama');
@@ -27,22 +25,45 @@ class StoryEditController extends Controller
 
     public function update(UpdateStoryRequest $request, Story $story)
     {
-
-
         if ($story->user_id !== Auth::id()) {
             abort(403);
         }
 
         $data = $request->validated();
 
+        // 🔥 TEXT UPDATE
         $story->update([
             'title' => $data['title'],
             'content' => $data['content'],
             'goal_amount' => $data['goal_amount'],
         ]);
-        // ✅ MAIN IMAGE UPLOAD
+
+        // 🔥 TAG UPDATE
+        if ($request->tags_text) {
+
+            preg_match_all('/#(\w+)/u', $request->tags_text, $matches);
+
+            $tagIds = [];
+
+            foreach ($matches[1] as $tagName) {
+
+                $tag = \App\Models\Tag::firstOrCreate([
+                    'name' => strtolower($tagName)
+                ]);
+
+                $tagIds[] = $tag->id;
+            }
+
+            $story->tags()->sync($tagIds);
+        }
+
+        // =========================
+        // 🔥 MAIN IMAGE (FIXED)
+        // =========================
+
         if ($request->hasFile('main_image')) {
 
+            // ištrinam seną
             if ($story->main_image) {
                 Storage::disk('public')->delete($story->main_image);
             }
@@ -51,16 +72,18 @@ class StoryEditController extends Controller
 
             $story->main_image = $path;
             $story->save();
-        }
+        } elseif ($request->input('delete_main_image') && $story->main_image) {
 
-        // ✅ DELETE MAIN
-        if ($request->input('delete_main_image') && $story->main_image) {
             Storage::disk('public')->delete($story->main_image);
+
             $story->main_image = null;
             $story->save();
         }
 
-        // ✅ DELETE GALLERY
+        // =========================
+        // 🔥 DELETE GALLERY
+        // =========================
+
         $deleteImages = $request->input('delete_images', []);
 
         if (!empty($deleteImages)) {
@@ -73,7 +96,10 @@ class StoryEditController extends Controller
             }
         }
 
-        // ✅ ADD GALLERY
+        // =========================
+        // 🔥 ADD GALLERY
+        // =========================
+
         if ($request->hasFile('gallery_images')) {
 
             foreach ($request->file('gallery_images') as $file) {
@@ -88,10 +114,10 @@ class StoryEditController extends Controller
             }
         }
 
+        // =========================
+        // 🔥 RESPONSE
+        // =========================
 
-
-
-        // 🔥 modal support
         if ($request->expectsJson()) {
             return response()->json([
                 'message' => 'Istorija atnaujinta',

@@ -7,9 +7,47 @@ document.addEventListener('submit', (e) => {
 
     e.preventDefault();
 
-    // 🔥 parodyti modalą
-    const modal = document.getElementById('create-modal');
-    modal.classList.add('active');
+    // 🔥 pasiimam laukus
+    const title = form.querySelector('[name="title"]').value.trim();
+    const content = form.querySelector('[name="content"]').value.trim();
+    const goal = form.querySelector('[name="goal_amount"]').value.trim();
+    const mainImage = form.querySelector('[name="main_image"]');
+
+
+    // išvalom senas klaidas
+    document.querySelectorAll('.input-error').forEach(el => el.remove());
+    document.querySelectorAll('.error').forEach(el => el.classList.remove('error'));
+
+    let hasError = false;
+
+    if (!title) {
+        showError('title', 'Įveskite pavadinimą');
+        hasError = true;
+    }
+
+    if (!content) {
+        showError('content', 'Įveskite aprašymą');
+        hasError = true;
+    }
+
+    if (!goal) {
+        showError('goal_amount', 'Įveskite tikslinę sumą');
+        hasError = true;
+    }
+    if (!mainImage.files.length) {
+        showError('main_image', 'Pasirinkite pagrindinę nuotrauką');
+        hasError = true;
+    }
+    if (mainImage.files[0] && mainImage.files[0].size > 2 * 1024 * 1024) {
+        showError('main_image', 'Nuotrauka per didelė (max 2MB)');
+        hasError = true;
+    }
+
+    // ❌ jei klaidos → STOP
+    if (hasError) return;
+
+    // ✅ tik tada modal
+    document.getElementById('create-modal')?.classList.add('active');
 
     pendingForm = form;
 });
@@ -93,3 +131,37 @@ function closeModal() {
     document.getElementById('create-modal')?.classList.remove('active');
     pendingForm = null;
 }
+
+
+function showError(field, message) {
+
+    const input = document.querySelector(`[name="${field}"]`);
+    if (!input) return;
+
+    input.classList.add('error');
+
+    const errorDiv = document.createElement('div');
+    errorDiv.classList.add('input-error');
+    errorDiv.textContent = message;
+
+    input.closest('.form-group')?.appendChild(errorDiv);
+}
+
+// =============================
+// REAL-TIME ERROR REMOVE
+// =============================
+
+document.querySelectorAll('.story-form input, .story-form textarea').forEach(input => {
+
+    input.addEventListener('input', () => {
+
+        // nuimam raudoną borderį
+        input.classList.remove('error');
+
+        // nuimam klaidos tekstą
+        const error = input.closest('.form-group')?.querySelector('.input-error');
+        if (error) error.remove();
+
+    });
+
+});

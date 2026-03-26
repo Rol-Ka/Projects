@@ -3,123 +3,165 @@
 
 
 .main-nav {
-    background: $nav;
-    border-bottom: 1px solid $border-light;
     position: sticky;
     top: 0;
     z-index: 1000;
+
+    backdrop-filter: blur(10px);
+    background: rgba(255, 255, 255, 0.7);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .nav-container {
     max-width: 1200px;
     margin: auto;
-    padding: 12px 20px;
+    padding: 14px 20px;
 
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    position: relative;
+    justify-content: space-between;
 }
 
-.logo {
-    color: $primary;
-    font-weight: bold;
-    font-size: 20px;
-    text-decoration: none;
+/* LOGO */
+
+.logo img {
+    height: 42px;
+    transition: transform 0.2s ease;
 }
+
+.logo:hover img {
+    transform: scale(1.05);
+}
+
+/* LINKS */
 
 .nav-links {
     display: flex;
-    gap: 30px;
+    align-items: center;
+    gap: 40px;
 }
 
 .nav-left,
 .nav-right {
     display: flex;
-    gap: 20px;
     align-items: center;
+    gap: 24px;
 }
 
-.nav-left a,
-.nav-right a {
+/* LINK STYLE */
+
+.nav-links a {
+    position: relative;
     text-decoration: none;
+    color: $text;
+    font-weight: 500;
+    transition: 0.2s;
+}
+
+/* underline animacija */
+
+.nav-links a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    width: 0%;
+    height: 2px;
+    background: $primary;
+    transition: 0.25s;
+}
+
+.nav-links a:hover::after,
+.nav-links a.active::after {
+    width: 100%;
+}
+
+/* CTA */
+
+.btn-primary {
+    background: $primary;
+    color: white !important;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: 0.2s;
+}
+
+.btn-primary:hover {
+    background: $primary-hover;
+}
+
+/* LOGOUT */
+
+.logout-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: $font-main;
     color: $text;
 }
 
-.nav-left,
-.nav-right a.active {
-    font-weight: 600;
-}
-
-.logout-btn {
-    border: none;
-    background: none;
-    cursor: pointer;
-}
-
-/* hamburger */
+/* HAMBURGER */
 
 .nav-toggle {
     display: none;
-    font-size: 26px;
+    flex-direction: column;
+    gap: 5px;
     cursor: pointer;
-    margin-left: auto;
 }
 
-.navbar {
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    background: $background;
+.nav-toggle span {
+    width: 25px;
+    height: 3px;
+    background: $text;
+    border-radius: 2px;
+    transition: 0.3s;
 }
 
 /* MOBILE */
 
 @media (max-width: 1024px) {
 
-    .nav-container {
-        flex-wrap: wrap;
-
-    }
-
     .nav-toggle {
-        display: block;
+        display: flex;
     }
-
-    /* paslepiam menu */
 
     .nav-links {
         position: absolute;
-        top: 60px;
+        top: 70px;
         left: 0;
-        border-radius: 1%;
-        border-color: $primary;
-        // border: 1px solid $primary;
-
-
         width: 100%;
 
-        background: $white;
-        // justify-content: flex-end;
-
-
-
+        background: white;
         flex-direction: column;
-        display: none;
-        padding: 20px;
+        align-items: flex-start;
+
+        padding: 25px;
+        gap: 20px;
+
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+
+        opacity: 0;
+        transform: translateY(-10px);
+        pointer-events: none;
+        transition: 0.3s;
     }
 
-    /* atidarytas */
-
     .nav-links.active {
-        display: flex;
-
+        opacity: 1;
+        transform: translateY(0);
+        pointer-events: all;
     }
 
     .nav-left,
     .nav-right {
         flex-direction: column;
+        width: 100%;
         gap: 15px;
     }
 
+    .btn-primary {
+        width: 100%;
+        text-align: center;
+    }
 }

@@ -155,7 +155,7 @@ class StoryController extends Controller
             'title' => 'required',
             'content' => 'required',
             'goal_amount' => 'required|numeric|min:1',
-            'main_image' => 'nullable|image|max:2048'
+            'main_image' => 'nullable|image|max:2048',
         ]);
 
         // 🔥 ištrinam main image jei pažymėta

@@ -20,6 +20,7 @@ Atnaujinti
 </form>
 
 </div>
+
 <div id="edit-modal" class="donate-modal">
     <div class="donate-modal-box">
 

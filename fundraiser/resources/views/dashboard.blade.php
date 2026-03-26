@@ -80,11 +80,6 @@
                         {{ Str::limit($story->content, 200) }}
                     </p>
 
-                    <div class="story-progress">
-                        <div class="progress-bar"
-                             style="width: {{ ($story->current_amount / $story->goal_amount) * 100 }}%">
-                        </div>
-                    </div>
 
                     <p class="story-raised">
                         €{{ $story->current_amount }} / €{{ $story->goal_amount }}
