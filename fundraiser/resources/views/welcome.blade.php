@@ -58,9 +58,9 @@ PaaukokMan platforma kur žmonės gali dalintis savo istorijomis ir gauti param�
 <img src="/images/hero7.jpg">
 </div>
 
-</div> {{-- swiper-wrapper --}}
+</div> 
 
-</div> {{-- hero-slider --}}
+</div> 
 
 </section>
 
@@ -85,30 +85,27 @@ Istorijos, kurios įkvepia, ir bendruomenė, kuri palaiko. Padėk žmonėms pasi
 
 <div class="discover-grid">
 
-@foreach($stories as $story)
+@foreach($activeStories as $story)
 
 <a href="{{ route('story.show', $story) }}" class="story-link">
     <div class="story-card">
 
-    {{-- IMAGE --}}
     @if($story->main_image)
         <div class="story-image-wrap">
             <img src="{{ asset('storage/'.$story->main_image) }}">
         </div>
     @endif
 
-    {{-- BODY --}}
     <div class="story-body">
 
         <h3 class="story-title">
             {{ $story->title }}
         </h3>
 
-        {{-- <p class="story-content">
+        <p class="story-content">
             {{ Str::limit($story->content, 90) }}
-        </p> --}}
+        </p>
 
-        {{-- PROGRESS --}}
         @php
     $current = $story->current_amount;
     $goal = $story->goal_amount;
@@ -133,13 +130,9 @@ Istorijos, kurios įkvepia, ir bendruomenė, kuri palaiko. Padėk žmonėms pasi
 
 </div>
 
-        {{-- FOOTER --}}
+        
         <div class="story-footer">
-
-            <div class="likes">
-                ❤️ {{ $story->likes_count }}
-            </div>
-
+            
         </div>
 
     </div>
@@ -147,10 +140,7 @@ Istorijos, kurios įkvepia, ir bendruomenė, kuri palaiko. Padėk žmonėms pasi
 </div>
 </a>
 
-
-
 @endforeach
-
 
 </div>
 <div class="hero-buttons-bottom">
@@ -163,13 +153,81 @@ Istorijos, kurios įkvepia, ir bendruomenė, kuri palaiko. Padėk žmonėms pasi
 <section class="landing-info">
 
 <h2>
-Tūkstančiai žmonių jau pasiekė savo tikslus
+Tavo istorija gali pakeisti viską
 </h2>
 
 <p>
-Pasidalink savo istorija, gauk paramą ir padėk savo svajonėms
-tapti realybe.
+Pasidalink savo keliu, įkvėpk žmones ir leisk bendruomenei prisidėti prie tavo svajonės. Kiekviena didelė istorija prasideda nuo pirmo žingsnio.
 </p>
+</section>
+
+<section class="discover">
+
+<div class="container">
+
+<div class="discover-grid">
+
+@foreach($completedStories as $story)
+
+<a href="{{ route('story.show', $story) }}" class="story-link">
+    <div class="story-card">
+
+    @if($story->main_image)
+        <div class="story-image-wrap">
+            <img src="{{ asset('storage/'.$story->main_image) }}">
+        </div>
+    @endif
+
+    <div class="story-body">
+
+        <h3 class="story-title">
+            {{ $story->title }}
+        </h3>
+
+        <p class="story-content">
+            {{ Str::limit($story->content, 90) }}
+        </p>
+
+        @php
+    $current = $story->current_amount;
+    $goal = $story->goal_amount;
+@endphp
+
+@include('components.progress')
+
+        <div class="story-money">
+
+    <div class="story-amounts">
+        <span class="raised">
+            €{{ number_format($story->current_amount, 0) }}
+        </span>
+        <span class="goal">
+            iš €{{ number_format($story->goal_amount, 0) }}
+        </span>
+    </div>
+
+    <div class="story-left">
+        Liko €{{ number_format($goal - $current, 0) }}
+    </div>
+
+</div>
+        <div class="story-footer">
+            
+        </div>
+
+    </div>
+
+</div>
+</a>
+
+@endforeach
+
+</div>
+<div class="hero-buttons-bottom">
+
+<a href="{{ route('fundraiser.start') }}" class="btn-primary">Pradėti rinkti paramą</a>
+</div>
+</div>
 
 </section>
 

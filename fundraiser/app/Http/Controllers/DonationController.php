@@ -27,7 +27,6 @@ class DonationController extends Controller
             ], 403);
         }
 
-        // 🔥 jei tikslas pasiektas
         if ($story->is_completed) {
             return response()->json([
                 'message' => 'Tikslas jau pasiektas'
@@ -35,8 +34,6 @@ class DonationController extends Controller
         }
 
         $amount = $request->amount;
-
-        // 🔥 MAX LIMIT
         $remaining = $story->goal_amount - $story->current_amount;
 
         if ($amount > $remaining) {
@@ -51,7 +48,6 @@ class DonationController extends Controller
             'amount' => $amount
         ]);
 
-        // 🔥 atnaujinam sumą
         $story->current_amount += $amount;
 
         if ($story->current_amount >= $story->goal_amount) {

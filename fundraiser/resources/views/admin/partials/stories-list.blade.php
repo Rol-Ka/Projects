@@ -20,7 +20,7 @@
             Sukurta: {{ $story->created_at->format('Y-m-d H:i') }}
         </p>
 
-        {{-- PROGRESS BAR --}}
+        
         @php
             $percent = $story->goal_amount > 0
             ? ($story->current_amount / $story->goal_amount) * 100

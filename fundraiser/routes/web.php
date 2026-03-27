@@ -21,7 +21,7 @@ use App\Http\Controllers\StoryEditController;
 |
 */
 
-// Route::view('/', 'welcome')->name('home');
+
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::get('/stories', [StoryController::class, 'index'])->name('stories.index');
@@ -29,6 +29,7 @@ Route::get('/stories', [StoryController::class, 'index'])->name('stories.index')
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+Route::view('/about', 'about')->name('about');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

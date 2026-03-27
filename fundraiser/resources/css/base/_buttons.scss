@@ -2,7 +2,7 @@
 
 .btn-primary {
     background: $primary;
-    color: white;
+    color: $white;
     padding: 14px 28px;
     border-radius: 25px;
     text-decoration: none;
@@ -10,6 +10,7 @@
 
 .btn-primary:hover {
     background: $primary-hover;
+    transition: 0.5s;
 }
 
 .btn-secondary {
@@ -20,11 +21,17 @@
     text-decoration: none;
 }
 
+.btn-secondary:hover {
+    background: $primary;
+    color: $white;
+    transition: 0.5s;
+}
+
 .create-btn {
     margin-top: 10px;
     padding: 12px;
     background: $primary;
-    color: white;
+    color: $white;
     border: none;
     border-radius: 10px;
     cursor: pointer;
@@ -43,7 +50,7 @@
     text-align: center;
 
     background: $primary;
-    color: white;
+    color: $white;
 
     border-radius: 25px;
     text-decoration: none;
@@ -58,7 +65,7 @@
     text-align: center;
 
     background: $primary;
-    color: white;
+    color: $white;
 
     border-radius: 25px;
     text-decoration: none;
@@ -66,7 +73,7 @@
 
 .btn-delete-story {
     background: $delete;
-    color: white;
+    color: $white;
     padding: 14px 28px;
     border-radius: 25px;
     text-decoration: none;
@@ -76,4 +83,18 @@
 
 .btn-delete-story:hover {
     background: $delete-hover;
+}
+
+.logout-btn {
+    background: $primary;
+    border: none;
+    color: $white;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.logout-btn:hover {
+    background-color: $primary-hover;
 }

@@ -15,7 +15,6 @@ document.addEventListener('submit', (e) => {
 
     const errorBox = form.querySelector('.input-error');
 
-    // reset
     if (input) input.classList.remove('error');
     if (errorBox) errorBox.textContent = '';
 
@@ -33,7 +32,7 @@ document.addEventListener('submit', (e) => {
         return;
     }
 
-    // 🔥 parodyti modalą
+
     const modal = document.getElementById('donate-modal');
     const text = document.getElementById('donate-modal-text');
 
@@ -70,10 +69,8 @@ document.getElementById('confirm-donate')?.addEventListener('click', async () =>
             return;
         }
 
-        // 🔥 PASLEPIAM CONFIRM
         document.getElementById('modal-confirm').style.display = 'none';
 
-        // 🔥 PARODOM SUCCESS
         const successBox = document.getElementById('modal-success');
         successBox.style.display = 'block';
 
@@ -105,7 +102,6 @@ function startCountdown() {
 
     }, 1000);
 
-    // manual click
     btn.onclick = () => {
         location.reload();
     };

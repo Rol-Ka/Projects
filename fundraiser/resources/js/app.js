@@ -1,7 +1,6 @@
 import './bootstrap';
-import './pages/home.js'
-import './pages/dashboard.js'
-import './components/navbar.js'
+import './pages/home.js';
+import './components/navbar.js';
 import Swiper from 'swiper';
 import 'swiper/css';
 import './components/hero-slider.js';

@@ -31,14 +31,14 @@ class StoryEditController extends Controller
 
         $data = $request->validated();
 
-        // 🔥 TEXT UPDATE
+
         $story->update([
             'title' => $data['title'],
             'content' => $data['content'],
             'goal_amount' => $data['goal_amount'],
         ]);
 
-        // 🔥 TAG UPDATE
+
         if ($request->tags_text) {
 
             preg_match_all('/#(\w+)/u', $request->tags_text, $matches);
@@ -57,13 +57,9 @@ class StoryEditController extends Controller
             $story->tags()->sync($tagIds);
         }
 
-        // =========================
-        // 🔥 MAIN IMAGE (FIXED)
-        // =========================
-
         if ($request->hasFile('main_image')) {
 
-            // ištrinam seną
+
             if ($story->main_image) {
                 Storage::disk('public')->delete($story->main_image);
             }
@@ -80,10 +76,6 @@ class StoryEditController extends Controller
             $story->save();
         }
 
-        // =========================
-        // 🔥 DELETE GALLERY
-        // =========================
-
         $deleteImages = $request->input('delete_images', []);
 
         if (!empty($deleteImages)) {
@@ -96,9 +88,6 @@ class StoryEditController extends Controller
             }
         }
 
-        // =========================
-        // 🔥 ADD GALLERY
-        // =========================
 
         if ($request->hasFile('gallery_images')) {
 
@@ -113,10 +102,6 @@ class StoryEditController extends Controller
                 ]);
             }
         }
-
-        // =========================
-        // 🔥 RESPONSE
-        // =========================
 
         if ($request->expectsJson()) {
             return response()->json([

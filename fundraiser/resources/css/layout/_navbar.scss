@@ -8,7 +8,7 @@
     z-index: 1000;
 
     backdrop-filter: blur(10px);
-    background: rgba(255, 255, 255, 0.7);
+    background: $nav;
     border-bottom: 1px solid rgba(0, 0, 0, 0.05);
 }
 
@@ -76,30 +76,7 @@
     width: 100%;
 }
 
-/* CTA */
 
-.btn-primary {
-    background: $primary;
-    color: white !important;
-    padding: 8px 16px;
-    border-radius: 8px;
-    font-size: 14px;
-    transition: 0.2s;
-}
-
-.btn-primary:hover {
-    background: $primary-hover;
-}
-
-/* LOGOUT */
-
-.logout-btn {
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-family: $font-main;
-    color: $text;
-}
 
 /* HAMBURGER */
 
@@ -108,60 +85,90 @@
     flex-direction: column;
     gap: 5px;
     cursor: pointer;
+    z-index: 1100;
 }
 
 .nav-toggle span {
-    width: 25px;
+    width: 26px;
     height: 3px;
     background: $text;
     border-radius: 2px;
-    transition: 0.3s;
+    transition: all 0.3s ease;
+}
+
+/* ANIMACIJA Į X */
+
+.nav-toggle.open span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+}
+
+.nav-toggle.open span:nth-child(2) {
+    opacity: 0;
+}
+
+.nav-toggle.open span:nth-child(3) {
+    transform: rotate(-45deg) translate(6px, -6px);
+}
+
+.nav-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(6px);
+    opacity: 0;
+    pointer-events: none;
+    transition: 0.3s ease;
+    z-index: 900;
+}
+
+.nav-overlay.active {
+    opacity: 1;
+    pointer-events: all;
 }
 
 /* MOBILE */
 
-@media (max-width: 1024px) {
+@media (max-width: $mobile) {
 
     .nav-toggle {
-        display: flex;
+        display: flex; // 🔥 ŠITO TRŪKSTA
     }
 
     .nav-links {
-        position: absolute;
-        top: 70px;
-        left: 0;
-        width: 100%;
+        position: fixed;
+        top: 0;
+        right: 0;
+        height: 350px;
+        width: 75%;
+        max-width: 320px;
 
         background: white;
+
         flex-direction: column;
         align-items: flex-start;
 
-        padding: 25px;
+        padding: 80px 25px;
         gap: 20px;
 
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        box-shadow: -10px 0 30px rgba(0, 0, 0, 0.1);
 
-        opacity: 0;
-        transform: translateY(-10px);
-        pointer-events: none;
-        transition: 0.3s;
+        transform: translateX(120%);
+        transition: 0.35s ease;
+        z-index: 1000;
     }
 
     .nav-links.active {
-        opacity: 1;
-        transform: translateY(0);
-        pointer-events: all;
+        transform: translateX(0);
     }
 
     .nav-left,
     .nav-right {
+        width: 100%;
         flex-direction: column;
-        width: 100%;
-        gap: 15px;
+        gap: 18px;
     }
+}
 
-    .btn-primary {
-        width: 100%;
-        text-align: center;
-    }
+body {
+    overflow-x: hidden;
 }

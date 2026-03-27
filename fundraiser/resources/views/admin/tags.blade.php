@@ -4,7 +4,7 @@
 
 <div class="admin-container">
 
-<h2>Hashtag'ai</h2>
+<h2>Žymos</h2>
 
 <div class="tags-actions">
 
@@ -14,7 +14,7 @@
         <input
         type="text"
         name="name"
-        placeholder="Naujas hashtag..."
+        placeholder="Nauja žyma..."
         required
         >
 
@@ -27,7 +27,7 @@
         <input
         type="text"
         name="search"
-        placeholder="Ieškoti hashtag..."
+        placeholder="Ieškoti žymos..."
         value="{{ request('search') }}"
         >
 

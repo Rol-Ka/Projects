@@ -10,7 +10,6 @@
         $story = auth()->user()->story;
     @endphp
 
-    {{-- ❌ NETURI STORY --}}
     @if(!$story)
 
         <div class="dashboard-card empty">
@@ -37,8 +36,6 @@
 
     @endif
 
-
-    {{-- ✅ TURI STORY --}}
     @if($story)
 
         <div class="dashboard-card">
@@ -57,10 +54,8 @@
 
             </div>
 
-            {{-- 🔥 reuse iš show --}}
             <div class="story-show-card dashboard-story">
 
-                {{-- LEFT --}}
                 <div class="story-left">
 
                     @if($story->main_image)
@@ -71,7 +66,6 @@
 
                 </div>
 
-                {{-- RIGHT --}}
                 <div class="story-show-content">
 
                     <h1 class="story-title">{{ $story->title }}</h1>

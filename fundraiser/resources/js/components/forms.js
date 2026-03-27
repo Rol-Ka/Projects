@@ -1,9 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    // =============================
-    // FILE NAME UPDATE
-    // =============================
-
     document.querySelectorAll('.file-input input:not(#gallery-input)').forEach(input => {
         input.addEventListener('change', function () {
 
@@ -22,11 +18,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 .textContent = text;
         });
     });
-
-
-    // =============================
-    // GALLERY PREVIEW (NEW FILES)
-    // =============================
 
     const input = document.getElementById('gallery-input');
     const preview = document.getElementById('image-preview');
@@ -66,7 +57,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
                     preview.appendChild(div);
 
-                    // 🔥 čia update po kiekvieno append
                     updateGalleryText();
                 };
 
@@ -88,11 +78,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
     }
-
-
-    // =============================
-    // MAIN IMAGE PREVIEW
-    // =============================
 
     const mainInput = document.getElementById('main-image-input');
     const mainPreview = document.getElementById('main-image-preview');
@@ -140,14 +125,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 .textContent = 'Nuotrauka nepasirinkta';
         });
     }
-
-
-    // =============================
-    // TAG INPUT (ONLY CREATE)
-    // =============================
-    // =============================
-    // TAG INPUT (CREATE + EDIT)
-    // =============================
 
     const tagInput = document.getElementById("tags-input");
     const tagSuggestions = document.getElementById("tags-suggestions");
@@ -233,11 +210,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-
-    // =============================
-    // EXISTING IMAGES REMOVE (EDIT)
-    // =============================
-
     document.addEventListener('click', (e) => {
 
         if (!e.target.classList.contains('existing-remove')) return;
@@ -254,11 +226,6 @@ document.addEventListener('DOMContentLoaded', () => {
         updateGalleryText();
     });
 
-
-    // =============================
-    // MAIN IMAGE REMOVE (EDIT)
-    // =============================
-
     document.addEventListener('click', (e) => {
 
         if (!e.target.classList.contains('main-remove')) return;
@@ -272,7 +239,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const wrapper = e.target.closest('.preview-item');
         if (wrapper) wrapper.remove();
 
-        // 🔥 RESET TEXT
         const mainInput = document.getElementById('main-image-input');
 
         if (mainInput) {
@@ -283,11 +249,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 .textContent = 'Nuotrauka nepasirinkta';
         }
     });
-
-
-    // =============================
-    // GALLERY TEXT UPDATE (EDIT + CREATE)
-    // =============================
 
     function updateGalleryText() {
 

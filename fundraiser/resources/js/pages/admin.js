@@ -23,9 +23,7 @@ if (searchInput) {
 }
 
 window.editTag = function (id) {
-
     const el = document.getElementById(`edit-${id}`);
-
     if (el) {
         el.classList.add("active");
     }
@@ -33,9 +31,7 @@ window.editTag = function (id) {
 }
 
 window.cancelEdit = function (id) {
-
     const el = document.getElementById(`edit-${id}`);
-
     if (el) {
         el.classList.remove("active");
     }
@@ -43,11 +39,8 @@ window.cancelEdit = function (id) {
 }
 
 document.querySelectorAll("textarea").forEach(textarea => {
-
     textarea.style.height = textarea.scrollHeight + "px";
-
     textarea.addEventListener("input", function () {
-
         this.style.height = "auto";
         this.style.height = this.scrollHeight + "px";
 
@@ -55,11 +48,8 @@ document.querySelectorAll("textarea").forEach(textarea => {
 
 });
 
-
-
 let pendingForm = null;
 
-// universal open modal
 function openConfirm(text, form) {
 
     document.getElementById('admin-confirm-text').textContent = text;
@@ -68,7 +58,6 @@ function openConfirm(text, form) {
     pendingForm = form;
 }
 
-// YES
 document.getElementById('admin-confirm-yes')?.addEventListener('click', () => {
 
     if (pendingForm) {
@@ -77,7 +66,6 @@ document.getElementById('admin-confirm-yes')?.addEventListener('click', () => {
 
 });
 
-// NO
 document.getElementById('admin-confirm-no')?.addEventListener('click', () => {
 
     document.getElementById('admin-confirm-modal')?.classList.remove('active');
@@ -126,12 +114,6 @@ document.querySelectorAll('.tag-remove').forEach(btn => {
 
 });
 
-
-// =============================
-// ADMIN SHOW ACTIONS
-// =============================
-
-// APPROVE
 document.querySelectorAll('form[action*="approve"]').forEach(form => {
 
     form.addEventListener('submit', (e) => {
@@ -144,10 +126,9 @@ document.querySelectorAll('form[action*="approve"]').forEach(form => {
 
 });
 
-// DELETE STORY
+
 document.querySelectorAll('form[action*="stories"][method="POST"]').forEach(form => {
 
-    // tik DELETE formoms
     if (!form.querySelector('input[name="_method"][value="DELETE"]')) return;
 
     form.addEventListener('submit', (e) => {

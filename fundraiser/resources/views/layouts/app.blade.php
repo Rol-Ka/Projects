@@ -26,10 +26,10 @@
 
 <body  data-page="@yield('page')">
 <div class="site-wrapper"> 
-    {{-- NAVBAR --}}
+    
     @include('layouts.navigation')
 
-    {{-- PAGE CONTENT --}}
+   
     <main class="page-container">
         @yield('content')
     </main>

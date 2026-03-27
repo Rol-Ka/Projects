@@ -2,7 +2,6 @@
 $isEdit = isset($story);
 @endphp
 
-{{-- TITLE --}}
 <div class="form-group">
 <label>Pavadinimas</label>
 <input 
@@ -17,8 +16,6 @@ $isEdit = isset($story);
 @enderror
 </div>
 
-
-{{-- CONTENT --}}
 <div class="form-group">
 <label>Aprašymas</label>
 <textarea 
@@ -31,8 +28,6 @@ $isEdit = isset($story);
 @enderror
 </div>
 
-
-{{-- GOAL --}}
 <div class="form-group">
 <label>Tikslinė suma (€)</label>
 <input 
@@ -49,9 +44,8 @@ $isEdit = isset($story);
 </div>
 
 
-{{-- TAGS --}}
 <div class="form-group">
-<label>Įrašykite norimus tag'us</label>
+<label>Įrašykite norimas žymas</label>
 
 @php
 $tagsValue = '';
@@ -68,7 +62,7 @@ if(old('tags_text')) {
 <input
     type="text"
     id="tags-input"
-    placeholder="Pvz.: kelione pagalba auka"
+    placeholder="Pvz.: kelionė pagalba auka"
     autocomplete="off"
     value="{{ $tagsValue }}"
 >
@@ -84,10 +78,6 @@ if(old('tags_text')) {
 
 </div>
 
-
-{{-- =========================
-   MAIN IMAGE
-========================= --}}
 <div class="form-group">
 <label>Pagrindinė nuotrauka</label>
 
@@ -102,7 +92,6 @@ if(old('tags_text')) {
     </span>
 </div>
 
-{{-- EXISTING MAIN --}}
 @if($isEdit && $story->main_image)
 <input type="hidden" id="existing-main-image" value="{{ $story->main_image }}">
 <div class="image-preview" data-main-existing> {{-- 🔥 pridėtas data attribute --}}
@@ -120,7 +109,6 @@ if(old('tags_text')) {
 <input type="hidden" name="delete_main_image" id="delete-main-image">
 @endif
 
-{{-- NEW MAIN --}}
 <div id="main-image-preview" class="image-preview"></div>
 
 @error('main_image')
@@ -128,10 +116,6 @@ if(old('tags_text')) {
 @enderror
 </div>
 
-
-{{-- =========================
-   GALLERY
-========================= --}}
 <div class="form-group">
 <label>Galerijos nuotraukos</label>
 
@@ -152,7 +136,6 @@ if(old('tags_text')) {
     </span>
 </div>
 
-{{-- EXISTING GALLERY --}}
 @if($isEdit && $story->images->count())
 <div class="image-preview" data-gallery-existing>
     @foreach($story->images as $img)
@@ -164,7 +147,6 @@ if(old('tags_text')) {
                 ×
             </div>
 
-            {{-- 🔥 checkbox atskirai (ne viduje X) --}}
             <input 
                 type="checkbox" 
                 name="delete_images[]" 
@@ -177,7 +159,6 @@ if(old('tags_text')) {
 </div>
 @endif
 
-{{-- NEW GALLERY --}}
 <div id="image-preview" class="image-preview"></div>
 
 </div>

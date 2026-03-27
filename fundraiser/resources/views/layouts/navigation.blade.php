@@ -22,8 +22,8 @@
         Istorijos
     </a>
 
-    <a href="{{ route('home') }}"
-       class="{{ request()->routeIs('home') ? 'active' : '' }}">
+    <a href="{{ route('about') }}"
+       class="{{ request()->routeIs('about') ? 'active' : '' }}">
         Apie mus
     </a>
 </div>
@@ -32,16 +32,16 @@
 
 @auth
 
-<a href="{{ route('dashboard') }}">Paskyra</a>
+<a href="{{ route('dashboard') }}">Mano paskyra</a>
 
 @if(!auth()->user()->story)
-<a href="{{ route('story.create') }}" class="btn-primary">
-    + Sukurti
+<a href="{{ route('story.create') }}" >
+    + Sukurti istoriją
 </a>
 @endif
 
 @if(auth()->user()->role === 'admin')
-<a href="{{ route('admin.dashboard') }}">Admin</a>
+<a href="{{ route('admin.dashboard') }}">Administratorius</a>
 @endif
 
 <form method="POST" action="{{ route('logout') }}">
@@ -54,7 +54,7 @@ Atsijungti
 @else
 
 <a href="{{ route('login') }}">Prisijungti</a>
-<a href="{{ route('register') }}" class="btn-primary">Registruotis</a>
+<a href="{{ route('register') }}">Registruotis</a>
 
 @endauth
 
@@ -65,3 +65,5 @@ Atsijungti
 </div>
 
 </nav>
+
+<div class="nav-overlay" id="navOverlay"></div>

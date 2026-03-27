@@ -38,7 +38,7 @@ Istorijos
 
 <a href="{{ route('admin.tags') }}"
 class="{{ request()->routeIs('admin.tags') ? 'active' : '' }}">
-Hashtag'ai
+Žymos
 </a>
 
         </nav>

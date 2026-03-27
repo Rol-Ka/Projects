@@ -24,7 +24,6 @@ class StoryController extends Controller
     {
         if (auth()->user()->story) {
 
-            // 🔥 jei fetch (modal)
             if ($request->expectsJson()) {
                 return response()->json([
                     'message' => 'Jūs jau turite sukūrę istoriją'
@@ -48,7 +47,6 @@ class StoryController extends Controller
             'main_image' => $imagePath,
         ]);
 
-        // 🔥 TAGS
         if ($request->tags_text) {
 
             preg_match_all('/#(\w+)/u', $request->tags_text, $matches);
@@ -63,7 +61,6 @@ class StoryController extends Controller
             }
         }
 
-        // 🔥 GALLERY
         if ($request->hasFile('gallery_images')) {
 
             foreach ($request->file('gallery_images') as $image) {
@@ -77,7 +74,7 @@ class StoryController extends Controller
             }
         }
 
-        // 🔥 👇 SVARBIAUSIAS ADD
+
         if ($request->expectsJson()) {
             return response()->json([
                 'message' => 'Istorija sukurta',
@@ -100,7 +97,6 @@ class StoryController extends Controller
             });
         }
 
-        // 🔥 SORT
         if ($request->sort === 'likes_desc') {
             $query->orderBy('likes_count', 'desc');
         } elseif ($request->sort === 'likes_asc') {
@@ -158,7 +154,6 @@ class StoryController extends Controller
             'main_image' => 'nullable|image|max:2048',
         ]);
 
-        // 🔥 ištrinam main image jei pažymėta
         if ($request->delete_main_image && $story->main_image) {
             Storage::disk('public')->delete($story->main_image);
             $story->main_image = null;
@@ -175,7 +170,6 @@ class StoryController extends Controller
 
         $story->save();
 
-        // 🔥 ADD THIS
         if ($request->expectsJson()) {
             return response()->json([
                 'message' => 'Istorija atnaujinta',
@@ -204,18 +198,15 @@ class StoryController extends Controller
             abort(403);
         }
 
-        // 🔥 ištrinam main image
         if ($story->main_image) {
             Storage::disk('public')->delete($story->main_image);
         }
 
-        // 🔥 ištrinam galeriją
         foreach ($story->images as $img) {
             Storage::disk('public')->delete($img->image_path);
             $img->delete();
         }
 
-        // 🔥 ištrinam story
         $story->delete();
 
         return response()->json([

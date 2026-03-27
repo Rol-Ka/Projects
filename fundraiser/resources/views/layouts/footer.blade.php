@@ -1,6 +1,6 @@
 <footer class="site-footer">
 
-    {{-- Viršutinė dalis (informacija) --}}
+  
     <div class="footer-info">
 
         <div class="footer-container">
@@ -26,7 +26,7 @@
     </div>
 
 
-    {{-- Apatinė dalis (banner) --}}
+  
     <div class="footer-banner">
 
         <img src="/images/banner.png" alt="footer banner">

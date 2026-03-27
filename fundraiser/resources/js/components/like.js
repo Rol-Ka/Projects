@@ -3,7 +3,6 @@ document.addEventListener('click', async (e) => {
     const btn = e.target.closest('.like-btn');
     if (!btn) return;
 
-    // 🔥 jei neprisijungęs
     if (!window.isLoggedIn) {
         showToast('Norint uždėti širdutę, turite būti prisijungęs', 'warning');
         return;

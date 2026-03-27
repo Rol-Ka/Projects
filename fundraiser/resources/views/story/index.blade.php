@@ -66,14 +66,12 @@
 <a href="{{ route('story.show', $story) }}" class="story-link">
     <div class="story-card">
 
-    {{-- IMAGE --}}
     @if($story->main_image)
         <div class="story-image-wrap">
             <img src="{{ asset('storage/'.$story->main_image) }}">
         </div>
     @endif
 
-    {{-- BODY --}}
     <div class="story-body">
 
         <h3 class="story-title">
@@ -84,7 +82,6 @@
             {{ Str::limit($story->content, 90) }}
         </p>
 
-        {{-- PROGRESS --}}
         @php
     $current = $story->current_amount;
     $goal = $story->goal_amount;
@@ -108,8 +105,6 @@
     </div>
 
 </div>
-
-        {{-- FOOTER --}}
         <div class="story-footer">
 
             <div class="likes">
@@ -139,7 +134,6 @@
 <a href="{{ route('story.show', $story) }}" class="story-link">
     <div class="story-card completed">
 
-    {{-- IMAGE --}}
     @if($story->main_image)
         <div class="story-image-wrap">
             <img src="{{ asset('storage/'.$story->main_image) }}">
@@ -147,7 +141,6 @@
         </div>
     @endif
 
-    {{-- BODY --}}
     <div class="story-body">
 
         <h3 class="story-title">
@@ -158,12 +151,10 @@
             {{ Str::limit($story->content, 90) }}
         </p>
 
-        {{-- FULL PROGRESS --}}
         <div class="progress-bar">
             <div class="progress-fill full"></div>
         </div>
 
-        {{-- AMOUNTS --}}
         <div class="story-money">
 
     <div class="story-amounts">
@@ -200,13 +191,6 @@
 @endforelse
 
 </div>
-
-
-{{-- <div class="stories-pagination">
-
-{{ $stories->links('vendor.pagination.pagination') }}
-
-</div> --}}
 
 </div>
 

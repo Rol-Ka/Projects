@@ -6,12 +6,11 @@
 <a href="{{ url()->previous() }}" class="btn btn-view back-btn">
 ← Atgal
 </a>
-    <div class="story-show-card"> {{-- 🔥 LABAI SVARBU --}}
+    <div class="story-show-card">
 
         {{-- LEFT --}}
         <div class="story-left">
 
-            {{-- VISOS NUOTRAUKOS (hidden data) --}}
             @php
                 $allImages = [];
 
@@ -24,7 +23,6 @@
                 }
             @endphp
 
-            {{-- MAIN IMAGE --}}
             @if($story->main_image)
                 <div class="story-show-image">
                     <img 
@@ -35,7 +33,6 @@
                 </div>
             @endif
 
-            {{-- GALLERY --}}
             @if($story->images->count())
             <div class="story-gallery-wrapper">
                 <div class="story-gallery-track">
@@ -56,7 +53,6 @@
 
         </div>
 
-        {{-- RIGHT --}}
         <div class="story-show-content">
 
             <h1 class="story-title">{{ $story->title }}</h1>
@@ -69,7 +65,6 @@
                 {{ $story->content }}
             </p>
 
-            {{-- PROGRESS --}}
            @php
     $current = $story->current_amount;
     $goal = $story->goal_amount;
@@ -97,8 +92,6 @@
     @endforeach
 
 </div>
-
-            {{-- ❤️ LIKE --}}
             <div class="story-like">
                 <button 
     class="like-btn {{ (!$story->is_approved || $isCompleted) ? 'disabled' : '' }}" 
@@ -110,9 +103,7 @@
                 </button>
             </div>
 
-            
-
-{{-- 💰 DONATE --}}
+        
 @if(!$isCompleted && $story->is_approved)
 
     @auth
@@ -151,7 +142,6 @@
 
 @endif
 
-            {{-- DONATIONS --}}
             <div class="story-donations">
                 <h3>Aukos</h3>
 
@@ -164,12 +154,10 @@
 
         </div>
 
-    </div> {{-- 🔥 ČIA UŽSIDARO FLEX CONTAINER --}}
+    </div> 
 
 </div>
 
-
-{{-- LIGHTBOX (paliekam už card ribų) --}}
 <div class="lightbox" id="lightbox">
 
     <span class="lightbox-close">&times;</span>
@@ -186,7 +174,6 @@
 
 </div>
 
-{{-- 🔥 perduodam images į JS --}}
 <script>
    
     window.isLoggedIn = {{ auth()->check() ? 'true' : 'false' }};

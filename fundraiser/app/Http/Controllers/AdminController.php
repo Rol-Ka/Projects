@@ -17,8 +17,6 @@ class AdminController extends Controller
 
         $query = Story::with('user');
 
-        // STATUS FILTRAS
-        // STATUS FILTRAS
         if ($request->status === 'pending') {
             $query->where('is_approved', false);
         }
@@ -32,7 +30,6 @@ class AdminController extends Controller
             $query->whereNotNull('completed_at');
         }
 
-        // PAIEŠKA
         if ($request->filled('search')) {
 
             $query->where(function ($q) use ($request) {
@@ -44,7 +41,6 @@ class AdminController extends Controller
             });
         }
 
-        // RŪŠIAVIMAS
         switch ($request->sort) {
 
             case 'created_asc':
@@ -60,9 +56,6 @@ class AdminController extends Controller
         return view('admin.stories', compact('stories'));
     }
 
-
-
-
     public function approve(Story $story)
     {
         if (auth()->user()->role !== 'admin') {
@@ -77,7 +70,6 @@ class AdminController extends Controller
         return back();
     }
 
-
     public function destroy(Story $story)
     {
         if (auth()->user()->role !== 'admin') {
@@ -88,7 +80,6 @@ class AdminController extends Controller
 
         return back();
     }
-
 
     public function dashboard()
     {
@@ -109,9 +100,6 @@ class AdminController extends Controller
 
         return view('admin.story-show', compact('story'));
     }
-
-
-
 
     public function edit(Story $story)
     {
@@ -144,7 +132,6 @@ class AdminController extends Controller
             'goal_amount' => $request->goal_amount
         ]);
 
-        // 👇 ČIA PRIDEDI TAG SYNC
         if ($request->has('tags')) {
             $story->tags()->sync($request->tags);
         }

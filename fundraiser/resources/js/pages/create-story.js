@@ -7,14 +7,11 @@ document.addEventListener('submit', (e) => {
 
     e.preventDefault();
 
-    // 🔥 pasiimam laukus
     const title = form.querySelector('[name="title"]').value.trim();
     const content = form.querySelector('[name="content"]').value.trim();
     const goal = form.querySelector('[name="goal_amount"]').value.trim();
     const mainImage = form.querySelector('[name="main_image"]');
 
-
-    // išvalom senas klaidas
     document.querySelectorAll('.input-error').forEach(el => el.remove());
     document.querySelectorAll('.error').forEach(el => el.classList.remove('error'));
 
@@ -43,17 +40,13 @@ document.addEventListener('submit', (e) => {
         hasError = true;
     }
 
-    // ❌ jei klaidos → STOP
     if (hasError) return;
 
-    // ✅ tik tada modal
     document.getElementById('create-modal')?.classList.add('active');
 
     pendingForm = form;
 });
 
-
-// CONFIRM
 document.getElementById('confirm-create')?.addEventListener('click', async () => {
 
     if (!pendingForm) return;
@@ -74,15 +67,11 @@ document.getElementById('confirm-create')?.addEventListener('click', async () =>
 
         if (!res.ok) {
 
-            // 🔥 fallback į normal submit (kad rodytų validation)
             form.submit();
             return;
         }
 
-        // 🔥 hide confirm
         document.getElementById('modal-confirm').style.display = 'none';
-
-        // 🔥 show success
         const successBox = document.getElementById('modal-success');
         successBox.style.display = 'block';
 
@@ -90,13 +79,10 @@ document.getElementById('confirm-create')?.addEventListener('click', async () =>
 
     } catch (err) {
         console.error(err);
-
-        // fallback
         form.submit();
     }
 
 });
-
 
 function startCountdown() {
     let seconds = 5;
@@ -120,8 +106,6 @@ function startCountdown() {
     };
 }
 
-
-// CANCEL
 document.getElementById('cancel-create')?.addEventListener('click', () => {
     closeModal();
 });
@@ -131,7 +115,6 @@ function closeModal() {
     document.getElementById('create-modal')?.classList.remove('active');
     pendingForm = null;
 }
-
 
 function showError(field, message) {
 
@@ -147,18 +130,12 @@ function showError(field, message) {
     input.closest('.form-group')?.appendChild(errorDiv);
 }
 
-// =============================
-// REAL-TIME ERROR REMOVE
-// =============================
-
 document.querySelectorAll('.story-form input, .story-form textarea').forEach(input => {
 
     input.addEventListener('input', () => {
 
-        // nuimam raudoną borderį
         input.classList.remove('error');
 
-        // nuimam klaidos tekstą
         const error = input.closest('.form-group')?.querySelector('.input-error');
         if (error) error.remove();
 

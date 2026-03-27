@@ -63,7 +63,7 @@ value="{{ old('goal_amount',$story->goal_amount) }}"
 </div>
 
 
-<h3>Tagai</h3>
+<h3>Žymos</h3>
 
 <div class="tags-container">
 
@@ -100,8 +100,6 @@ Išsaugoti
 
 </div>
 
-
-{{-- TAG DETACH FORMS (outside main form) --}}
 
 @foreach($story->tags as $tag)
 

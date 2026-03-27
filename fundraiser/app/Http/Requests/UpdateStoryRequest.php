@@ -34,7 +34,7 @@ class UpdateStoryRequest extends FormRequest
 
                     $delete = request()->input('delete_main_image');
 
-                    // jei ištrinta ir nėra naujos
+
                     if ($delete && !$value) {
                         $fail('Pasirinkite pagrindinę nuotrauką');
                     }
