@@ -78,7 +78,8 @@ class AdminController extends Controller
 
         $story->delete();
 
-        return back();
+        return redirect()->route('admin.stories')
+            ->with('success', 'Istorija ištrinta');
     }
 
     public function dashboard()
